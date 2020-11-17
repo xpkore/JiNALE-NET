@@ -15,7 +15,7 @@
       </p>
       <input :disabled="fetching === true" type="submit" value="Login" />
     </form>
-    <p v-if=errorStr>
+    <p v-if="errorStr">
       <span>{{ errorStr }}</span>
     </p>
   </div>
@@ -34,6 +34,7 @@ export default {
       this.$data.errorStr = ''
       this.$data.fetching = true
       const hashedPwd = this.$data.pwd
+      let loginInfo
       fetch(this.$store.state.endpoint + '/login', {
         method: 'POST',
         headers: new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' }),
@@ -44,11 +45,31 @@ export default {
         if (d.code !== 0) {
           this.$data.errorStr = `Login failed: [${d.code}] ${d.msg}`
         }
+
+        return fetch(this.$store.state.endpoint + '/myinfo', {
+          method: 'GET',
+          credentials: 'include'
+        }).then(r => r.json())
+
+        // return new Promise((resolve, reject) => setTimeout(resolve, 1000))
+      }).then(d => {
+        if (d.code === 0) {
+          loginInfo = d.data
+        } else {
+          this.$data.errorStr = `Login failed: [${d.code}] ${d.msg}`
+        }
+
+        // manual slow down
         return new Promise((resolve, reject) => setTimeout(resolve, 1000))
       }).catch((e) => {
         console.error(e)
       }).finally(() => {
         this.$data.fetching = false
+
+        if (loginInfo) {
+          this.$store.commit('updateLoginInfo', loginInfo)
+          this.$router.push('/user/home')
+        }
       })
     }
   }
