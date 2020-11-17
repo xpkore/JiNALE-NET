@@ -23,6 +23,12 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+
+  {
+    path: '/user/home',
+    name: 'UserHome',
+    component: () => import('../views/user/Home.vue')
   }
 ]
 
@@ -34,6 +40,15 @@ const router = new VueRouter({
 
 router.afterEach((to, from) => {
   M.AutoInit()
+
+  if (!router.currentRoute.matched.length) {
+    router.replace('/')
+  }
+})
+
+router.onError((e) => {
+  console.error('router error', e)
+  router.replace('/')
 })
 
 export default router
