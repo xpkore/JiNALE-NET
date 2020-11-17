@@ -17,6 +17,11 @@
 export default {
   name: 'Home',
   components: {
+  },
+  beforeMount: function () {
+    if (this.$store.state.loggedIn) {
+      this.$router.replace('/user/home')
+    }
   }
 }
 </script>
