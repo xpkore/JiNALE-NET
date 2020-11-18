@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import hashPassword from '../components/hashPassword'
+
 export default {
   data: () => ({
     cardValidated: false,
@@ -71,7 +73,7 @@ export default {
       } else {
         // reg with pwd
         if (!this.$data.pwdConfirmed) return
-        const hashedPwd = this.$data.pwd
+        const hashedPwd = hashPassword(this.$data.pwd)
         let loginInfo
         fetch(this.$store.state.endpoint + '/register', {
           method: 'POST',

@@ -22,6 +22,8 @@
 </template>
 
 <script>
+import hashPassword from '../components/hashPassword'
+
 export default {
   data: () => ({
     userid: '',
@@ -33,7 +35,7 @@ export default {
     doLogin (e) {
       this.$data.errorStr = ''
       this.$data.fetching = true
-      const hashedPwd = this.$data.pwd
+      const hashedPwd = hashPassword(this.$data.pwd)
       let loginInfo
       fetch(this.$store.state.endpoint + '/login', {
         method: 'POST',
@@ -43,6 +45,7 @@ export default {
       }).then(r => r.json()).then(d => {
         if (d.code !== 0) {
           this.$data.errorStr = `Login failed: [${d.code}] ${d.msg}`
+          return
         }
 
         this.$data.errorStr = 'Logged in, loading...'
