@@ -46,9 +46,4 @@ router.afterEach((to, from) => {
   }
 })
 
-router.onError((e) => {
-  console.error('router error', e)
-  router.replace('/')
-})
-
 export default router

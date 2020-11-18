@@ -41,7 +41,6 @@ export default {
         body: `id=${encodeURIComponent(this.$data.userid)}&hashed_pwd=${hashedPwd}`,
         credentials: 'include'
       }).then(r => r.json()).then(d => {
-        console.log(d)
         if (d.code !== 0) {
           this.$data.errorStr = `Login failed: [${d.code}] ${d.msg}`
         }
