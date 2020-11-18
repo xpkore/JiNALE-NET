@@ -46,6 +46,7 @@ export default {
           this.$data.errorStr = `Login failed: [${d.code}] ${d.msg}`
         }
 
+        this.$data.errorStr = 'Logged in, loading...'
         return fetch(this.$store.state.endpoint + '/myinfo', {
           method: 'GET',
           credentials: 'include'
