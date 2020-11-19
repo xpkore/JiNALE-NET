@@ -5,7 +5,7 @@
     <p>Confirm? </p>
     <div class="row">
       <div class="col s1"></div>
-      <router-link to="/user/home" class="col s4 waves-effect waves-light btn">Back</router-link>
+      <router-link to="/player/home" class="col s4 waves-effect waves-light btn">Back</router-link>
       <div class="col s2"></div>
       <a class="col s4 waves-effect waves-light btn red" :class="{ disabled:fetching === true }" @click="doLogout">Confirm</a>
       <div class="col s1"></div>

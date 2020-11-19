@@ -19,7 +19,7 @@ export default {
   },
   beforeMount: function () {
     if (this.$store.state.loggedIn) {
-      this.$router.replace('/user/home')
+      this.$router.replace('/player/home')
     }
   }
 }

@@ -73,7 +73,7 @@ export default {
 
         if (loginInfo) {
           this.$store.commit('updateLoginInfo', loginInfo)
-          this.$router.push('/user/home')
+          this.$router.push('/player/home')
         }
       })
     }
