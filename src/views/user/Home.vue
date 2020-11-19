@@ -3,7 +3,7 @@
     <h3>User Home</h3>
     <div class="card horizontal">
       <div class="card-image">
-        <img :alt="selectCharaName" style="width:150px;height:320px;object-fit:contain" :src="`${publicPath}assets/chara/${selectCharaName}.png`" />
+        <img :alt="selectCharaName" style="width:150px;height:320px;object-fit:contain" :src="`http://n.bzxyzt.cn/assets/chara/${selectCharaName}.png`" />
       </div>
       <div class="card-stacked">
         <div class="card-content user-info-card">
@@ -46,12 +46,20 @@
         <a class="col waves-effect waves-light btn" @click="loadRanking">Retry</a>
       </div>
       <div v-else>
+        <template v-for="item in rankingData">
+          <hr :key="item.or" v-if="item.or > 1">
+          <div class="row s12" :key="item.or">
+            <div class="col s3">{{ item.or }}</div>
+            <div class="col s7">{{ item.id }}</div>
+            <div class="col s2">{{ item.prev }}</div>
+          </div>
+        </template>
       </div>
     </div>
   </div>
 </template>
 
-<style>
+<style scoped>
 .user-play-info {
   text-align: right
 }
@@ -99,10 +107,17 @@ export default {
       this.$data.rankingLoadFailed = false
       this.$data.rankingData = null
 
-      setTimeout(() => {
-        this.$data.rankingLoadFailed = true
+      fetch(this.$store.state.endpoint + '/musicRanking').then(r => r.json()).then(d => {
+        if (d.code) {
+          this.$data.rankingLoadFailed = true
+        } else {
+          const prevIndex = d['2'].map(i => i.id)
+          let order = 1
+          const rankingData = d['1'].map(i => ({ or: order++, id: i.id, prev: prevIndex.indexOf(i.id) + 1 }))
+          this.$data.rankingData = rankingData
+        }
         this.$data.rankingLoaded = true
-      }, 1000)
+      })
     }
   }
 }
