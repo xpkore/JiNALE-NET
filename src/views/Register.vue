@@ -16,7 +16,7 @@
           <label for="userid">User ID</label>
         </p>
         <p class="input-field">
-          <input type="password" autocomplete="new-password" minlength="8" id="pwd" name="pwd" v-model="pwd"/>
+          <input type="password" autocomplete="new-password" minlength="8" id="pwd" name="pwd" v-model="pwd" :class="pwdValid ? '' : 'invalid'" @input="pwdInput"/>
           <label for="pwd">Password</label>
         </p>
         <p class="input-field">
@@ -43,12 +43,16 @@ export default {
 
     userid: '',
     pwd: '',
+    pwdValid: true,
     pwdConfirm: '',
     pwdConfirmed: true,
 
     errorStr: ''
   }),
   methods: {
+    pwdInput (e) {
+      this.$data.pwdValid = this.$data.pwd.length >= 8
+    },
     pwdConfirmInput (e) {
       this.$data.pwdConfirmed = this.$data.pwd === this.$data.pwdConfirm
     },
@@ -72,7 +76,7 @@ export default {
         })
       } else {
         // reg with pwd
-        if (!this.$data.pwdConfirmed) return
+        if (!this.$data.pwdValid || !this.$data.pwdConfirmed) return
         const hashedPwd = hashPassword(this.$data.pwd)
         let loginInfo
         fetch(this.$store.state.endpoint + '/register', {
