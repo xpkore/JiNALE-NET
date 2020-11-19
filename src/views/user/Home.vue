@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import { getShopName } from '../../components/shopUtils'
-import { dateToLocalStr } from '../../components/dateUtils'
+import { getShopName } from '@/components/shopUtils'
+import { dateToLocalStr } from '@/components/dateUtils'
 
 export default {
   computed: {

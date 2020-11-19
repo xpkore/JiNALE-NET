@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import hashPassword from '../components/hashPassword'
+import hashPassword from '@/components/hashPassword'
 
 export default {
   data: () => ({
