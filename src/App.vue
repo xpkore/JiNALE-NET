@@ -16,6 +16,15 @@ html {
   cursor: default;
   font-family: Arial,"Microsoft YaHei"
 }
+@media (prefers-color-scheme: dark) {
+  html,body {background:black;color:#DDD}
+  div.card,.dropdown-content {background:#1c1c1c}
+  .select-wrapper input.select-dropdown {color:white}
+  .select-wrapper .caret {fill:rgba(255,255,255,0.87)}
+  .pagination li a {color:white}
+  img {filter:brightness(0.8)}
+  input {color: inherit}
+}
 </style>
 
 <script>
