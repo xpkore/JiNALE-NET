@@ -18,6 +18,11 @@ export default new Vuex.Store({
         state.loggedIn = false
         state.loginInfo = null
       }
+    },
+    updateCardNo (state, newCard) {
+      if (state.loggedIn) {
+        state.loginInfo.card.id = newCard
+      }
     }
   },
   actions: {

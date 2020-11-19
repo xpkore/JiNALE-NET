@@ -86,7 +86,7 @@ export default {
     rankingData: null
   }),
   computed: {
-    publicPath () { return process.env.BASE_URL },
+    // publicPath () { return process.env.BASE_URL },
     loginInfo () {
       return this.$store.state.loginInfo
     },

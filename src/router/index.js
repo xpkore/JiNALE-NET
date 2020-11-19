@@ -30,6 +30,11 @@ const routes = [
     path: '/player/home',
     name: 'UserHome',
     component: () => import('../views/player/Home.vue')
+  },
+  {
+    path: '/player/transfer_card',
+    name: 'TransferCard',
+    component: () => import('../views/player/TransferCard.vue')
   }
 ]
 
