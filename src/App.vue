@@ -55,23 +55,32 @@ export default {
   }),
   mounted: function () {
     let loginInfo
-    fetch(this.$store.state.endpoint + '/myinfo', {
-      method: 'GET',
-      credentials: 'include'
-    }).then(r => r.json()).then(d => {
-      if (d.code === 0) {
-        loginInfo = d.data
-      }
-    }).catch((e) => {
-      console.error(e)
-    }).finally(() => {
-      if (loginInfo) {
-        this.$store.commit('updateLoginInfo', loginInfo)
-      } else if (location.pathname !== '/') {
+    if (localStorage.authToken !== undefined) {
+      const h = new Headers()
+      h.append('Authorization', 'Bearer ' + localStorage.authToken)
+      fetch(this.$store.state.endpoint + '/myinfo', {
+        method: 'GET',
+        headers: h
+      }).then(r => r.json()).then(d => {
+        if (d.code === 0) {
+          loginInfo = d.data
+        }
+      }).catch((e) => {
+        console.error(e)
+      }).finally(() => {
+        if (loginInfo) {
+          this.$store.commit('updateLoginInfo', loginInfo)
+        } else if (location.pathname !== '/') {
+          this.$router.replace('/')
+        }
+        this.$data.initialized = true
+      })
+    } else {
+      if (location.pathname !== '/') {
         this.$router.replace('/')
       }
       this.$data.initialized = true
-    })
+    }
   },
   methods: {
   }

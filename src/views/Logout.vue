@@ -28,15 +28,8 @@ export default {
   },
   methods: {
     doLogout () {
-      fetch(this.$store.state.endpoint + '/logout', {
-        credentials: 'include'
-      }).then(r => r.json()).then(d => {
-        this.$data.doneLogout = true
-        // manual slow down
-        return new Promise((resolve, reject) => setTimeout(resolve, 1000))
-      }).catch((e) => {
-        console.error(e)
-      }).finally(() => {
+      delete localStorage.authToken
+      new Promise((resolve, reject) => setTimeout(resolve, 1000)).then(() => {
         this.$store.commit('updateLoginInfo')
         this.$router.push('/')
       })

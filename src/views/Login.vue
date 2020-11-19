@@ -45,18 +45,19 @@ export default {
         body: `id=${encodeURIComponent(this.$data.userid)}&hashed_pwd=${hashedPwd}`,
         credentials: 'include'
       }).then(r => r.json()).then(d => {
-        if (d.code !== 0) {
+        if (d.code !== 0 || !d.token) {
           this.$data.errorStr = `登录失败: [${d.code}] ${d.msg}`
           return
         }
 
+        localStorage.authToken = d.token
         this.$data.errorStr = '已登录，读取中...'
+        const h = new Headers()
+        h.append('Authorization', 'Bearer ' + localStorage.authToken)
         return fetch(this.$store.state.endpoint + '/myinfo', {
           method: 'GET',
-          credentials: 'include'
+          headers: h
         }).then(r => r.json())
-
-        // return new Promise((resolve, reject) => setTimeout(resolve, 1000))
       }).then(d => {
         if (d.code === 0) {
           loginInfo = d.data

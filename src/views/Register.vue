@@ -97,17 +97,19 @@ export default {
         fetch(this.$store.state.endpoint + '/register', {
           method: 'POST',
           headers: new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' }),
-          body: `card=${this.$data.cardno}&id=${encodeURIComponent(this.$data.userid)}&hashed_pwd=${hashedPwd}`,
-          credentials: 'include'
+          body: `card=${this.$data.cardno}&id=${encodeURIComponent(this.$data.userid)}&hashed_pwd=${hashedPwd}`
         }).then(r => r.json()).then(d => {
-          if (d.code !== 0) {
+          if (d.code !== 0 || !d.token) {
             this.$data.errorStr = `注册失败: [${d.code}] ${d.msg}`
             return
           }
+          localStorage.authToken = d.token
           this.$data.errorStr = '已注册，读取中...'
+          const h = new Headers()
+          h.append('Authorization', 'Bearer ' + localStorage.authToken)
           return fetch(this.$store.state.endpoint + '/myinfo', {
             method: 'GET',
-            credentials: 'include'
+            headers: h
           }).then(r => r.json())
         }).then(d => {
           if (d.code === 0) {

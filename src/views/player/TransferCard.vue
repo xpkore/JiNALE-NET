@@ -34,9 +34,11 @@ export default {
         return
       }
       // check card
+      const h = new Headers()
+      h.append('Authorization', 'Bearer ' + localStorage.authToken)
       fetch(this.$store.state.endpoint + '/transferCard?newCard=' + this.$data.cardno, {
         method: 'GET',
-        credentials: 'include'
+        headers: h
       }).then(r => r.json()).then(d => {
         if (d.code !== 0) {
           this.$data.errorStr = `变更卡号失败: [${d.code}] ${d.msg}`
