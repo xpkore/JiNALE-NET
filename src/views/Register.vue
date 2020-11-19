@@ -2,7 +2,8 @@
   <div>
     <h1>Register</h1>
     <p>
-    <router-link to="/login">Login</router-link>
+      <span>Already registered? </span>
+      <router-link to="/login">Login</router-link>
     </p>
     <form @submit.prevent="doReg">
       <h5>Enter Card Number</h5>
@@ -24,7 +25,7 @@
           <label for="pwd_confirm">Confirm Password</label>
         </p>
       </template>
-      <input :disabled="fetching === true" type="submit" :value="cardValidated ? 'Register' : 'Check Card'" />
+      <input class="btn waves-effect waves-light" :disabled="fetching === true" type="submit" :value="cardValidated ? 'Register' : 'Check Card'" />
     </form>
     <p v-if="errorStr">
       <span>{{ errorStr }}</span>

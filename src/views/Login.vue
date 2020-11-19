@@ -2,7 +2,9 @@
   <div>
     <h1>Login</h1>
     <p>
-      <router-link to="/">Home</router-link>
+      <span>Not registered? </span>
+      <router-link to="/register">Register</router-link>
+      <span> now! </span>
     </p>
     <form @submit.prevent="doLogin">
       <p class="input-field">
@@ -13,7 +15,7 @@
         <input type="password" id="pwd" name="pwd" v-model="pwd"/>
         <label for="pwd">Password</label>
       </p>
-      <input :disabled="fetching === true" type="submit" value="Login" />
+      <input class="btn waves-effect waves-light" :disabled="fetching === true" type="submit" value="Login" />
     </form>
     <p v-if="errorStr">
       <span>{{ errorStr }}</span>
