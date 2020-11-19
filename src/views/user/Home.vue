@@ -47,10 +47,10 @@
       </div>
       <div v-else>
         <template v-for="item in rankingData">
-          <hr :key="item.or" v-if="item.or > 1">
-          <div class="row s12" :key="item.or">
+          <hr :key="`hr-${item.or}`" v-if="item.or > 1">
+          <div class="row s12" :key="`div-${item.or}`">
             <div class="col s3">{{ item.or }}</div>
-            <div class="col s7">{{ item.id }}</div>
+            <div class="col s7">{{ getMusicName(item.id) }}</div>
             <div class="col s2">{{ item.prev }}</div>
           </div>
         </template>
@@ -71,6 +71,7 @@
 <script>
 import { getShopName } from '@/components/shopUtils'
 import { dateToLocalStr } from '@/components/dateUtils'
+import { getMusicName } from '@/components/musicUtils'
 
 export default {
   data: () => ({
@@ -102,6 +103,9 @@ export default {
     this.loadRanking()
   },
   methods: {
+    getMusicName (id) {
+      return getMusicName(id)
+    },
     loadRanking () {
       this.$data.rankingLoaded = false
       this.$data.rankingLoadFailed = false
