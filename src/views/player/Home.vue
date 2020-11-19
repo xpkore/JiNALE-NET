@@ -10,7 +10,7 @@
           <h6 class="user-name">{{ loginInfo.user_data.user_name }}</h6>
           <p class="card-no">
             <span>{{ cardNo }}</span>
-            <span class="transfer-card-btn"><router-link to="/user/transfer_card">转移数据</router-link></span>
+            <span class="transfer-card-btn"><router-link to="/player/transfer_card">转移数据</router-link></span>
           </p>
           <p class="show-card-no-toggle">
             <label>

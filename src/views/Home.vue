@@ -1,12 +1,14 @@
 <template>
   <div class="home">
-    <h2>Welcome to JiNALE-net</h2>
-    <h5>A.K.A. My AiMe-CN</h5>
+    <h2>欢迎来到 JiNALE-net</h2>
+    <h5>（又名 MyAiMe-CN）</h5>
+    <div class="row"></div>
+    <div class="row"></div>
     <div class="row">
       <div class="col s1"></div>
-      <router-link class="col s4 waves-effect waves-light btn" to="/register">Register</router-link>
+      <router-link class="col s4 waves-effect waves-light btn" to="/register">注册新账户</router-link>
       <div class="col s2"></div>
-      <router-link class="col s4 waves-effect waves-light btn" to="/login">Login</router-link>
+      <router-link class="col s4 waves-effect waves-light btn" to="/login">登录</router-link>
       <div class="col s1"></div>
     </div>
   </div>

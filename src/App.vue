@@ -48,15 +48,12 @@ export default {
       if (d.code === 0) {
         loginInfo = d.data
       }
-
-      // manual slow down
-      return new Promise((resolve, reject) => setTimeout(resolve, 1000))
     }).catch((e) => {
       console.error(e)
     }).finally(() => {
       if (loginInfo) {
         this.$store.commit('updateLoginInfo', loginInfo)
-      } else {
+      } else if (location.pathname !== '/') {
         this.$router.replace('/')
       }
       this.$data.initialized = true

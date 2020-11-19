@@ -1,21 +1,21 @@
 <template>
   <div>
-    <h1>Login</h1>
+    <h1>登录</h1>
     <p>
-      <span>Not registered? </span>
-      <router-link to="/register">Register</router-link>
-      <span> now! </span>
+      <span>还没注册？现在就可以</span>
+      <router-link to="/register">注册</router-link>
+      <span>！</span>
     </p>
     <form @submit.prevent="doLogin">
       <p class="input-field">
         <input type="text" id="userid" name="userid" v-model="userid"/>
-        <label for="userid">User ID</label>
+        <label for="userid">用户名</label>
       </p>
       <p class="input-field">
         <input type="password" id="pwd" name="pwd" v-model="pwd"/>
-        <label for="pwd">Password</label>
+        <label for="pwd">密码</label>
       </p>
-      <input class="btn waves-effect waves-light" :disabled="fetching === true" type="submit" value="Login" />
+      <input class="btn waves-effect waves-light" :disabled="fetching === true" type="submit" value="登录" />
     </form>
     <p v-if="errorStr">
       <span>{{ errorStr }}</span>
@@ -46,11 +46,11 @@ export default {
         credentials: 'include'
       }).then(r => r.json()).then(d => {
         if (d.code !== 0) {
-          this.$data.errorStr = `Login failed: [${d.code}] ${d.msg}`
+          this.$data.errorStr = `登录失败: [${d.code}] ${d.msg}`
           return
         }
 
-        this.$data.errorStr = 'Logged in, loading...'
+        this.$data.errorStr = '已登录，读取中...'
         return fetch(this.$store.state.endpoint + '/myinfo', {
           method: 'GET',
           credentials: 'include'
@@ -61,11 +61,8 @@ export default {
         if (d.code === 0) {
           loginInfo = d.data
         } else {
-          this.$data.errorStr = `Login failed: [${d.code}] ${d.msg}`
+          this.$data.errorStr = `登录失败: [${d.code}] ${d.msg}`
         }
-
-        // manual slow down
-        return new Promise((resolve, reject) => setTimeout(resolve, 1000))
       }).catch((e) => {
         console.error(e)
       }).finally(() => {
