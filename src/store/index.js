@@ -23,6 +23,12 @@ export default new Vuex.Store({
       if (state.loggedIn) {
         state.loginInfo.card.id = newCard
       }
+    },
+    dailyBonus (state) {
+      if (state.loggedIn) {
+        state.loginInfo.have_daily_bonus = false
+        state.loginInfo.user_data.event_point += 10
+      }
     }
   },
   actions: {

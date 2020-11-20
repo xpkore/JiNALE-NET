@@ -10,7 +10,6 @@
           <h6 class="user-name">{{ loginInfo.user_data.user_name }}</h6>
           <p class="card-no">
             <span>{{ cardNo }}</span>
-            <span class="transfer-card-btn"><router-link to="/player/transfer_card">转移数据</router-link></span>
           </p>
           <p class="show-card-no-toggle">
             <label>
@@ -26,15 +25,21 @@
           <div class="user-play-info">
             <p>Rating: {{ (loginInfo.user_data.player_rating / 100).toFixed(2) }}</p>
             <p>总游玩次数: {{ loginInfo.user_data.play_count }}</p>
-            <p>奶酪: {{ loginInfo.user_data.event_point }}</p>
+            <p>奶酪: {{ cheeseCount }}</p>
           </div>
         </div>
       </div>
     </div>
     <div class="row">
+      <div class="col s2"></div>
+      <router-link to="/player/transfer_card" class="col s3 waves-effect waves-light btn">转移数据</router-link>
+      <div class="col s2"></div>
+      <a v-if="cheeseCount < 1000" class="col s3 waves-effect waves-light btn" :class="{disabled:(!haveDailyBonus || this.fetchingDailyBonus)}" @click="getDailyBonus">{{ haveDailyBonus ? '签到(+10奶酪)' : '已签到'}}</a>
+      <span v-else class="col s3 center">不足1000奶酪时<br>才能签到</span>
+    </div>
+    <div class="row">
       <div class="col s7"></div>
-      <router-link to="/logout" class="col s4 waves-effect waves-light btn">退出登录</router-link>
-      <div class="col s1"></div>
+      <router-link to="/logout" class="col s4 waves-effect waves-light btn red">退出登录</router-link>
     </div>
     <div class="music-ranking">
       <h5>热门游玩榜</h5>
@@ -48,15 +53,15 @@
       <div v-else>
         <div class="row s12">
             <div class="col s3">今日排名</div>
-            <div class="col s7">歌曲</div>
-            <div class="col s2">昨日排名</div>
+            <div class="col s6">歌曲</div>
+            <div class="col s3">昨日排名</div>
         </div>
         <template v-for="item in rankingData">
           <hr :key="`hr-${item.or}`" v-if="item.or > 1">
           <div class="row s12" :key="`div-${item.or}`">
             <div class="col s3">{{ item.or }}</div>
-            <div class="col s7">{{ getMusicName(item.id) }}</div>
-            <div class="col s2">{{ item.prev }}</div>
+            <div class="col s6">{{ getMusicName(item.id) }}</div>
+            <div class="col s3">{{ item.prev }}</div>
           </div>
         </template>
       </div>
@@ -83,7 +88,8 @@ export default {
     showCardNo: false,
     rankingLoaded: false,
     rankingLoadFailed: false,
-    rankingData: null
+    rankingData: null,
+    fetchingDailyBonus: false
   }),
   computed: {
     // publicPath () { return process.env.BASE_URL },
@@ -102,6 +108,12 @@ export default {
     },
     cardNo () {
       return this.loginInfo.card.id.replace(/(.{4})(.{4})(.{4})(.{4})(.{4})/, this.showCardNo ? '$1-$2-$3-$4-$5' : '$1-$2-****-****-$5')
+    },
+    haveDailyBonus () {
+      return this.loginInfo.have_daily_bonus
+    },
+    cheeseCount () {
+      return this.loginInfo.user_data.event_point
     }
   },
   mounted () {
@@ -126,6 +138,21 @@ export default {
           this.$data.rankingData = rankingData
         }
         this.$data.rankingLoaded = true
+      })
+    },
+    getDailyBonus () {
+      if (!this.haveDailyBonus) return
+      this.$data.fetchingDailyBonus = true
+
+      const h = new Headers()
+      h.append('Authorization', 'Bearer ' + localStorage.authToken)
+      fetch(this.$store.state.endpoint + '/dailyBonus', {
+        method: 'GET',
+        headers: h
+      }).then(r => r.json()).then(d => {
+        if (d.code === 0) {
+          this.$store.commit('dailyBonus')
+        }
       })
     }
   }
