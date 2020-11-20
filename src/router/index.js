@@ -2,49 +2,58 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import M from 'materialize-css'
 
+import Home from '../views/Home.vue'
+import UpdateNotes from '../views/UpdateNotes.vue'
+import Register from '../views/account/Register.vue'
+import Login from '../views/account/Login.vue'
+import Logout from '../views/account/Logout.vue'
+import ChangePassword from '../views/account/ChangePassword.vue'
+import UserHome from '../views/player/Home.vue'
+import TransferCard from '../views/player/TransferCard.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('../views/Home.vue')
+    component: Home
   },
   {
     path: '/update_notes',
     name: 'UpdateNotes',
-    component: () => import('../views/UpdateNotes.vue')
+    component: UpdateNotes
   },
   {
     path: '/account/register',
     name: 'Register',
-    component: () => import('../views/account/Register.vue')
+    component: Register
   },
   {
     path: '/account/login',
     name: 'Login',
-    component: () => import('../views/account/Login.vue')
+    component: Login
   },
   {
     path: '/account/logout',
     name: 'Logout',
-    component: () => import('../views/account/Logout.vue')
+    component: Logout
   },
   {
     path: '/account/change_password',
     name: 'ChangePassword',
-    component: () => import('../views/account/ChangePassword.vue')
+    component: ChangePassword
   },
 
   {
     path: '/player/home',
     name: 'UserHome',
-    component: () => import('../views/player/Home.vue')
+    component: UserHome
   },
   {
     path: '/player/transfer_card',
     name: 'TransferCard',
-    component: () => import('../views/player/TransferCard.vue')
+    component: TransferCard
   }
 ]
 
