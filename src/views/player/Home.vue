@@ -63,7 +63,9 @@
       </div>
     </div>
     <div class="row">
-      <div class="col s7"></div>
+      <div class="col s1"></div>
+      <router-link to="/account/change_password" class="col s4 waves-effect waves-light btn">修改密码</router-link>
+      <div class="col s2"></div>
       <router-link to="/account/logout" class="col s4 waves-effect waves-light btn red">退出登录</router-link>
     </div>
   </div>
