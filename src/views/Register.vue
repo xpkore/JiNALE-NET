@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import hashPassword from '@/components/hashPassword'
+import { hashPassword, checkTokenValidity } from '@/components/accUtils'
 
 export default {
   data: () => ({
@@ -110,7 +110,7 @@ export default {
           return fetch(this.$store.state.endpoint + '/myinfo', {
             method: 'GET',
             headers: h
-          }).then(r => r.json())
+          }).then(checkTokenValidity.bind(this))
         }).then(d => {
           if (d.code === 0) {
             loginInfo = d.data

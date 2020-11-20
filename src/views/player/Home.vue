@@ -35,7 +35,7 @@
       <router-link to="/player/transfer_card" class="col s3 waves-effect waves-light btn">转移数据</router-link>
       <div class="col s2"></div>
       <a v-if="cheeseCount < 1000" class="col s3 waves-effect waves-light btn" :class="{disabled:(!haveDailyBonus || this.fetchingDailyBonus)}" @click="getDailyBonus">{{ haveDailyBonus ? '签到(+10奶酪)' : '已签到'}}</a>
-      <span v-else class="col s3 center">不足1000奶酪时<br>才能签到</span>
+      <span v-else class="col s3 center">不足1000奶酪时才能签到</span>
     </div>
     <div class="row">
       <div class="col s7"></div>
@@ -82,6 +82,7 @@
 import { getShopName } from '@/components/shopUtils'
 import { dateToLocalStr } from '@/components/dateUtils'
 import { getMusicName } from '@/components/musicUtils'
+import { checkTokenValidity } from '@/components/accUtils'
 
 export default {
   data: () => ({
@@ -149,7 +150,7 @@ export default {
       fetch(this.$store.state.endpoint + '/dailyBonus', {
         method: 'GET',
         headers: h
-      }).then(r => r.json()).then(d => {
+      }).then(checkTokenValidity.bind(this)).then(d => {
         if (d.code === 0) {
           this.$store.commit('dailyBonus')
         }

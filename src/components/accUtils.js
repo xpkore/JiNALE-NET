@@ -6,3 +6,13 @@ export function hashPassword (pwd) {
     .update(pwd)
     .digest('hex').toLowerCase()
 }
+
+export function checkTokenValidity (r) {
+  const tokenStatus = r.headers.get('X-Token-Status')
+  if (tokenStatus === 'Revoked') {
+    delete localStorage.authToken
+    if (this.$store) this.$store.commit('updateLoginInfo')
+    throw new Error('Token is revoked')
+  }
+  return r.json()
+}

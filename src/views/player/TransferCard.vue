@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import { checkTokenValidity } from '@/components/accUtils'
+
 export default {
   data: () => ({
     fetching: false,
@@ -39,7 +41,7 @@ export default {
       fetch(this.$store.state.endpoint + '/transferCard?newCard=' + this.$data.cardno, {
         method: 'GET',
         headers: h
-      }).then(r => r.json()).then(d => {
+      }).then(checkTokenValidity.bind(this)).then(d => {
         if (d.code !== 0) {
           this.$data.errorStr = `变更卡号失败: [${d.code}] ${d.msg}`
           return

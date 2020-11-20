@@ -49,6 +49,8 @@ footer {
 </style>
 
 <script>
+import { checkTokenValidity } from '@/components/accUtils'
+
 export default {
   data: () => ({
     initialized: false
@@ -61,7 +63,7 @@ export default {
       fetch(this.$store.state.endpoint + '/myinfo', {
         method: 'GET',
         headers: h
-      }).then(r => r.json()).then(d => {
+      }).then(checkTokenValidity.bind(this)).then(d => {
         if (d.code === 0) {
           loginInfo = d.data
         }

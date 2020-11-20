@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import hashPassword from '@/components/hashPassword'
+import { hashPassword, checkTokenValidity } from '@/components/accUtils'
 
 export default {
   data: () => ({
@@ -44,7 +44,7 @@ export default {
         headers: new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' }),
         body: `id=${encodeURIComponent(this.$data.userid)}&hashed_pwd=${hashedPwd}`,
         credentials: 'include'
-      }).then(r => r.json()).then(d => {
+      }).then(checkTokenValidity.bind(this)).then(d => {
         if (d.code !== 0 || !d.token) {
           this.$data.errorStr = `登录失败: [${d.code}] ${d.msg}`
           return
