@@ -37,10 +37,6 @@
       <a v-if="cheeseCount < 1000" class="col s3 waves-effect waves-light btn" :class="{disabled:(!haveDailyBonus || this.fetchingDailyBonus)}" @click="getDailyBonus">{{ haveDailyBonus ? '签到(+10奶酪)' : '已签到'}}</a>
       <span v-else class="col s3 center">不足1000奶酪时才能签到</span>
     </div>
-    <div class="row">
-      <div class="col s7"></div>
-      <router-link to="/logout" class="col s4 waves-effect waves-light btn red">退出登录</router-link>
-    </div>
     <div class="music-ranking">
       <h5>热门游玩榜</h5>
       <div v-if="!rankingLoaded">
@@ -65,6 +61,10 @@
           </div>
         </template>
       </div>
+    </div>
+    <div class="row">
+      <div class="col s7"></div>
+      <router-link to="/account/logout" class="col s4 waves-effect waves-light btn red">退出登录</router-link>
     </div>
   </div>
 </template>

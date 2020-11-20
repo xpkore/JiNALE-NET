@@ -6,9 +6,9 @@
     <div class="row"></div>
     <div class="row">
       <div class="col s1"></div>
-      <router-link class="col s4 waves-effect waves-light btn" to="/register">注册新账户</router-link>
+      <router-link class="col s4 waves-effect waves-light btn" to="/account/register">注册新账户</router-link>
       <div class="col s2"></div>
-      <router-link class="col s4 waves-effect waves-light btn" to="/login">登录</router-link>
+      <router-link class="col s4 waves-effect waves-light btn" to="/account/login">登录</router-link>
       <div class="col s1"></div>
     </div>
   </div>

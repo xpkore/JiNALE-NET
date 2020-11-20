@@ -3,7 +3,7 @@
     <h1>登录</h1>
     <p>
       <span>还没注册？现在就可以</span>
-      <router-link to="/register">注册</router-link>
+      <router-link to="/account/register">注册</router-link>
       <span>！</span>
     </p>
     <form @submit.prevent="doLogin">

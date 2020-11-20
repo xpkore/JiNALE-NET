@@ -11,19 +11,24 @@ const routes = [
     component: () => import('../views/Home.vue')
   },
   {
-    path: '/register',
+    path: '/account/register',
     name: 'Register',
-    component: () => import('../views/Register.vue')
+    component: () => import('../views/account/Register.vue')
   },
   {
-    path: '/login',
+    path: '/account/login',
     name: 'Login',
-    component: () => import('../views/Login.vue')
+    component: () => import('../views/account/Login.vue')
   },
   {
-    path: '/logout',
+    path: '/account/logout',
     name: 'Logout',
-    component: () => import('../views/Logout.vue')
+    component: () => import('../views/account/Logout.vue')
+  },
+  {
+    path: '/account/change_password',
+    name: 'Logout',
+    component: () => import('../views/account/ChangePassword.vue')
   },
 
   {

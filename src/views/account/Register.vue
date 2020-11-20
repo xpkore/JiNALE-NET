@@ -3,7 +3,7 @@
     <h1>注册新账号</h1>
     <p>
       <span>注册过了？直接</span>
-      <router-link to="/login">登录</router-link>
+      <router-link to="/account/login">登录</router-link>
     </p>
     <form @submit.prevent="doReg">
       <h5>输入卡号</h5>
