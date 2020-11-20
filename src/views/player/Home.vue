@@ -9,7 +9,8 @@
         <div class="card-content user-info-card">
           <h6 class="user-name">{{ loginInfo.user_data.user_name }}</h6>
           <p class="card-no">
-            <span>{{ cardNo }}</span>
+            <span v-if="showCardNo">{{ loginInfo.card.id.replace(/(.{4})(.{4})(.{4})(.{4})(.{4})/, '$1-$2-$3-$4-$5') }}</span>
+            <span v-else>{{ loginInfo.card.id.replace(/(.{4})(.{4})(.{4})(.{4})(.{4})/, '$1-$2-****-****-$5') }}</span>
           </p>
           <p class="show-card-no-toggle">
             <label>
@@ -108,9 +109,6 @@ export default {
     selectCharaName () {
       const nameArr = ['', '', 'ras', 'chiffon', 'salt', 'otohime', 'syama', 'milk']
       return nameArr[this.loginInfo.user_data.select_chara]
-    },
-    cardNo () {
-      return this.loginInfo.card.id.replace(/(.{4})(.{4})(.{4})(.{4})(.{4})/, this.showCardNo ? '$1-$2-$3-$4-$5' : '$1-$2-****-****-$5')
     },
     haveDailyBonus () {
       return this.loginInfo.have_daily_bonus
