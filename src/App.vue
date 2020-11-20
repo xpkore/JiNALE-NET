@@ -2,11 +2,18 @@
   <div id="app">
     <router-view v-if="initialized" />
     <div v-else>
-      <h4>正在初始化...</h4>
+      <p>正在初始化...</p>
     </div>
+    <footer v-if="notAtUpdateNotes" class="center">
+      <router-link to="/update_notes">JiNet更新日志</router-link>
+    </footer>
     <footer>
       <p>JiNALE team &copy; 2020</p>
       <p>Make maimai FiNALE &amp; fanmade great again</p>
+      <p>
+        <a href="http://maimai.best/" target="_blank" style="margin-right:10px">茶盘</a>
+        <a href="http://finale.plus/" target="_blank" style="margin-left:10px">球盘</a>
+      </p>
     </footer>
   </div>
 </template>
@@ -53,7 +60,8 @@ import { checkTokenValidity } from '@/components/accUtils'
 
 export default {
   data: () => ({
-    initialized: false
+    initialized: false,
+    notAtUpdateNotes: true
   }),
   mounted: function () {
     let loginInfo
@@ -83,6 +91,10 @@ export default {
       }
       this.$data.initialized = true
     }
+
+    this.$router.afterEach(() => {
+      this.notAtUpdateNotes = location.pathname !== '/update_notes'
+    })
   },
   methods: {
   }

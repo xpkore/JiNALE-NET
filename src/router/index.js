@@ -11,6 +11,11 @@ const routes = [
     component: () => import('../views/Home.vue')
   },
   {
+    path: '/update_notes',
+    name: 'UpdateNotes',
+    component: () => import('../views/UpdateNotes.vue')
+  },
+  {
     path: '/account/register',
     name: 'Register',
     component: () => import('../views/account/Register.vue')
@@ -27,7 +32,7 @@ const routes = [
   },
   {
     path: '/account/change_password',
-    name: 'Logout',
+    name: 'ChangePassword',
     component: () => import('../views/account/ChangePassword.vue')
   },
 
