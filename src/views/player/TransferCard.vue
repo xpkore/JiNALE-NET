@@ -4,7 +4,7 @@
     <form @submit.prevent="doTransfer">
       <h5>输入新卡号</h5>
       <p class="input-field">
-        <input type="text" id="cardno" name="cardno" v-model="cardno" :disabled="fetching" @input="cardnoInput" :class="cardnoValid ? '' : 'invalid'" maxlength="20"/>
+        <input type="text" inputmode="decimal" id="cardno" name="cardno" v-model="cardno" :disabled="fetching" @input="cardnoInput" :class="cardnoValid ? '' : 'invalid'" maxlength="20"/>
         <label for="cardno">20位卡号</label>
       </p>
       <input class="btn waves-effect waves-light" :disabled="fetching === true" type="submit" value="变更卡号" />

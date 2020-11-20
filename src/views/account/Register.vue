@@ -8,7 +8,7 @@
     <form @submit.prevent="doReg">
       <h5>输入卡号</h5>
       <p class="input-field">
-        <input type="text" id="cardno" name="cardno" v-model="cardno" :disabled="fetching || cardValidated" @input="cardnoInput" :class="cardnoValid ? '' : 'invalid'" maxlength="20"/>
+        <input type="text" inputmode="decimal" id="cardno" name="cardno" v-model="cardno" :disabled="fetching || cardValidated" @input="cardnoInput" :class="cardnoValid ? '' : 'invalid'" maxlength="20"/>
         <label for="cardno">20位卡号</label>
       </p>
       <template v-if="cardValidated">
