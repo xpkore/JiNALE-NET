@@ -53,58 +53,58 @@ export default {
   }),
   methods: {
     cardnoInput () {
-      this.$data.cardnoValid = this.$data.cardno.match(/^\d{20}$/) !== null
+      this.cardnoValid = this.cardno.match(/^\d{20}$/) !== null
     },
     pwdInput () {
-      this.$data.pwdValid = this.$data.pwd.length >= 8
+      this.pwdValid = this.pwd.length >= 8
     },
     pwdConfirmInput () {
-      this.$data.pwdConfirmed = this.$data.pwd === this.$data.pwdConfirm
+      this.pwdConfirmed = this.pwd === this.pwdConfirm
     },
     doReg () {
-      this.$data.fetching = true
-      if (!this.$data.cardValidated) {
+      this.fetching = true
+      if (!this.cardValidated) {
         this.cardnoInput()
-        if (!this.$data.cardnoValid) {
-          this.$data.fetching = false
+        if (!this.cardnoValid) {
+          this.fetching = false
           return
         }
         // check card
-        fetch(this.$store.state.endpoint + '/chkcard?card=' + this.$data.cardno).then(r => r.json()).then(d => {
+        fetch(this.$store.state.endpoint + '/chkcard?card=' + this.cardno).then(r => r.json()).then(d => {
           if (d.code !== 0) {
-            this.$data.errorStr = `卡号验证失败: [${d.code}] ${d.msg}`
+            this.errorStr = `卡号验证失败: [${d.code}] ${d.msg}`
             return
           }
-          this.$data.errorStr = '卡号已确认，继续进行注册'
-          setTimeout(() => { this.$data.errorStr = '' }, 3000)
-          this.$data.cardValidated = true
+          this.errorStr = '卡号已确认，继续进行注册'
+          setTimeout(() => { this.errorStr = '' }, 3000)
+          this.cardValidated = true
         }).catch((e) => {
-          this.$data.errorStr = '出现未知错误'
+          this.errorStr = '出现未知错误'
           console.error(e)
         }).finally(() => {
-          this.$data.fetching = false
+          this.fetching = false
         })
       } else {
         this.pwdInput()
         this.pwdConfirmInput()
         // reg with pwd
-        if (!this.$data.pwdValid || !this.$data.pwdConfirmed) {
-          this.$data.fetching = false
+        if (!this.pwdValid || !this.pwdConfirmed) {
+          this.fetching = false
           return
         }
-        const hashedPwd = hashPassword(this.$data.pwd)
+        const hashedPwd = hashPassword(this.pwd)
         let loginInfo
         fetch(this.$store.state.endpoint + '/register', {
           method: 'POST',
           headers: new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' }),
-          body: `card=${this.$data.cardno}&id=${encodeURIComponent(this.$data.userid)}&hashed_pwd=${hashedPwd}`
+          body: `card=${this.cardno}&id=${encodeURIComponent(this.userid)}&hashed_pwd=${hashedPwd}`
         }).then(r => r.json()).then(d => {
           if (d.code !== 0 || !d.token) {
-            this.$data.errorStr = `注册失败: [${d.code}] ${d.msg}`
+            this.errorStr = `注册失败: [${d.code}] ${d.msg}`
             return
           }
           localStorage.authToken = d.token
-          this.$data.errorStr = '已注册，读取中...'
+          this.errorStr = '已注册，读取中...'
           const h = new Headers()
           h.append('Authorization', 'Bearer ' + localStorage.authToken)
           return fetch(this.$store.state.endpoint + '/myinfo', {
@@ -115,13 +115,13 @@ export default {
           if (d.code === 0) {
             loginInfo = d.data
           } else {
-            this.$data.errorStr = `登录失败: [${d.code}] ${d.msg}`
+            this.errorStr = `登录失败: [${d.code}] ${d.msg}`
           }
         }).catch((e) => {
-          this.$data.errorStr = '出现未知错误'
+          this.errorStr = '出现未知错误'
           console.error(e)
         }).finally(() => {
-          this.$data.fetching = false
+          this.fetching = false
 
           if (loginInfo) {
             this.$store.commit('updateLoginInfo', loginInfo)

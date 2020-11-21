@@ -44,20 +44,20 @@ export default {
   },
   methods: {
     pwdInput () {
-      this.$data.pwdValid = this.$data.pwd.length >= 8
+      this.pwdValid = this.pwd.length >= 8
     },
     pwdConfirmInput () {
-      this.$data.pwdConfirmed = this.$data.pwd === this.$data.pwdConfirm
+      this.pwdConfirmed = this.pwd === this.pwdConfirm
     },
     doChangePwd () {
-      this.$data.fetching = true
+      this.fetching = true
       this.pwdInput()
       this.pwdConfirmInput()
-      if (!this.$data.pwdValid || !this.$data.pwdConfirmed) {
-        this.$data.fetching = false
+      if (!this.pwdValid || !this.pwdConfirmed) {
+        this.fetching = false
         return
       }
-      const hashedPwd = hashPassword(this.$data.pwd)
+      const hashedPwd = hashPassword(this.pwd)
       const h = new Headers()
       h.append('Authorization', 'Bearer ' + localStorage.authToken)
       h.append('Content-Type', 'application/x-www-form-urlencoded')
@@ -67,17 +67,17 @@ export default {
         body: `hashed_pwd=${hashedPwd}`
       }).then(checkTokenValidity.bind(this)).then(d => {
         if (d.code !== 0 || !d.token) {
-          this.$data.errorStr = `变更密码失败: [${d.code}] ${d.msg}`
+          this.errorStr = `变更密码失败: [${d.code}] ${d.msg}`
           return
         }
-        this.$data.errorStr = '密码已更新'
+        this.errorStr = '密码已更新'
         localStorage.authToken = d.token
         setTimeout(() => { this.$router.push('/player/home') }, 1000)
       }).catch((e) => {
-        this.$data.errorStr = '出现未知错误'
+        this.errorStr = '出现未知错误'
         console.error(e)
       }).finally(() => {
-        this.$data.fetching = false
+        this.fetching = false
       })
     }
   }

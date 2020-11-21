@@ -83,13 +83,13 @@ export default {
         } else if (location.pathname !== '/') {
           this.$router.replace('/')
         }
-        this.$data.initialized = true
+        this.initialized = true
       })
     } else {
       if (location.pathname !== '/') {
         this.$router.replace('/')
       }
-      this.$data.initialized = true
+      this.initialized = true
     }
 
     this.$router.afterEach(() => {

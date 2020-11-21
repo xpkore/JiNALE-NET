@@ -29,6 +29,7 @@ export default {
   methods: {
     doLogout () {
       delete localStorage.authToken
+      this.doneLogout = true
       new Promise((resolve, reject) => setTimeout(resolve, 1000)).then(() => {
         this.$store.commit('updateLoginInfo')
         this.$router.push('/')
