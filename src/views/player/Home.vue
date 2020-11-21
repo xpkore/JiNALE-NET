@@ -1,5 +1,5 @@
 <template>
-  <div class="col s12">
+  <div>
     <h3>玩家首页</h3>
     <div class="card horizontal">
       <div class="card-image">
@@ -49,7 +49,7 @@
       </div>
       <div v-else>
         <template v-for="item in rankingData">
-          <div class="rank-music-item" :class="`rank-${rankRelativePosition(item)}`" :key="`div-${item.or}`">
+          <div class="valign-wrapper rank-music-item" :class="`rank-${rankRelativePosition(item)}`" :key="`div-${item.or}`">
             <div class="rank-music-order" :class="`rank-${item.or}`">{{ item.or }}</div>
             <div class="rank-music-jacket"><img :src="getMusicJacketUrl(item.id)"></div>
             <div class="rank-music-name">{{ getMusicName(item.id) }}</div>
@@ -77,7 +77,6 @@
 
 .rank-music-item {
   position: relative;
-  display: block;
   height: 80px;
   line-height: 80px;
 }
@@ -85,7 +84,6 @@
   border-top: 1px solid gray
 }
 .rank-music-item>div {
-  overflow: hidden;
   display: inline-block;
 }
 .rank-music-order {
@@ -100,6 +98,7 @@
   vertical-align: middle;
 }
 .rank-music-name {
+  overflow:hidden;
   margin-left: 5px;
   width: calc(100% - 146px);
   text-overflow: ellipsis;

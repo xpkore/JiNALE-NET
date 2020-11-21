@@ -20,7 +20,7 @@
 
 <style>
 body {
-  width: 95%;
+  width: calc(100vw - 10px);
   max-width: 600px;
   margin: 5px auto;
   background: #efeff4;
