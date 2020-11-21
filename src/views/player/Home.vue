@@ -53,6 +53,7 @@
             <div class="rank-music-order" :class="`rank-${item.or}`">{{ item.or }}</div>
             <div class="rank-music-jacket"><img :src="getMusicJacketUrl(item.id)"></div>
             <div class="rank-music-name">{{ getMusicName(item.id) }}</div>
+            <div class="rank-music-prev">{{ item.prev }}</div>
           </div>
         </template>
       </div>
@@ -75,6 +76,7 @@
 }
 
 .rank-music-item {
+  position: relative;
   display: block;
   height: 80px;
   line-height: 80px;
@@ -90,15 +92,9 @@
   width: 40px;
   text-align: center
 }
-.rank-music-order.rank-1 {
-  font-size: 30px;
-}
-.rank-music-order.rank-2 {
-  font-size: 25px;
-}
-.rank-music-order.rank-3 {
-  font-size: 20px;
-}
+.rank-music-order.rank-1 { font-size: 30px; }
+.rank-music-order.rank-2 { font-size: 25px; }
+.rank-music-order.rank-3 { font-size: 20px; }
 .rank-music-jacket img {
   height: 60px;
   vertical-align: middle;
@@ -107,23 +103,27 @@
   margin-left: 5px;
   width: calc(100% - 146px);
   text-overflow: ellipsis;
+  white-space: pre;
+}
+.rank-music-prev {
+  line-height:20px;
+  margin-top:60px;
+  width:40px;
+  text-align: center;
+  color: gray;
 }
 .rank-music-item:after {
-  overflow: hidden;
-  display:inline-block;
   content: "";
-  margin: 20px 0;
+  position: absolute;
+  top: 20px;
+  right: 0;
   height: 40px;
   width: 40px;
   background-image: url("https://n.bzxyzt.cn/assets/ranking.png");
   background-size: 40px auto
 }
-.rank-music-item.rank-up:after {
-  background-position: 0 -82px;
-}
-.rank-music-item.rank-down:after {
-  background-position: 0 -164px;
-}
+.rank-music-item.rank-up:after { background-position: 0 80px; }
+.rank-music-item.rank-down:after { background-position: 0 160px; }
 </style>
 
 <script>
