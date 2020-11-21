@@ -48,17 +48,11 @@
         <a class="col waves-effect waves-light btn" @click="loadRanking">重试</a>
       </div>
       <div v-else>
-        <div class="row s12">
-            <div class="col s3">今日排名</div>
-            <div class="col s6">歌曲</div>
-            <div class="col s3">昨日排名</div>
-        </div>
         <template v-for="item in rankingData">
-          <hr :key="`hr-${item.or}`" v-if="item.or > 1">
-          <div class="row s12" :key="`div-${item.or}`">
-            <div class="col s3">{{ item.or }}</div>
-            <div class="col s6">{{ getMusicName(item.id) }}</div>
-            <div class="col s3">{{ item.prev }}</div>
+          <div class="rank-music-item" :class="`rank-${rankRelativePosition(item)}`" :key="`div-${item.or}`">
+            <div class="rank-music-order" :class="`rank-${item.or}`">{{ item.or }}</div>
+            <div class="rank-music-jacket"><img :src="getMusicJacketUrl(item.id)"></div>
+            <div class="rank-music-name">{{ getMusicName(item.id) }}</div>
           </div>
         </template>
       </div>
@@ -79,12 +73,63 @@
 .show-card-no-toggle, .transfer-card-btn {
   float: right
 }
+
+.rank-music-item {
+  display: block;
+  height: 80px;
+  line-height: 80px;
+}
+.rank-music-item:not(:first-of-type) {
+  border-top: 1px solid gray
+}
+.rank-music-item>div {
+  overflow: hidden;
+  display: inline-block;
+}
+.rank-music-order {
+  width: 40px;
+  text-align: center
+}
+.rank-music-order.rank-1 {
+  font-size: 30px;
+}
+.rank-music-order.rank-2 {
+  font-size: 25px;
+}
+.rank-music-order.rank-3 {
+  font-size: 20px;
+}
+.rank-music-jacket img {
+  height: 60px;
+  vertical-align: middle;
+}
+.rank-music-name {
+  margin-left: 5px;
+  width: calc(100% - 146px);
+  text-overflow: ellipsis;
+}
+.rank-music-item:after {
+  overflow: hidden;
+  display:inline-block;
+  content: "";
+  margin: 20px 0;
+  height: 40px;
+  width: 40px;
+  background-image: url("https://n.bzxyzt.cn/assets/ranking.png");
+  background-size: 40px auto
+}
+.rank-music-item.rank-up:after {
+  background-position: 0 -82px;
+}
+.rank-music-item.rank-down:after {
+  background-position: 0 -164px;
+}
 </style>
 
 <script>
 import { getShopName } from '@/components/shopUtils'
 import { dateToLocalStr } from '@/components/dateUtils'
-import { getMusicName } from '@/components/musicUtils'
+import { getMusicName, getMusicJacketUrl } from '@/components/musicUtils.js'
 import { checkTokenValidity } from '@/components/accUtils'
 
 export default {
@@ -155,6 +200,15 @@ export default {
           this.$store.commit('dailyBonus')
         }
       })
+    },
+    rankRelativePosition (item) {
+      if (item.prev === 0) return 'up'
+      if (item.prev > item.or) return 'up'
+      if (item.prev < item.or) return 'down'
+      return 'keep'
+    },
+    getMusicJacketUrl (id) {
+      return getMusicJacketUrl(id)
     }
   }
 }
