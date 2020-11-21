@@ -8,10 +8,11 @@
     <form @submit.prevent="doReg">
       <h5>输入卡号</h5>
       <p class="input-field">
-        <input type="text" inputmode="decimal" id="cardno" name="cardno" v-model="cardno" :disabled="fetching || cardValidated" @input="cardnoInput" :class="cardnoValid ? '' : 'invalid'" maxlength="20"/>
+        <input type="text" inputmode="decimal" id="cardno" name="cardno" autofocus v-model="cardno" :disabled="fetching || cardValidated" @input="cardnoInput" :class="cardnoValid ? '' : 'invalid'" maxlength="20"/>
         <label for="cardno">20位卡号</label>
       </p>
       <template v-if="cardValidated">
+        <h5>输入注册信息</h5>
         <p class="input-field">
           <input type="text" id="userid" name="userid" v-model="userid"/>
           <label for="userid">用户名</label>
@@ -51,6 +52,14 @@ export default {
 
     errorStr: ''
   }),
+  mounted () {
+    let match
+    if ((match = location.search.match(/\?cardno=(\d{20})/)) !== null) {
+      document.getElementById('cardno').nextElementSibling.classList.add('active')
+      this.cardno = match[1]
+      this.doReg()
+    }
+  },
   methods: {
     cardnoInput () {
       this.cardnoValid = this.cardno.match(/^\d{20}$/) !== null

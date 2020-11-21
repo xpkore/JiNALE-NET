@@ -80,7 +80,7 @@ export default {
       }).finally(() => {
         if (loginInfo) {
           this.$store.commit('updateLoginInfo', loginInfo)
-        } else if (location.pathname !== '/') {
+        } else if (location.pathname !== '/' && location.pathname.substr(0, 9) !== '/account/') {
           this.$router.replace('/')
         }
         this.initialized = true
