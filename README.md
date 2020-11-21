@@ -1,4 +1,4 @@
-# myaime-cn
+# JiNALE-NET
 
 ## Project setup
 ```
