@@ -3,3 +3,9 @@ const musicIds = JSON.parse('{"668":"ようこそジャパリパークへ","824"
 export function getMusicName (id) {
   return musicIds[id] || `id ${id}`
 }
+
+export function getMusicJacketUrl (id) {
+  if (id < 10) id = `00${id}`
+  else if (id < 100) id = `0${id}`
+  return `https://n.bzxyzt.cn/assets/jacket/${id}.jpg`
+}
