@@ -128,7 +128,7 @@ export default {
         this.initialized = true
       })
     } else {
-      if (location.pathname !== '/') {
+      if (location.pathname !== '/' && location.pathname.substr(0, 9) !== '/account/') {
         this.$router.replace('/')
       }
       this.initialized = true
