@@ -178,25 +178,25 @@ export default {
       return getMusicName(id)
     },
     loadRanking () {
-      this.$data.rankingLoaded = false
-      this.$data.rankingLoadFailed = false
-      this.$data.rankingData = null
+      this.rankingLoaded = false
+      this.rankingLoadFailed = false
+      this.rankingData = null
 
       fetch(this.$store.state.endpoint + '/musicRanking').then(r => r.json()).then(d => {
         if (d.code) {
-          this.$data.rankingLoadFailed = true
+          this.rankingLoadFailed = true
         } else {
           const prevIndex = d['2'].map(i => i.id)
           let order = 1
           const rankingData = d['1'].map(i => ({ or: order++, id: i.id, prev: prevIndex.indexOf(i.id) + 1 }))
-          this.$data.rankingData = rankingData
+          this.rankingData = rankingData
         }
-        this.$data.rankingLoaded = true
+        this.rankingLoaded = true
       })
     },
     getDailyBonus () {
       if (!this.haveDailyBonus) return
-      this.$data.fetchingDailyBonus = true
+      this.fetchingDailyBonus = true
 
       const h = new Headers()
       h.append('Authorization', 'Bearer ' + localStorage.authToken)

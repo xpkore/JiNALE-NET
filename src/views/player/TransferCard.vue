@@ -27,33 +27,33 @@ export default {
   }),
   methods: {
     cardnoInput () {
-      this.$data.cardnoValid = this.$data.cardno.match(/^\d{20}$/) !== null
+      this.cardnoValid = this.cardno.match(/^\d{20}$/) !== null
     },
     doTransfer () {
       this.cardnoInput()
-      if (!this.$data.cardnoValid) {
-        this.$data.fetching = false
+      if (!this.cardnoValid) {
+        this.fetching = false
         return
       }
       // check card
       const h = new Headers()
       h.append('Authorization', 'Bearer ' + localStorage.authToken)
-      fetch(this.$store.state.endpoint + '/transferCard?newCard=' + this.$data.cardno, {
+      fetch(this.$store.state.endpoint + '/transferCard?newCard=' + this.cardno, {
         method: 'GET',
         headers: h
       }).then(checkTokenValidity.bind(this)).then(d => {
         if (d.code !== 0) {
-          this.$data.errorStr = `变更卡号失败: [${d.code}] ${d.msg}`
+          this.errorStr = `变更卡号失败: [${d.code}] ${d.msg}`
           return
         }
-        this.$data.errorStr = '卡号已更新'
-        this.$store.commit('updateCardNo', this.$data.cardno)
+        this.errorStr = '卡号已更新'
+        this.$store.commit('updateCardNo', this.cardno)
         setTimeout(() => { this.$router.push('/player/home') }, 1000)
       }).catch((e) => {
-        this.$data.errorStr = '出现未知错误'
+        this.errorStr = '出现未知错误'
         console.error(e)
       }).finally(() => {
-        this.$data.fetching = false
+        this.fetching = false
       })
     }
   }
