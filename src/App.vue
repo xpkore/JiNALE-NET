@@ -48,6 +48,11 @@ footer {
   padding-top:20px;
   border-top:1px solid rgba(0,0,0,0.14)
 }
+
+.hoveritem>.hover{display:none}
+.hoveritem:hover>.normal{display:none}
+.hoveritem:hover>.hover{display:inline}
+
 @media (prefers-color-scheme: dark) {
   html[color-scheme=auto],html[color-scheme=auto] body {background:black;color:#DDD}
   html[color-scheme=auto] div.card,html[color-scheme=auto] .dropdown-content {background:#1c1c1c}

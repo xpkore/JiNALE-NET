@@ -21,7 +21,10 @@
           <div style="clear:both"></div>
           <hr>
           <p class="shop-name">{{ lastShopName }}</p>
-          <p class="play-date">{{ lastPlayDate }}</p>
+          <p class="play-date"><span class="hoveritem">
+            <span class="normal timeago" :datetime="lastPlayDate">{{ lastPlayDateStr }}</span>
+            <span class="hover">{{ lastPlayDateStr }}</span>
+          </span></p>
           <hr>
           <div class="user-play-info">
             <p>Rating: {{ (loginInfo.user_data.player_rating / 100).toFixed(2) }}</p>
@@ -127,7 +130,7 @@
 
 <script>
 import { getShopName } from '@/components/shopUtils'
-import { dateToLocalStr } from '@/components/dateUtils'
+import { standardizeDate, dateToLocalStr } from '@/components/dateUtils'
 import { getMusicName, getMusicJacketUrl } from '@/components/musicUtils.js'
 import { checkTokenValidity } from '@/components/accUtils'
 
@@ -139,6 +142,9 @@ export default {
     rankingData: null,
     fetchingDailyBonus: false
   }),
+  updated () {
+    window.dispatchEvent(new Event('trigger-timeago'))
+  },
   computed: {
     // publicPath () { return process.env.BASE_URL },
     loginInfo () {
@@ -148,7 +154,10 @@ export default {
       return getShopName(this.loginInfo.user_data.last_client_id)
     },
     lastPlayDate () {
-      return dateToLocalStr(this.loginInfo.user_data.last_play_date)
+      return standardizeDate(this.loginInfo.user_data.last_play_date).toISOString()
+    },
+    lastPlayDateStr () {
+      return dateToLocalStr(this.loginInfo.user_data.last_play_date, true)
     },
     selectCharaName () {
       const nameArr = ['', '', 'ras', 'chiffon', 'salt', 'otohime', 'syama', 'milk']
