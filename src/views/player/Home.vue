@@ -44,6 +44,7 @@
     </div>
     <div class="music-ranking">
       <h5>热门游玩榜</h5>
+      <label v-if="rankingDate">排名更新于 {{ rankingDate }}</label>
       <div v-if="!rankingLoaded">
         <p>获取中...</p>
       </div>
@@ -141,6 +142,7 @@ export default {
     rankingLoaded: false,
     rankingLoadFailed: false,
     rankingData: null,
+    rankingDate: '',
     fetchingDailyBonus: false
   }),
   updated () {
@@ -191,6 +193,7 @@ export default {
           let order = 1
           const rankingData = d['1'].map(i => ({ or: order++, id: i.id, prev: prevIndex.indexOf(i.id) + 1 }))
           this.rankingData = rankingData
+          this.rankingDate = d['updated']
         }
         this.rankingLoaded = true
       })
