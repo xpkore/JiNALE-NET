@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>数据转移</h1>
+    <h3>数据转移</h3>
     <form @submit.prevent="doTransfer">
       <h5>输入新卡号</h5>
       <p class="input-field">

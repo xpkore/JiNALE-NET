@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>登录</h1>
+    <h3>登录</h3>
     <p>
       <span>还没注册？现在就可以</span>
       <router-link to="/account/register">注册</router-link>

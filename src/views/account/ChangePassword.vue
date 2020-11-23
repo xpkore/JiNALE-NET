@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>变更密码</h1>
+    <h3>变更密码</h3>
     <form @submit.prevent="doChangePwd">
       <h5>输入新密码</h5>
       <p class="input-field">
