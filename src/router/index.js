@@ -10,6 +10,7 @@ import Logout from '../views/account/Logout.vue'
 import ChangePassword from '../views/account/ChangePassword.vue'
 import UserHome from '../views/player/Home.vue'
 import TransferCard from '../views/player/TransferCard.vue'
+import ChangeName from '../views/player/ChangeName.vue'
 
 Vue.use(VueRouter)
 
@@ -54,6 +55,11 @@ const routes = [
     path: '/player/transfer_card',
     name: 'TransferCard',
     component: TransferCard
+  },
+  {
+    path: '/player/change_name',
+    name: 'ChangeName',
+    component: ChangeName
   }
 ]
 

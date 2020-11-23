@@ -71,6 +71,9 @@ footer {
   html[color-scheme=auto] footer {
     border-top-color: rgba(255,255,255,0.25)
   }
+  html[color-scheme=auto] .input-field .helper-text {
+    color: rgba(255,255,255,.54)
+  }
 }
 
 html[color-scheme=dark],html[color-scheme=dark] body {background:black;color:#DDD}
@@ -89,6 +92,9 @@ input:not([type]):disabled + label, html[color-scheme=dark] input:not([type])[re
 }
 html[color-scheme=dark] footer {
   border-top-color: rgba(255,255,255,0.25)
+}
+html[color-scheme=dark] .input-field .helper-text {
+  color: rgba(255,255,255,.54)
 }
 </style>
 

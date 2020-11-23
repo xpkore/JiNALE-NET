@@ -8,6 +8,7 @@
       <div class="card-stacked">
         <div class="card-content user-info-card">
           <h6 class="user-name">{{ loginInfo.user_data.user_name }}</h6>
+          <div><router-link to="/player/change_name">变更玩家名</router-link></div>
           <p class="card-no">
             <span v-if="showCardNo">{{ loginInfo.card.id.replace(/(.{4})(.{4})(.{4})(.{4})(.{4})/, '$1-$2-$3-$4-$5') }}</span>
             <span v-else>{{ loginInfo.card.id.replace(/(.{4})(.{4})(.{4})(.{4})(.{4})/, '$1-$2-****-****-$5') }}</span>

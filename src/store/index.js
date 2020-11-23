@@ -29,6 +29,11 @@ export default new Vuex.Store({
         state.loginInfo.have_daily_bonus = false
         state.loginInfo.user_data.event_point += 10
       }
+    },
+    updatePlayerName (state, newName) {
+      if (state.loggedIn) {
+        state.loginInfo.user_data.user_name = newName
+      }
     }
   },
   actions: {
