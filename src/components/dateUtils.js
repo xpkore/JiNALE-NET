@@ -30,21 +30,21 @@ export function dateToLocalStr (date, showSeconds = false) {
 
 const timeagoInstance = {
   format: function (date) {
-    date = new Date(date);
-    var ts = date.getTime(), now = Date.now();
-    if (date.getFullYear() == (new Date).getFullYear()) {
-      if (date.getMonth() == (new Date).getMonth()) {
-        if (date.getDate() == (new Date).getDate()) {
-          return padTime(date.getHours()) + ':' + padTime(date.getMinutes());
+    date = new Date(date)
+    const ts = date.getTime(), now = new Date
+    if (date.getFullYear() == now.getFullYear()) {
+      if (date.getMonth() == now.getMonth()) {
+        if (date.getDate() == now.getDate()) {
+          return padTime(date.getHours()) + ':' + padTime(date.getMinutes())
         }
-        var day = Math.floor((now - ts) / 24 / 3600e3);
-        return day + ' day' + (day == 1 ? '' : 's') + ' ago';
+        var day = now.getDate() - date.getDate();
+        if (day == 1) return '昨天 ' + padTime(date.getHours()) + ':' + padTime(date.getMinutes())
       }
-      return padTime(date.getMonth() + 1) + '/' + padTime(date.getDate()) + ' ' + padTime(date.getHours()) + ':' + padTime(date.getMinutes());
+      return padTime(date.getMonth() + 1) + '/' + padTime(date.getDate()) + ' ' + padTime(date.getHours()) + ':' + padTime(date.getMinutes())
     }
-    return date.getFullYear() + '/' + padTime(date.getMonth() + 1) + '/' + padTime(date.getDate()) + ' ' + padTime(date.getHours()) + ':' + padTime(date.getMinutes());
+    return date.getFullYear() + '/' + padTime(date.getMonth() + 1) + '/' + padTime(date.getDate()) + ' ' + padTime(date.getHours()) + ':' + padTime(date.getMinutes())
   }
-};
+}
 function timeagoRun () {
   const needs = [].slice.call(document.getElementsByClassName('timeago'));
   needs.forEach(i => {
