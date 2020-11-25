@@ -3,8 +3,8 @@
     <h3>变更名称</h3>
     <form @submit.prevent="doChangeName">
       <p class="input-field">
-        <input type="text" id="new_user_name" name="new_user_name" autocomplete="off" autofocus v-model="new_user_name" :disabled="fetching" @input="usernameInput" maxlength="8" data-length="8"/>
-        <label for="new_user_name">新ID</label>
+        <input type="text" id="new_player_name" name="new_player_name" autocomplete="off" autofocus v-model="new_player_name" :disabled="fetching" @input="usernameInput" maxlength="8" data-length="8"/>
+        <label for="new_player_name">新玩家名</label>
         <span class="helper-text">玩家名最多可以包含8个全角/半角的英文字母、数字或以下的特殊符号</span>
       </p>
       <input class="btn waves-effect waves-light" :disabled="fetching === true" type="submit" value="变更名称" />
@@ -28,6 +28,7 @@
   margin: 10px;
   background:#DDD;
   border-radius: 5px;
+  line-height: 25px;
 }
 @media (prefers-color-scheme: dark) {
   html[color-scheme=auto] .symbol-item { background:#444; }
@@ -41,7 +42,7 @@ import { checkTokenValidity } from '@/components/accUtils'
 
 export default {
   data: () => ({
-    new_user_name: '',
+    new_player_name: '',
     fetching: false,
     errorStr: '',
     symbolList: [
@@ -92,20 +93,20 @@ export default {
     ]
   }),
   mounted () {
-    new M.CharacterCounter(new_user_name)
-    new_user_name.dispatchEvent(new Event('input'))
+    new M.CharacterCounter(new_player_name)
+    new_player_name.dispatchEvent(new Event('input'))
   },
   methods: {
     usernameInput () {
-      this.new_user_name = this.new_user_name.replace(/[^0-9A-Za-z\uff10-\uff19\uff21-\uff3a\uff41-\uff5a・：；？！～／＋－×÷＝♂♀∀＃＆＊＠☆○◎◇□△▽♪†‡ΣαβγθφψωДё＄（）．＿ \u3000]/g, '').substr(0, 8)
+      this.new_player_name = this.new_player_name.replace(/[^0-9A-Za-z\uff10-\uff19\uff21-\uff3a\uff41-\uff5a・：；？！～／＋－×÷＝♂♀∀＃＆＊＠☆○◎◇□△▽♪†‡ΣαβγθφψωДё＄（）．＿ \u3000]/g, '').substr(0, 8)
     },
     appendSymbol (e) {
       if (this.fetching) return
       if (!e.target.dataset.symbol) return
-      this.new_user_name += e.target.dataset.symbol
-      new_user_name.focus()
+      this.new_player_name += e.target.dataset.symbol
+      new_player_name.focus()
       Promise.resolve().then(() => {
-        new_user_name.dispatchEvent(new Event('input'))
+        new_player_name.dispatchEvent(new Event('input'))
       })
     },
     doChangeName () {
@@ -114,7 +115,7 @@ export default {
       const h = new Headers()
       h.append('Authorization', 'Bearer ' + localStorage.authToken)
 
-      const newName = this.new_user_name.replace(/[\w\W]/g, c => {
+      const newName = this.new_player_name.replace(/[\w\W]/g, c => {
         const cc = c.charCodeAt(0)
         if (cc>=0x30 && cc <= 0x39) { return JSON.parse('"\\u' + (0xff10 + cc - 0x30).toString(16) + '"'); } // 0-9
         if (cc>=0x41 && cc <= 0x5a) { return JSON.parse('"\\u' + (0xff21 + cc - 0x41).toString(16) + '"'); } // A-Z

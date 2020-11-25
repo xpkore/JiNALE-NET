@@ -30,6 +30,11 @@ module.exports = {
           ]
           return args
         })
+    } else if (process.env.NODE_ENV === 'development') {
+      config
+        .output
+        .filename('[name].[hash].js')
+        .end()
     }
   }
   /*configureWebpack: {
