@@ -3,7 +3,7 @@
     <h3>变更名称</h3>
     <form @submit.prevent="doChangeName">
       <p class="input-field">
-        <input type="text" id="new_user_name" name="new_user_name" v-model="new_user_name" :disabled="fetching" @input="usernameInput" maxlength="8" data-length="8"/>
+        <input type="text" id="new_user_name" name="new_user_name" autocomplete="off" autofocus v-model="new_user_name" :disabled="fetching" @input="usernameInput" maxlength="8" data-length="8"/>
         <label for="new_user_name">新ID</label>
         <span class="helper-text">玩家名最多可以包含8个全角/半角的英文字母、数字或以下的特殊符号</span>
       </p>

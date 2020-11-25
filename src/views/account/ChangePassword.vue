@@ -8,7 +8,7 @@
         <label for="pwd" class="active">用户名</label>
       </p>
       <p class="input-field">
-        <input type="password" autocomplete="new-password" minlength="8" id="pwd" name="pwd" v-model="pwd" :class="pwdValid ? '' : 'invalid'" @input="pwdInput"/>
+        <input type="password" autocomplete="new-password" minlength="8" id="pwd" name="pwd" autofocus v-model="pwd" :class="pwdValid ? '' : 'invalid'" @input="pwdInput"/>
         <label for="pwd">密码</label>
       </p>
       <p class="input-field">

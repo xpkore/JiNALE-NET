@@ -8,11 +8,11 @@
     </p>
     <form @submit.prevent="doLogin">
       <p class="input-field">
-        <input type="text" id="userid" name="userid" v-model="userid"/>
+        <input type="text" id="userid" name="userid" autocomplete="username" autofocus v-model="userid"/>
         <label for="userid">用户名</label>
       </p>
       <p class="input-field">
-        <input type="password" id="pwd" name="pwd" v-model="pwd"/>
+        <input type="password" id="pwd" name="pwd" autocomplete="current-password" v-model="pwd"/>
         <label for="pwd">密码</label>
       </p>
       <input class="btn waves-effect waves-light" :disabled="fetching === true" type="submit" value="登录" />
@@ -36,6 +36,13 @@ export default {
   methods: {
     doLogin (e) {
       this.errorStr = ''
+      if (this.userid === '') {
+        userid.focus()
+        return
+      } else if (this.pwd === '') {
+        pwd.focus()
+        return
+      }
       this.fetching = true
       const hashedPwd = hashPassword(this.pwd)
       let loginInfo
