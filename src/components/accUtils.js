@@ -18,11 +18,31 @@ export function hashPassword (pwd) {
  * @return {Promise<string>}
  */
 export function checkTokenValidity (r) {
+  if (!this.$store) {
+    throw new Error('initMyInfo not called with vue binding')
+  }
   const tokenStatus = r.headers.get('X-Token-Status')
   if (tokenStatus === 'Revoked') {
     delete localStorage.authToken
-    if (this.$store) this.$store.commit('updateLoginInfo')
+    this.$store.commit('updateLoginInfo')
     throw new Error('Token is revoked')
   }
   return r.json()
+}
+
+export async function initMyInfo () {
+  if (!this.$store) {
+    throw new Error('initMyInfo not called with vue binding')
+  }
+  const h = new Headers()
+  h.append('Authorization', 'Bearer ' + localStorage.authToken)
+  const d = await fetch(this.$store.state.endpoint + '/myinfo', {
+    method: 'GET',
+    headers: h
+  }).then(checkTokenValidity.bind(this))
+  if (d.code === 0) {
+    this.$store.commit('updateLoginInfo', d.data)
+  } else {
+    this.$store.commit('updateLoginInfo')
+  }
 }

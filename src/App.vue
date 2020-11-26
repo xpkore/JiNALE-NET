@@ -99,7 +99,7 @@ html[color-scheme=dark] .input-field .helper-text {
 </style>
 
 <script>
-import { checkTokenValidity } from '@/components/accUtils'
+import { initMyInfo } from '@/components/accUtils'
 import M from 'materialize-css'
 
 export default {
@@ -119,23 +119,14 @@ export default {
 
     let loginInfo
     if (localStorage.authToken !== undefined) {
-      const h = new Headers()
-      h.append('Authorization', 'Bearer ' + localStorage.authToken)
-      fetch(this.$store.state.endpoint + '/myinfo', {
-        method: 'GET',
-        headers: h
-      }).then(checkTokenValidity.bind(this)).then(d => {
-        if (d.code === 0) {
-          loginInfo = d.data
-        }
+      initMyInfo.call(this).then(() => {
+        if (!this.$store.state.loggedIn) throw new Error('init myinfo failed')
       }).catch((e) => {
-        console.error(e)
-      }).finally(() => {
-        if (loginInfo) {
-          this.$store.commit('updateLoginInfo', loginInfo)
-        } else if (location.pathname !== '/' && location.pathname.substr(0, 9) !== '/account/') {
+        console.log(e)
+        if (location.pathname !== '/' && location.pathname.substr(0, 9) !== '/account/') {
           this.$router.replace('/')
         }
+      }).finally(() => {
         this.initialized = true
       })
     } else {

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { hashPassword, checkTokenValidity } from '@/components/accUtils'
+import { hashPassword, initMyInfo } from '@/components/accUtils'
 
 export default {
   data: () => ({
@@ -51,7 +51,7 @@ export default {
         headers: new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' }),
         body: `id=${encodeURIComponent(this.userid)}&hashed_pwd=${hashedPwd}`,
         credentials: 'include'
-      }).then(checkTokenValidity.bind(this)).then(d => {
+      }).then(r => r.json()).then(d => {
         if (d.code !== 0 || !d.token) {
           this.errorStr = `登录失败: [${d.code}] ${d.msg}`
           return
@@ -59,25 +59,16 @@ export default {
 
         localStorage.authToken = d.token
         this.errorStr = '已登录，读取中...'
-        const h = new Headers()
-        h.append('Authorization', 'Bearer ' + localStorage.authToken)
-        return fetch(this.$store.state.endpoint + '/myinfo', {
-          method: 'GET',
-          headers: h
-        }).then(r => r.json())
-      }).then(d => {
-        if (d.code === 0) {
-          loginInfo = d.data
-        } else {
-          this.errorStr = `登录失败: [${d.code}] ${d.msg}`
-        }
+        return initMyInfo.call(this)
+      }).then(() => {
+        if (!this.$store.state.loggedIn) throw new Error('init myinfo failed')
       }).catch((e) => {
+          this.errorStr = `出现未知错误`
         console.error(e)
       }).finally(() => {
         this.fetching = false
 
-        if (loginInfo) {
-          this.$store.commit('updateLoginInfo', loginInfo)
+        if (this.$store.state.loggedIn) {
           this.$router.push('/player/home')
         }
       })
