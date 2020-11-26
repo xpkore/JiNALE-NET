@@ -193,7 +193,7 @@ export default {
           let order = 1
           const rankingData = d['1'].map(i => ({ or: order++, id: i.id, prev: prevIndex.indexOf(i.id) + 1 }))
           this.rankingData = rankingData
-          this.rankingDate = d['updated']
+          this.rankingDate = d.updated
         }
         this.rankingLoaded = true
       })

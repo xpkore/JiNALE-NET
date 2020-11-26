@@ -63,7 +63,7 @@ export default {
       }).then(() => {
         if (!this.$store.state.loggedIn) throw new Error('init myinfo failed')
       }).catch((e) => {
-          this.errorStr = `出现未知错误`
+        this.errorStr = '出现未知错误'
         console.error(e)
       }).finally(() => {
         this.fetching = false
