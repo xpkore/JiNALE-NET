@@ -36,7 +36,7 @@ module.exports = {
         .filename('[name].[hash].js')
         .end()
     }
-  }
+  },
   /*configureWebpack: {
     output: {
       filename: "static/app.js"
