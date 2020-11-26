@@ -85,9 +85,9 @@ export default {
 
         localStorage.authToken = d.token
         this.errorStr = this.$t('msg_2')
-        return initMyInfo.call(this)
-      }).then(() => {
-        if (!this.$store.state.loggedIn) throw new Error('init myinfo failed')
+        return initMyInfo.call(this).then(() => {
+          if (!this.$store.state.loggedIn) throw new Error('init myinfo failed')
+        })
       }).catch((e) => {
         this.errorStr = this.$t('msg_3')
         console.error(e)
