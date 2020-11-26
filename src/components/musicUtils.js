@@ -49,7 +49,7 @@ function parseMusicInfoCsv () {
   })
 }
 
-export async function initMusicList () {
+export async function initMusicInfo () {
   if (musicInfos) return
   const musicDataVer = await fetch('https://n.bzxyzt.cn/cors_resources/musicData.json').then(r => r.json())
   if (!localStorage.musicDataCsv || localStorage.musicDataVer !== musicDataVer.ver) {

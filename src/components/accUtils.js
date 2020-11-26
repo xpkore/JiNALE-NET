@@ -1,6 +1,6 @@
 import crypto from 'crypto'
 const clientHashSalt = '3012efd1056e7b8bf0f19a79814e906ab0afc81c'
-import { initMusicList } from './musicUtils'
+import { initMusicInfo } from './musicUtils'
 
 /**
  * 
@@ -43,7 +43,7 @@ export async function initMyInfo () {
   }).then(checkTokenValidity.bind(this))
   if (d.code === 0) {
     this.$store.commit('updateLoginInfo', d.data)
-    await initMusicList()
+    await initMusicInfo()
   } else {
     this.$store.commit('updateLoginInfo')
   }
