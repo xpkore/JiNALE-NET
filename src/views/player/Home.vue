@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>玩家首页</h3>
+    <h3>{{ $t('title') }}</h3>
     <div class="card horizontal">
       <div class="card-image">
         <img :alt="selectCharaName" style="width:150px;height:320px;object-fit:contain" :src="`https://n.bzxyzt.cn/assets/chara/${selectCharaName}.png`" />
@@ -8,7 +8,7 @@
       <div class="card-stacked">
         <div class="card-content user-info-card">
           <h6 class="user-name">{{ loginInfo.user_data.user_name }}</h6>
-          <div><router-link to="/player/change_name">变更玩家名</router-link></div>
+          <div><router-link to="/player/change_name">{{ $t('change_name_btn') }}</router-link></div>
           <p class="card-no">
             <span v-if="showCardNo">{{ loginInfo.card.id.replace(/(.{4})(.{4})(.{4})(.{4})(.{4})/, '$1-$2-$3-$4-$5') }}</span>
             <span v-else>{{ loginInfo.card.id.replace(/(.{4})(.{4})(.{4})(.{4})(.{4})/, '$1-$2-****-****-$5') }}</span>
@@ -16,7 +16,7 @@
           <p class="show-card-no-toggle">
             <label>
               <input type="checkbox" id="showCardNo" v-model="showCardNo"/>
-              <span>显示卡号</span>
+              <span>{{ $t('show_cardno_label') }}</span>
             </label>
           </p>
           <div style="clear:both"></div>
@@ -29,28 +29,28 @@
           <hr>
           <div class="user-play-info">
             <p>Rating: {{ (loginInfo.user_data.player_rating / 100).toFixed(2) }}</p>
-            <p>总游玩次数: {{ loginInfo.user_data.play_count }}</p>
-            <p>奶酪: {{ cheeseCount }}</p>
+            <p>{{ $t('play_count') }}: {{ loginInfo.user_data.play_count }}</p>
+            <p>{{ $t('cheese') }}: {{ cheeseCount }}</p>
           </div>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col s2"></div>
-      <router-link to="/player/transfer_card" class="col s3 waves-effect waves-light btn">转移数据</router-link>
+      <router-link to="/player/transfer_card" class="col s3 waves-effect waves-light btn">{{ $t('transfer_data') }}</router-link>
       <div class="col s2"></div>
-      <a v-if="cheeseCount < 1000" class="col s3 waves-effect waves-light btn" :class="{disabled:(!haveDailyBonus || this.fetchingDailyBonus)}" @click="getDailyBonus">{{ haveDailyBonus ? '签到(+10奶酪)' : '已签到'}}</a>
-      <span v-else class="col s3 center">不足1000奶酪时才能签到</span>
+      <a v-if="cheeseCount < 1000" class="col s3 waves-effect waves-light btn" :class="{disabled:(!haveDailyBonus || this.fetchingDailyBonus)}" @click="getDailyBonus">{{ haveDailyBonus ? $t('daily_bonus') : $t('daily_bonus_got')}}</a>
+      <span v-else class="col s3 center">{{ $t('no_daily_bonus') }}</span>
     </div>
     <div class="music-ranking">
-      <h5>热门游玩榜</h5>
-      <label v-if="rankingDate">排名更新于 {{ rankingDate }}</label>
+      <h5>{{ $t('music_ranking') }}</h5>
+      <label v-if="rankingDate">{{ $t('music_ranking_updated_at') }} {{ rankingDate }}</label>
       <div v-if="!rankingLoaded">
-        <p>获取中...</p>
+        <p>{{ $t('music_ranking_loading') }}</p>
       </div>
       <div v-else-if="rankingLoadFailed">
-        <p>获取排行榜失败</p>
-        <a class="col waves-effect waves-light btn" @click="loadRanking">重试</a>
+        <p>{{ $t('music_ranking_failed') }}</p>
+        <a class="col waves-effect waves-light btn" @click="loadRanking">{{ $t('retry') }}</a>
       </div>
       <div v-else>
         <template v-for="item in rankingData">
@@ -65,12 +65,53 @@
     </div>
     <div class="row">
       <div class="col s1"></div>
-      <router-link to="/account/change_password" class="col s4 waves-effect waves-light btn">修改密码</router-link>
+      <router-link to="/account/change_password" class="col s4 waves-effect waves-light btn">{{ $t('change_pwd') }}</router-link>
       <div class="col s2"></div>
-      <router-link to="/account/logout" class="col s4 waves-effect waves-light btn red">退出登录</router-link>
+      <router-link to="/account/logout" class="col s4 waves-effect waves-light btn red">{{ $t('logout') }}</router-link>
     </div>
   </div>
 </template>
+
+<i18n>
+{
+  "en": {
+    "title": "Player Home",
+    "change_name_btn": "Change player name",
+    "show_cardno_label": "Show Card NO",
+    "play_count": "Play count",
+    "cheese": "Cheese",
+    "transfer_data": "Transfer data",
+    "daily_bonus": "Daily cheese",
+    "daily_bonus_got": "Checked-in",
+    "no_daily_bonus": "Can check-in when under 1000 cheese",
+    "music_ranking": "Popular Ranking",
+    "music_ranking_updated_at": "Ranking updated at",
+    "music_ranking_loading": "Loading...",
+    "music_ranking_failed": "Failed loading rank data",
+    "retry": "Retry",
+    "change_pwd": "Change password",
+    "logout": "Log out"
+  },
+  "zh": {
+    "title": "玩家首页",
+    "change_name_btn": "变更玩家名",
+    "show_cardno_label": "显示卡号",
+    "play_count": "总游玩次数",
+    "cheese": "奶酪",
+    "transfer_data": "转移数据",
+    "daily_bonus": "签到(+10奶酪)",
+    "daily_bonus_got": "已签到",
+    "no_daily_bonus": "不足1000奶酪时才能签到",
+    "music_ranking": "热门游玩榜",
+    "music_ranking_updated_at": "排名更新于",
+    "music_ranking_loading": "获取中...",
+    "music_ranking_failed": "获取排行榜失败",
+    "retry": "重试",
+    "change_pwd": "修改密码",
+    "logout": "退出登录"
+  }
+}
+</i18n>
 
 <style scoped>
 .user-play-info {

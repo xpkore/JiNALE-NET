@@ -2,19 +2,19 @@
   <div id="app">
     <router-view v-if="initialized" />
     <div v-else>
-      <p>正在初始化...</p>
+      <p>{{$t('initializing')}}</p>
     </div>
     <footer v-if="notAtUpdateNotes" class="center">
-      <router-link to="/update_notes">JiNet更新日志</router-link>
+      <router-link to="/update_notes">{{$t('update_notes')}}</router-link>
     </footer>
     <footer>
       <div class="row s12"><div class="col s4"></div><div class="input-field col s4">
         <select id="colorScheme" v-model="colorScheme" @change="colorSchemeChanged">
-          <option value="auto">跟随系统</option>
-          <option value="light">亮色</option>
-          <option value="dark">暗色</option>
+          <option value="auto">{{$t('cs_auto')}}</option>
+          <option value="light">{{$t('cs_light')}}</option>
+          <option value="dark">{{$t('cs_dark')}}</option>
         </select>
-        <label>页面主题配色：</label>
+        <label>{{$t('color_scheme')}}: </label>
       </div></div>
       <p>JiNALE team &copy; 2020</p>
       <p>Make maimai FiNALE &amp; fanmade great again</p>
@@ -31,6 +31,27 @@ title="🏀：「xs」
     </footer>
   </div>
 </template>
+
+<i18n>
+{
+  "en": {
+    "initializing": "Initializing...",
+    "update_notes": "JiNet Update Notes",
+    "cs_auto": "System default",
+    "cs_light": "Light",
+    "cs_dark": "Dark",
+    "color_scheme": "Color scheme"
+  },
+  "zh": {
+    "initializing": "正在初始化...",
+    "update_notes": "JiNet更新日志",
+    "cs_auto": "跟随系统",
+    "cs_light": "亮色",
+    "cs_dark": "暗色",
+    "color_scheme": "页面主题配色"
+  }
+}
+</i18n>
 
 <style>
 body {

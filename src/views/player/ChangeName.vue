@@ -1,17 +1,17 @@
 <template>
   <div>
-    <h3>变更名称</h3>
+    <h3>{{$t('title')}}</h3>
     <form @submit.prevent="doChangeName">
       <p class="input-field">
         <input type="text" id="new_player_name" name="new_player_name" autocomplete="off" autofocus v-model="new_player_name" :disabled="fetching" @input="usernameInput" maxlength="8" data-length="8"/>
-        <label for="new_player_name">新玩家名</label>
-        <span class="helper-text">玩家名最多可以包含8个全角/半角的英文字母、数字或以下的特殊符号</span>
+        <label for="new_player_name">{{$t('label_1')}}</label>
+        <span class="helper-text">{{$t('label_2')}}</span>
       </p>
-      <input class="btn waves-effect waves-light" :disabled="fetching === true" type="submit" value="变更名称" />
+      <input class="btn waves-effect waves-light" :disabled="fetching === true" type="submit" :value="$t('btn_1')" />
     </form>
     <div class="card">
       <div class="card-content center" @click="appendSymbol">
-        <span class="symbol-item" v-for="symbol in symbolList" :key="symbol[1]" :title="symbol[0]" :data-symbol="symbol[1]">{{ symbol[1] }}</span>
+        <span class="symbol-item" v-for="symbol in symbolList" :key="symbol[1]" :title="symbol[$t('symbol_title_key')]" :data-symbol="symbol[1]">{{ symbol[1] }}</span>
       </div>
     </div>
     <p v-if="errorStr">
@@ -19,6 +19,31 @@
     </p>
   </div>
 </template>
+
+<i18n>
+{
+  "en": {
+    "title": "Change player name",
+    "label_1": "New player name",
+    "label_2": "Player name can include up to 8 full-width / half-width alphabets, numbers or symbols listed below",
+    "btn_1":"Transfer",
+    "msg_1":"Change name failed",
+    "msg_2":"Player name updated",
+    "msg_3":"Unknown error occured",
+    "symbol_title_key": "2"
+  },
+  "zh": {
+    "title": "变更名称",
+    "label_1": "新玩家名",
+    "label_2": "玩家名最多可以包含8个全角/半角的英文字母、数字或以下的特殊符号",
+    "btn_1":"变更名称",
+    "msg_1":"变更名称失败",
+    "msg_2":"玩家名已更新",
+    "msg_3":"出现未知错误",
+    "symbol_title_key": "0"
+  }
+}
+</i18n>
 
 <style scoped>
 .symbol-item {
@@ -46,50 +71,50 @@ export default {
     fetching: false,
     errorStr: '',
     symbolList: [
-      ["间隔号"/*"TYUUTEN"   */, "・"],
-      ["冒号"/* "COLON"      */, "："],
-      ["分号"/* "SEMICOLON"  */, "；"],
-      ["问号"/* "QUESTION"   */, "？"],
-      ["叹号"/* "EXCLAMATION"*/, "！"],
-      ["波浪线"/*"TILDE"     */, "～"],
-      ["斜杠"/* "SLASH"      */, "／"],
-      ["加号"/* "PLUS"       */, "＋"],
-      ["减号"/* "MINUS"      */, "－"],
-      ["乘号"/* "KAKERU"     */, "×"],
-      ["除号"/* "WARU"       */, "÷"],
-      ["等号"/* "EQUAL"      */, "＝"],
-      ["雄性"/* "OSU"        */, "♂"],
-      ["雌性"/* "MESU"       */, "♀"],
-      ["所有"/* "SUBETE"     */, "∀"],
-      ["井号"/* "SHARP"      */, "＃"],
-      ["与"/*   "AMPERSAND"  */, "＆"],
-      ["星号"/* "ASTERISK"   */, "＊"],
-      ["at"/*   "AT"         */, "＠"],
-      ["星"/*   "STAR"       */, "☆"],
-      ["圆"/*   "MARU"       */, "○"],
-      ["同心圆"/*"2MARU"     */, "◎"],
-      ["菱形"/*  "KUKEI"     */, "◇"],
-      ["方形"/*  "SQUARE"    */, "□"],
-      ["三角"/*  "TRIANGLE"  */, "△"],
-      ["倒三角"/*"TRIANGLE2" */, "▽"],
-      ["音符"/*  "ONNPU"     */, "♪"],
-      ["剑标"/*  "DAGGER"    */, "†"],
-      ["双剑标"/*"D_DAGGER"  */, "‡"],
-      ["希格玛"/*"SIGMA"     */, "Σ"],
-      ["alpha"/*"ALPHA"     */, "α"],
-      ["beta"/* "BETA"      */, "β"],
-      ["gamma"/*"GAMMA"     */, "γ"],
-      ["theta"/*"THETA"     */, "θ"],
-      ["phi"/*  "PHI"       */, "φ"],
-      ["psi"/*  "PSI"       */, "ψ"],
-      ["omega"/*"OMEGA"     */, "ω"],
-      ["de"/*   "DE"        */, "Д"],
-      ["yo"/*   "YO"        */, "ё"],
-      ["美元"/*  "DOLLAR"    */, "＄"],
-      ["左括号"/*"LEFT_PARENTHESIS"*/, "（"],
-      ["右括号"/*"RIGHT_PARENTHESIS"*/, "）"],
-      ["句号"/*  "PERIOD"    */, "．"],
-      ["下划线"/*"LOW_LINE"  */, "＿"]
+      ["间隔号"/*"TYUUTEN"   */, "・", "Seperation mark"],
+      ["冒号"/* "COLON"      */, "：", "Colon"],
+      ["分号"/* "SEMICOLON"  */, "；", "Semicolon"],
+      ["问号"/* "QUESTION"   */, "？", "Question mark"],
+      ["叹号"/* "EXCLAMATION"*/, "！", "Exclamation mark"],
+      ["波浪线"/*"TILDE"     */, "～", "Tilde"],
+      ["斜杠"/* "SLASH"      */, "／", "Slash"],
+      ["加号"/* "PLUS"       */, "＋", "Plus sign"],
+      ["减号"/* "MINUS"      */, "－", "Minus sign"],
+      ["乘号"/* "KAKERU"     */, "×", "Multiply sign"],
+      ["除号"/* "WARU"       */, "÷", "Divide sign"],
+      ["等号"/* "EQUAL"      */, "＝", "Equal sign"],
+      ["雄性"/* "OSU"        */, "♂", "Male mark"],
+      ["雌性"/* "MESU"       */, "♀", "Female mark"],
+      ["所有"/* "SUBETE"     */, "∀", "All mark"],
+      ["井号"/* "SHARP"      */, "＃", "Sharp"],
+      ["与"/*   "AMPERSAND"  */, "＆", "Ampersand"],
+      ["星号"/* "ASTERISK"   */, "＊", "Asterisk"],
+      ["at"/*   "AT"         */, "＠", "At"],
+      ["星"/*   "STAR"       */, "☆", "Star"],
+      ["圆"/*   "MARU"       */, "○", "Circle"],
+      ["同心圆"/*"2MARU"     */, "◎", "Circle-in-circle"],
+      ["菱形"/*  "KUKEI"     */, "◇", "Diamond"],
+      ["方形"/*  "SQUARE"    */, "□", "Square"],
+      ["三角"/*  "TRIANGLE"  */, "△", "Triangle"],
+      ["倒三角"/*"TRIANGLE2" */, "▽", "Upside-down triangle"],
+      ["音符"/*  "ONNPU"     */, "♪", "Musical note"],
+      ["剑标"/*  "DAGGER"    */, "†", "Dagger"],
+      ["双剑标"/*"D_DAGGER"  */, "‡", "Double dagger"],
+      ["希格玛"/*"SIGMA"     */, "Σ", "Sigma"],
+      ["alpha"/*"ALPHA"     */, "α", "Alpha"],
+      ["beta"/* "BETA"      */, "β", "Beta"],
+      ["gamma"/*"GAMMA"     */, "γ", "Gamma"],
+      ["theta"/*"THETA"     */, "θ", "Theta"],
+      ["phi"/*  "PHI"       */, "φ", "Phi"],
+      ["psi"/*  "PSI"       */, "ψ", "Psi"],
+      ["omega"/*"OMEGA"     */, "ω", "Omega"],
+      ["de"/*   "DE"        */, "Д", "De"],
+      ["yo"/*   "YO"        */, "ё", "Yo"],
+      ["美元"/*  "DOLLAR"    */, "＄", "Dollar"],
+      ["左括号"/*"LEFT_PARENTHESIS"*/, "（", "Left parenthesis"],
+      ["右括号"/*"RIGHT_PARENTHESIS"*/, "）", "Right parenthesis"],
+      ["句号"/*  "PERIOD"    */, "．", "Period mark"],
+      ["下划线"/*"LOW_LINE"  */, "＿", "Underscore"]
     ]
   }),
   mounted () {
@@ -129,14 +154,14 @@ export default {
         headers: h
       }).then(checkTokenValidity.bind(this)).then(d => {
         if (d.code !== 0) {
-          this.errorStr = `变更名称失败: [${d.code}] ${d.msg}`
+          this.errorStr = this.$t('msg_1') + `: [${d.code}] ${d.msg}`
           return
         }
-        this.errorStr = '玩家名已更新'
+        this.errorStr = this.$t('msg_2')
         this.$store.commit('updatePlayerName', newName)
         setTimeout(() => { this.$router.push('/player/home') }, 1000)
       }).catch((e) => {
-        this.errorStr = '出现未知错误'
+        this.errorStr = this.$t('msg_3')
         console.error(e)
       }).finally(() => {
         this.fetching = false

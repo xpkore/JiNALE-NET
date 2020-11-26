@@ -1,18 +1,35 @@
 <template>
   <div class="home">
-    <h2>欢迎来到 JiNALE-net</h2>
-    <h5>（又名 MyAiMe-CN）</h5>
+    <h2>{{$t('welcome')}}</h2>
+    <h5>{{$t('aka')}}</h5>
     <div class="row"></div>
     <div class="row"></div>
     <div class="row">
       <div class="col s1"></div>
-      <router-link class="col s4 waves-effect waves-light btn" to="/account/register">注册新账户</router-link>
+      <router-link class="col s4 waves-effect waves-light btn" to="/account/register">{{$t('register')}}</router-link>
       <div class="col s2"></div>
-      <router-link class="col s4 waves-effect waves-light btn" to="/account/login">登录</router-link>
+      <router-link class="col s4 waves-effect waves-light btn" to="/account/login">{{$t('login')}}</router-link>
       <div class="col s1"></div>
     </div>
   </div>
 </template>
+
+<i18n>
+{
+  "en": {
+    "welcome": "Welcome to JiNALE-net",
+    "aka": "(A.K.A MyAiMe-CN)",
+    "register": "New register",
+    "login": "Login"
+  },
+  "zh": {
+    "welcome": "欢迎来到 JiNALE-net",
+    "aka": "（又名 MyAiMe-CN）",
+    "register": "注册新账户",
+    "login": "登录"
+  }
+}
+</i18n>
 
 <script>
 export default {
