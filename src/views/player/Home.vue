@@ -36,11 +36,11 @@
       </div>
     </div>
     <div class="row">
-      <div class="col s2"></div>
-      <router-link to="/player/transfer_card" class="col s3 waves-effect waves-light btn">{{ $t('transfer_data') }}</router-link>
-      <div class="col s2"></div>
-      <a v-if="cheeseCount < 1000" class="col s3 waves-effect waves-light btn" :class="{disabled:(!haveDailyBonus || this.fetchingDailyBonus)}" @click="getDailyBonus">{{ haveDailyBonus ? $t('daily_bonus') : $t('daily_bonus_got')}}</a>
-      <span v-else class="col s3 center">{{ $t('no_daily_bonus') }}</span>
+      <div class="col s0 m2"></div>
+      <router-link to="/player/transfer_card" class="col s5 m3 waves-effect waves-light btn">{{ $t('transfer_data') }}</router-link>
+      <div class="col s1 m2"></div>
+      <a v-if="cheeseCount < 1000" class="col s5 m3 waves-effect waves-light btn small-btn-text" :class="{disabled:(!haveDailyBonus || this.fetchingDailyBonus)}" @click="getDailyBonus">{{ haveDailyBonus ? $t('daily_bonus') : $t('daily_bonus_got')}}</a>
+      <span v-else class="col s5 m3 center">{{ $t('no_daily_bonus') }}</span>
     </div>
     <div class="music-ranking">
       <h5>{{ $t('music_ranking') }}</h5>
@@ -63,11 +63,17 @@
         </template>
       </div>
     </div>
-    <div class="row">
-      <div class="col s1"></div>
-      <router-link to="/account/change_password" class="col s4 waves-effect waves-light btn">{{ $t('change_pwd') }}</router-link>
-      <div class="col s2"></div>
-      <router-link to="/account/logout" class="col s4 waves-effect waves-light btn red">{{ $t('logout') }}</router-link>
+    <div class="row center">
+      <div class="col s0 m1"></div>
+      <div class="col s12 m4" style="margin:10px 0">
+        <div class="col s2 m0"></div>
+        <router-link to="/account/change_password" class="col s8 m12 waves-effect waves-light btn small-btn-text">{{ $t('change_pwd') }}</router-link>
+      </div>
+      <div class="col s0 m2"></div>
+      <div class="col s12 m4" style="margin:10px 0">
+        <div class="col s2 m0"></div>
+        <router-link to="/account/logout" class="col s8 m12 waves-effect waves-light btn red">{{ $t('logout') }}</router-link>
+      </div>
     </div>
   </div>
 </template>
