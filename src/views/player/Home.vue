@@ -182,7 +182,7 @@
 import { getShopName } from '@/components/shopUtils'
 import { standardizeDate, dateToLocalStr } from '@/components/dateUtils'
 import { getMusicName, getMusicJacketUrl } from '@/components/musicUtils.js'
-import { checkTokenValidity } from '@/components/accUtils'
+import { checkTokenValidity, authHeader } from '@/components/accUtils'
 import PlayerNavBar from '@/components/PlayerNavBar'
 
 export default {
@@ -254,11 +254,9 @@ export default {
       if (!this.haveDailyBonus) return
       this.fetchingDailyBonus = true
 
-      const h = new Headers()
-      h.append('Authorization', 'Bearer ' + localStorage.authToken)
       fetch(this.$store.state.endpoint + '/dailyBonus', {
         method: 'GET',
-        headers: h
+        headers: authHeader()
       }).then(checkTokenValidity.bind(this)).then(d => {
         if (d.code === 0) {
           this.$store.commit('dailyBonus')

@@ -31,15 +31,25 @@ export function checkTokenValidity (r) {
   return r.json()
 }
 
+/**
+ * 
+ * @return {Headers} Headers object with Authentication
+ */
+export function authHeader () {
+  const h = new Headers()
+  if (localStorage.authToken) {
+    h.append('Authorization', 'Bearer ' + localStorage.authToken)
+  }
+  return h
+}
+
 export async function initMyInfo () {
   if (!this.$store) {
     throw new Error('initMyInfo not called with vue binding')
   }
-  const h = new Headers()
-  h.append('Authorization', 'Bearer ' + localStorage.authToken)
   const d = await fetch(this.$store.state.endpoint + '/myinfo', {
     method: 'GET',
-    headers: h
+    headers: authHeader()
   }).then(checkTokenValidity.bind(this))
   if (d.code === 0) {
     this.$store.commit('updateLoginInfo', d.data)

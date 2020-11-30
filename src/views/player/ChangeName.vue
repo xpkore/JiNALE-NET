@@ -63,7 +63,7 @@ html[color-scheme=dark] .symbol-item { background:#444; }
 
 <script>
 import M from 'materialize-css'
-import { checkTokenValidity } from '@/components/accUtils'
+import { checkTokenValidity, authHeader } from '@/components/accUtils'
 
 export default {
   data: () => ({
@@ -137,8 +137,6 @@ export default {
     doChangeName () {
       this.usernameInput()
       this.fetching = true
-      const h = new Headers()
-      h.append('Authorization', 'Bearer ' + localStorage.authToken)
 
       const newName = this.new_player_name.replace(/[\w\W]/g, c => {
         const cc = c.charCodeAt(0)
@@ -151,7 +149,7 @@ export default {
       })
       fetch(this.$store.state.endpoint + '/changeName?newName=' + newName, {
         method: 'GET',
-        headers: h
+        headers: authHeader()
       }).then(checkTokenValidity.bind(this)).then(d => {
         if (d.code !== 0) {
           this.errorStr = this.$t('msg_1') + `: [${d.code}] ${d.msg}`

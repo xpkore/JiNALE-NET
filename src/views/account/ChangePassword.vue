@@ -51,7 +51,7 @@
 </i18n>
 
 <script>
-import { hashPassword, checkTokenValidity } from '@/components/accUtils'
+import { hashPassword, checkTokenValidity, authHeader } from '@/components/accUtils'
 
 export default {
   data: () => ({
@@ -85,8 +85,7 @@ export default {
         return
       }
       const hashedPwd = hashPassword(this.pwd)
-      const h = new Headers()
-      h.append('Authorization', 'Bearer ' + localStorage.authToken)
+      const h = authHeader()
       h.append('Content-Type', 'application/x-www-form-urlencoded')
       fetch(this.$store.state.endpoint + '/changePwd', {
         method: 'POST',

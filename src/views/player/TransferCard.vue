@@ -39,7 +39,7 @@
 </i18n>
 
 <script>
-import { checkTokenValidity } from '@/components/accUtils'
+import { checkTokenValidity, authHeader } from '@/components/accUtils'
 
 export default {
   data: () => ({
@@ -59,11 +59,9 @@ export default {
         return
       }
       // check card
-      const h = new Headers()
-      h.append('Authorization', 'Bearer ' + localStorage.authToken)
       fetch(this.$store.state.endpoint + '/transferCard?newCard=' + this.cardno, {
         method: 'GET',
-        headers: h
+        headers: authHeader()
       }).then(checkTokenValidity.bind(this)).then(d => {
         if (d.code !== 0) {
           this.errorStr = this.$t('msg_1') + `: [${d.code}] ${d.msg}`
