@@ -1,6 +1,7 @@
 <template>
   <div>
     <h3>{{ $t('title') }}</h3>
+    <PlayerNavBar></PlayerNavBar>
     <div class="card horizontal">
       <div class="card-image">
         <img :alt="selectCharaName" style="width:150px;height:320px;object-fit:contain" :src="`https://n.bzxyzt.cn/assets/chara/${selectCharaName}.png`" />
@@ -182,8 +183,12 @@ import { getShopName } from '@/components/shopUtils'
 import { standardizeDate, dateToLocalStr } from '@/components/dateUtils'
 import { getMusicName, getMusicJacketUrl } from '@/components/musicUtils.js'
 import { checkTokenValidity } from '@/components/accUtils'
+import PlayerNavBar from '@/components/PlayerNavBar'
 
 export default {
+  components: {
+    PlayerNavBar
+  },
   data: () => ({
     showCardNo: false,
     rankingLoaded: false,

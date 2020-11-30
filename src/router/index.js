@@ -2,15 +2,17 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import M from 'materialize-css'
 
-import Home from '../views/Home.vue'
-import UpdateNotes from '../views/UpdateNotes.vue'
-import Register from '../views/account/Register.vue'
-import Login from '../views/account/Login.vue'
-import Logout from '../views/account/Logout.vue'
-import ChangePassword from '../views/account/ChangePassword.vue'
-import UserHome from '../views/player/Home.vue'
-import TransferCard from '../views/player/TransferCard.vue'
-import ChangeName from '../views/player/ChangeName.vue'
+import Home from '@/views/Home.vue'
+import UpdateNotes from '@/views/UpdateNotes.vue'
+import Register from '@/views/account/Register.vue'
+import Login from '@/views/account/Login.vue'
+import Logout from '@/views/account/Logout.vue'
+import ChangePassword from '@/views/account/ChangePassword.vue'
+
+import UserHome from '@/views/player/Home.vue'
+import TransferCard from '@/views/player/TransferCard.vue'
+import ChangeName from '@/views/player/ChangeName.vue'
+import RecentPlay from '@/views/player/RecentPlay.vue'
 
 Vue.use(VueRouter)
 
@@ -60,6 +62,11 @@ const routes = [
     path: '/player/change_name',
     name: 'ChangeName',
     component: ChangeName
+  },
+  {
+    path: '/player/recent_play',
+    name: 'RecentPlay',
+    component: RecentPlay
   }
 ]
 
