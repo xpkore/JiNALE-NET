@@ -36,7 +36,7 @@
     "msg_3":"Unkonwn error occured"
   },
   "zh": {
-    "title": "注册新账号",
+    "title": "登录",
     "not_registered?": "还没注册？现在就可以",
     "register": "注册",
     "label_1": "用户名",
