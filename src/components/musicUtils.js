@@ -51,7 +51,14 @@ function parseMusicInfoCsv () {
 
 export async function initMusicInfo () {
   if (musicInfos) return
-  const musicDataVer = await fetch('https://n.bzxyzt.cn/cors_resources/musicData.json').then(r => r.json())
+  let musicDataVer
+  try {
+    musicDataVer = await fetch('https://n.bzxyzt.cn/cors_resources/musicData.json').then(r => r.json())
+  } catch (e) {
+    if (localStorage.musicDataCsv && localStorage.musicDataVer) {
+      musicDataVer = { ver: localStorage.musicDataVer }
+    }
+  }
   if (!localStorage.musicDataCsv || localStorage.musicDataVer !== musicDataVer.ver) {
     const musicDataCsv = await fetch(`https://n.bzxyzt.cn/cors_resources/musicData.csv?${musicDataVer.ver}`).then(r => r.text())
     localStorage.musicDataCsv = musicDataCsv
