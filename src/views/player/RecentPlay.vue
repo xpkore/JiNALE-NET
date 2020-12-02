@@ -164,7 +164,7 @@
   font-size:20px;
   position: relative;
   white-space: pre;
-  width:60%;
+  width:55%;
 }
 .achievement-big {
   font-size:30px
@@ -180,7 +180,7 @@
 .score {
   font-size:16px;
   position: relative;
-  width:40%;
+  width:45%;
 }
 .until-next-rank {
 	font-size: 11px;
@@ -282,7 +282,7 @@ export default {
     getMusicName,
     getMusicJacketUrl,
     getFcText (item) {
-      if (item.is_all_perfect_plus === 'true') {
+      if (item.is_all_perfect_plus === 1) {
         return 'ALL PERFECT+'
       } else if (item.is_all_perfect === 'true') {
         return 'ALL PERFECT'
@@ -372,7 +372,7 @@ export default {
         return remaining
       } else {
         const nextRank = {'SS+':1,'SS':0.995,'S+':0.99,'S':0.98,'AAA':0.97,'AA':0.94,'A':0.9,'B':0.8,'C':0.6,'D':0.4,'E':0.2,'F':0.1}[item._rank]
-        return item._100p_score * nextRank - item.score
+        return Math.ceil(item._100p_score / 50 * nextRank) * 50 - item.score
       }
     },
     toggleDetail (d) {
