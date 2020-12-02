@@ -28,6 +28,11 @@ export default {
   data: () => ({
     updateNotes: {"en":[
       [
+        '2020/12/02', [
+          'Added recent plays page'
+        ]
+      ],
+      [
         '2020/11/26', [
           'Added English translation',
           'Music infos are now auto updated'
@@ -58,6 +63,11 @@ export default {
         ]
       ]
     ], "zh":[
+      [
+        '2020/12/02', [
+          '添加了最近游玩页面'
+        ]
+      ],
       [
         '2020/11/26', [
           '添加英文界面',
