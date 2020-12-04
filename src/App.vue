@@ -79,7 +79,7 @@ footer {
 
 @media (prefers-color-scheme: dark) {
   html[color-scheme=auto],html[color-scheme=auto] body {background:black;color:#DDD}
-  html[color-scheme=auto] div.card,html[color-scheme=auto] .dropdown-content {background:#1c1c1c}
+  html[color-scheme=auto] .card,html[color-scheme=auto] .dropdown-content {background:#1c1c1c}
   html[color-scheme=auto] .select-wrapper input.select-dropdown {color:white}
   html[color-scheme=auto] .select-wrapper .caret {fill:rgba(255,255,255,0.87)}
   html[color-scheme=auto] .pagination li a {color:white}
@@ -101,7 +101,7 @@ footer {
 }
 
 html[color-scheme=dark],html[color-scheme=dark] body {background:black;color:#DDD}
-html[color-scheme=dark] div.card,html[color-scheme=dark] .dropdown-content {background:#1c1c1c}
+html[color-scheme=dark] .card,html[color-scheme=dark] .dropdown-content {background:#1c1c1c}
 html[color-scheme=dark] .select-wrapper input.select-dropdown {color:white}
 html[color-scheme=dark] .select-wrapper .caret {fill:rgba(255,255,255,0.87)}
 html[color-scheme=dark] .pagination li a {color:white}
@@ -120,6 +120,39 @@ html[color-scheme=dark] footer {
 html[color-scheme=dark] .input-field .helper-text {
   color: rgba(255,255,255,.54)
 }
+
+.result-icon {
+  background-image:url('https://n.bzxyzt.cn/assets/icon_result.png');
+  background-size: 80px auto;
+  display:inline-block;
+  height:40px;
+  width:40px;
+  vertical-align: middle;
+}
+.result-icon-none{background:none}
+.result-icon-fc     {background-position:0 -2px}
+.result-icon-fcp    {background-position:0 -42px}
+.result-icon-ap     {background-position:0 -82px}
+.result-icon-app    {background-position:0 -122px}
+.result-icon-sync   {background-position:40px -2px}
+.result-icon-mf     {background-position:40px -42px}
+.result-icon-mfp    {background-position:40px -82px}
+.result-icon-100sync{background-position:40px -122px}
+.level-icon {
+  background-image:url('https://n.bzxyzt.cn/assets/icon_level.png');
+  background-size: 60px auto;
+  display:inline-block;
+  height:15px;
+  width:60px;
+  vertical-align: middle;
+}
+div.card.lvl-eas .level-icon {background-position-y:0}
+div.card.lvl-bas .level-icon {background-position-y:-15px}
+div.card.lvl-adv .level-icon {background-position-y:-30px}
+div.card.lvl-exp .level-icon {background-position-y:-45px}
+div.card.lvl-mas .level-icon {background-position-y:-60px}
+div.card.lvl-rem .level-icon {background-position-y:-75px}
+div.card.lvl-enkaijou .level-icon {background:none}
 </style>
 
 <script>

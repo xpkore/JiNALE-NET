@@ -21,11 +21,11 @@
       <div v-else>
         <template v-for="item in playlogData">
           <div class="playlog-item" :key="`playlog-${item.user_play_date}`">
-            <div class="card">
+            <div class="card" :class="getLevelClass(item)">
               <div class="flex flex-row flex-2">
                 <span>
                   <span>Track {{item.track.toString().padStart(2, 0)}}</span>
-                  <span class="level">{{getLevel(item)}}</span>
+                  <span class="level-icon"></span>
                 </span>
                 <span class="hoveritem right-align">
                   <span class="normal timeago" :datetime="playDate(item)">{{ playDateStr(item) }}</span>
@@ -48,11 +48,11 @@
                       <span class="until-next-rank">{{$t('until_next_rank')}}{{formatScore(scoreUntilNextRank(item))}}</span>
                     </div>
                   </div>
-                  <div class="flex flex-row flex-2">
-                    <div class="fc-text">{{getFcText(item)}}</div>
-                    <div class="mf-text">{{getMfText(item)}}</div>
+                  <div class="combo-text">
+                    <span>Combo: {{item.max_combo}} / {{item._total_notes}}</span>
+                    <div class="result-icon" :class="getResultIconClass(item)"></div>
+                    <div class="result-icon" :class="getMultiIconClass(item)"></div>
                   </div>
-                  <div class="combo-text">Combo: {{item.max_combo}} / {{item._total_notes}}</div>
                   <div class="right-align" v-show="!showAllDetailScore">
                     <div class="detail-toggle-box" @click="toggleDetail(item.user_play_date)">{{$t(showDetailScore === item.user_play_date ? 'hide_detail' : 'show_detail')}}</div>
                   </div>
@@ -195,11 +195,11 @@
   font-weight: bold
 }
 .score-detail-table * {text-align: right}
-.score-detail-table tr>:nth-child(2) {color: orange;}
-.score-detail-table tr>:nth-child(3) {color: #dda0dd;}
-.score-detail-table tr>:nth-child(4) {color: lightgreen;}
-.score-detail-table tr>:nth-child(5) {color: gray;}
-.score-detail-table tbody .perfect-score {color:gold}
+.score-detail-table tr>:nth-child(2) {color: rgb(255,126,0);}
+.score-detail-table tr>:nth-child(3) {color: rgb(255,47,116);}
+.score-detail-table tr>:nth-child(4) {color: rgb(40,190,0);}
+.score-detail-table tr>:nth-child(5) {color: rgb(114,114,114);}
+.score-detail-table tbody .perfect-score {color:rgb(255,174,0)}
 .multiplayer-list,.score-detail-table {
   border-top: solid 1px gray;
   padding-top:5px
@@ -281,35 +281,41 @@ export default {
     },
     getMusicName,
     getMusicJacketUrl,
-    getFcText (item) {
+    getResultIconClass (item) {
       if (item.is_all_perfect_plus === 1) {
-        return 'ALL PERFECT+'
+        return 'result-icon-app'
       } else if (item.is_all_perfect === 'true') {
-        return 'ALL PERFECT'
+        return 'result-icon-ap'
       } else {
         const fc = item.full_combo
         switch (fc) {
           case 2: {
-            return 'FULL COMBO+'
+            return 'result-icon-fcp'
           }
           case 1: {
-            return 'FULL COMBO'
+            return 'result-icon-fc'
           }
         }
-        return '　'
+        return 'result-icon-none'
       }
     },
-    getMfText (item) {
-      const mf = item.max_fever
-      switch (mf) {
-        case 2: {
-          return 'MAX FEVER+'
+    getMultiIconClass (item) {
+      if (item.game_mode === 1) {
+        if (item.sync_rate === 10000) {
+          return 'result-icon-100sync'
         }
-        case 1: {
-          return 'MAX FEVER'
+        return 'result-icon-sync'
+      } else if (item.game_mode === 2) {
+        switch (item.max_fever) {
+          case 2: {
+            return 'result-icon-mfp'
+          }
+          case 1: {
+            return 'result-icon-mf'
+          }
         }
       }
-      return '　'
+      return 'result-icon-none'
     },
     playDate (item) {
       return standardizeDate(item.user_play_date).toISOString()
@@ -387,6 +393,16 @@ export default {
       if (lvl === 5) return 'MASTER'
       if (lvl === 6) return 'Re:MASTER'
       return '宴会場'
+    },
+    getLevelClass (item) {
+      const lvl = item.level
+      if (lvl === 1) return 'lvl-eas'
+      if (lvl === 2) return 'lvl-bas'
+      if (lvl === 3) return 'lvl-adv'
+      if (lvl === 4) return 'lvl-exp'
+      if (lvl === 5) return 'lvl-mas'
+      if (lvl === 6) return 'lvl-rem'
+      return 'lvl-enkaijou'
     }
   }
 }
