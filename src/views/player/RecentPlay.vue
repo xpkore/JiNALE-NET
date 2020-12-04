@@ -212,6 +212,7 @@
 }
 .detail-box.show {max-height:500px}
 .detail-toggle-box {
+  cursor:pointer;
   border-radius:10px;
   line-height:20px;
   background:darkgray;
