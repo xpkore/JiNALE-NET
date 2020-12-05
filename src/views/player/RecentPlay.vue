@@ -22,7 +22,12 @@
         <ul class="pagination row s12" v-if="pageInfo.pages > 1">
           <li class="col s2 waves-effect" v-if="pageInfo.page > 1"><a :data-page="pageInfo.page-1" @click="loadPlaylog($event.target.dataset.page)" href="javascript:">＜</a></li>
           <li class="col s2 waves-effect disabled" v-else><a>＜</a></li>
-          <li class="col s8">{{pageInfo.page}}／{{pageInfo.pages}}</li>
+          <li class="col s8">
+            <div class="input-field inline" style="margin:0">
+              <input type="text" inputmode="decimal" class="right-align" style="width:2em;height:1.6em" :placeholder="pageInfo.page" @input="paginationInput" @keydown="paginationInput" @blur="paginationBlur">
+              <span>／{{pageInfo.pages}}</span>
+            </div>
+          </li>
           <li class="col s2 waves-effect" v-if="pageInfo.page < pageInfo.pages"><a :data-page="pageInfo.page+1" @click="loadPlaylog($event.target.dataset.page)" href="javascript:">＞</a></li>
           <li class="col s2 waves-effect disabled" v-else><a>＞</a></li>
         </ul>
@@ -107,7 +112,12 @@
         <ul class="pagination row s12" v-if="pageInfo.pages > 1">
           <li class="col s2 waves-effect" v-if="pageInfo.page > 1"><a :data-page="pageInfo.page-1" @click="loadPlaylog($event.target.dataset.page)" href="javascript:">＜</a></li>
           <li class="col s2 waves-effect disabled" v-else><a>＜</a></li>
-          <li class="col s8">{{pageInfo.page}}／{{pageInfo.pages}}</li>
+          <li class="col s8">
+            <div class="input-field inline" style="margin:0">
+              <input type="text" inputmode="decimal" class="right-align" style="width:2em;height:1.6em" :placeholder="pageInfo.page" @input="paginationInput" @keydown="paginationInput" @blur="paginationBlur">
+              <span>／{{pageInfo.pages}}</span>
+            </div>
+          </li>
           <li class="col s2 waves-effect" v-if="pageInfo.page < pageInfo.pages"><a :data-page="pageInfo.page+1" @click="loadPlaylog($event.target.dataset.page)" href="javascript:">＞</a></li>
           <li class="col s2 waves-effect disabled" v-else><a>＞</a></li>
         </ul>
@@ -440,6 +450,22 @@ export default {
       if (lvl === 5) return 'lvl-mas'
       if (lvl === 6) return 'lvl-rem'
       return 'lvl-utage'
+    },
+    paginationInput (e) {
+      if (e.keyCode === 13) {
+        e.target.blur()
+        return
+      }
+      e.target.value = e.target.value.replace(/[^\d]/g, '')
+    },
+    paginationBlur (e) {
+      let newPage = e.target.value.replace(/[^\d]/g, '') | 0
+      e.target.value = ''
+      if (!newPage) return
+      newPage = Math.max(newPage, 1)
+      newPage = Math.min(newPage, this.pageInfo.pages)
+      if (newPage === this.pageInfo.page) return
+      this.loadPlaylog(newPage)
     }
   }
 }
