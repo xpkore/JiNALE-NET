@@ -152,7 +152,7 @@ div.card.lvl-adv .level-icon {background-position-y:-30px}
 div.card.lvl-exp .level-icon {background-position-y:-45px}
 div.card.lvl-mas .level-icon {background-position-y:-60px}
 div.card.lvl-rem .level-icon {background-position-y:-75px}
-div.card.lvl-enkaijou .level-icon {background:none}
+div.card.lvl-utage .level-icon {background:none}
 </style>
 
 <script>

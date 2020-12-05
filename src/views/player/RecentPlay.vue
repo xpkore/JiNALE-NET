@@ -431,16 +431,6 @@ export default {
     toggleDetail (d) {
       this.showDetailScore = this.showDetailScore === d ? '' : d
     },
-    getLevel (item) {
-      const lvl = item.level
-      if (lvl === 1) return 'EASY'
-      if (lvl === 2) return 'BASIC'
-      if (lvl === 3) return 'ADVANCE'
-      if (lvl === 4) return 'EXPERT'
-      if (lvl === 5) return 'MASTER'
-      if (lvl === 6) return 'Re:MASTER'
-      return '宴会場'
-    },
     getLevelClass (item) {
       const lvl = item.level
       if (lvl === 1) return 'lvl-eas'
@@ -449,7 +439,7 @@ export default {
       if (lvl === 4) return 'lvl-exp'
       if (lvl === 5) return 'lvl-mas'
       if (lvl === 6) return 'lvl-rem'
-      return 'lvl-enkaijou'
+      return 'lvl-utage'
     }
   }
 }
