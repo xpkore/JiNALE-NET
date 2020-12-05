@@ -28,6 +28,11 @@ export default {
   data: () => ({
     updateNotes: {"en":[
       [
+        '2020/12/05', [
+          'Improve recent plays page with pagination and icons'
+        ]
+      ],
+      [
         '2020/12/02', [
           'Added recent plays page'
         ]
@@ -63,6 +68,11 @@ export default {
         ]
       ]
     ], "zh":[
+      [
+        '2020/12/05', [
+          '最近游玩改进，添加翻页及图标'
+        ]
+      ],
       [
         '2020/12/02', [
           '添加了最近游玩页面'

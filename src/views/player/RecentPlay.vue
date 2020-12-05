@@ -33,6 +33,7 @@
                 <span>
                   <span>Track {{item.track.toString().padStart(2, 0)}}</span>
                   <span class="level-icon"></span>
+                  <span v-if="item.challenge_life > 0" style="font-size:14px">{{$t(item.is_challenge_track === 'true' ? 'challenge' : 'survival')}}</span>
                 </span>
                 <span class="hoveritem right-align">
                   <span class="normal timeago" :datetime="playDate(item)">{{ playDateStr(item) }}</span>
@@ -67,7 +68,7 @@
                 <div class="detail-box" :class="{show:showAllDetailScore || showDetailScore === item.user_play_date}">
                   <div class="flex flex-row flex-2 center-align" v-if="item.judge_style !== 0 || item.challenge_life > 0">
                     <span>{{item.judge_style ? $t('judge_style') + ['','マジ','ガチ','ゴリ'][item.judge_style] : ''}}</span>
-                    <span>{{item.challenge_life ? ($t(item.is_challenge_track === 'true' ? 'challenge_track' : 'survival_track') + item.challenge_remain +'/'+ item.challenge_life) : ''}}</span>
+                    <span>{{item.challenge_life ? ($t('life') + item.challenge_remain +'/'+ item.challenge_life) : ''}}</span>
                   </div>
                   <table class="score-detail-table">
                     <thead>
@@ -130,8 +131,9 @@
     "hide_detail": "Hide detail",
     "show_all_details": "Show all details",
     "judge_style": "Judge style: ",
-    "challenge_track":"Challenge Track Life: ",
-    "survival_track":"Survival Course Life: "
+    "challenge":"Challenge",
+    "survival":"Survival",
+    "life":"Life: "
   },
   "zh": {
     "title": "游玩记录",
@@ -146,8 +148,9 @@
     "hide_detail": "隐藏详细",
     "show_all_details": "展开所有详细",
     "judge_style": "严判：",
-    "challenge_track":"Challenge Track血量：",
-    "survival_track":"段位认证 血量："
+    "challenge":"挑战曲",
+    "survival":"段位",
+    "life":"血量："
   }
 }
 </i18n>
