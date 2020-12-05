@@ -16,9 +16,16 @@
       </div>
       <div v-else-if="playlogLoadFailed">
         <p>{{ $t('playlog_failed') }}</p>
-        <a class="col waves-effect waves-light btn" @click="loadplaylog">{{ $t('retry') }}</a>
+        <a class="col waves-effect waves-light btn" @click="loadPlaylog(loadingPage)">{{ $t('retry') }}</a>
       </div>
       <div v-else>
+        <ul class="pagination row s12" v-if="pageInfo.pages > 1">
+          <li class="col s2 waves-effect" v-if="pageInfo.page > 1"><a :data-page="pageInfo.page-1" @click="loadPlaylog($event.target.dataset.page)" href="javascript:">＜</a></li>
+          <li class="col s2 waves-effect disabled" v-else><a>＜</a></li>
+          <li class="col s8">{{pageInfo.page}}／{{pageInfo.pages}}</li>
+          <li class="col s2 waves-effect" v-if="pageInfo.page < pageInfo.pages"><a :data-page="pageInfo.page+1" @click="loadPlaylog($event.target.dataset.page)" href="javascript:">＞</a></li>
+          <li class="col s2 waves-effect disabled" v-else><a>＞</a></li>
+        </ul>
         <template v-for="item in playlogData">
           <div class="playlog-item" :key="`playlog-${item.user_play_date}`">
             <div class="card" :class="getLevelClass(item)">
@@ -35,7 +42,7 @@
               <div class="score-rank">{{item._rank}}</div>
               <div class="music-name">{{ getMusicName(item.music_id) }}</div>
               <div class="row playlog-info">
-                <div class="music-jacket"><img :src="getMusicJacketUrl(item.music_id)"></div>
+                <div class="music-jacket"><img :_src="getMusicJacketUrl(item.music_id)" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="></div>
                 <div class="col s7 playlog-info-right">
                   <div class="flex flex-row">
                     <div class="achievement">
@@ -58,6 +65,10 @@
                   </div>
                 </div>
                 <div class="detail-box" :class="{show:showAllDetailScore || showDetailScore === item.user_play_date}">
+                  <div class="flex flex-row flex-2 center-align" v-if="item.judge_style !== 0 || item.challenge_life > 0">
+                    <span>{{item.judge_style ? $t('judge_style') + ['','マジ','ガチ','ゴリ'][item.judge_style] : ''}}</span>
+                    <span>{{item.challenge_life ? ($t(item.is_challenge_track === 'true' ? 'challenge_track' : 'survival_track') + item.challenge_remain +'/'+ item.challenge_life) : ''}}</span>
+                  </div>
                   <table class="score-detail-table">
                     <thead>
                       <tr>
@@ -92,6 +103,13 @@
             </div>
           </div>
         </template>
+        <ul class="pagination row s12" v-if="pageInfo.pages > 1">
+          <li class="col s2 waves-effect" v-if="pageInfo.page > 1"><a :data-page="pageInfo.page-1" @click="loadPlaylog($event.target.dataset.page)" href="javascript:">＜</a></li>
+          <li class="col s2 waves-effect disabled" v-else><a>＜</a></li>
+          <li class="col s8">{{pageInfo.page}}／{{pageInfo.pages}}</li>
+          <li class="col s2 waves-effect" v-if="pageInfo.page < pageInfo.pages"><a :data-page="pageInfo.page+1" @click="loadPlaylog($event.target.dataset.page)" href="javascript:">＞</a></li>
+          <li class="col s2 waves-effect disabled" v-else><a>＞</a></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -110,7 +128,10 @@
     "friends": "Friends",
     "show_detail": "Show detail",
     "hide_detail": "Hide detail",
-    "show_all_details": "Show all details"
+    "show_all_details": "Show all details",
+    "judge_style": "Judge style: ",
+    "challenge_track":"Challenge Track Life: ",
+    "survival_track":"Survival Course Life: "
   },
   "zh": {
     "title": "游玩记录",
@@ -123,7 +144,10 @@
     "friends": "好友",
     "show_detail": "显示详细",
     "hide_detail": "隐藏详细",
-    "show_all_details": "展开所有详细"
+    "show_all_details": "展开所有详细",
+    "judge_style": "严判：",
+    "challenge_track":"Challenge Track血量：",
+    "survival_track":"段位认证 血量："
   }
 }
 </i18n>
@@ -237,6 +261,8 @@ export default {
     playlogLoaded: false,
     playlogLoadFailed: false,
     playlogData: null,
+    pageInfo: {},
+    loadingPage: 0,
 
     showAllDetailScore: false,
     showDetailScore: ''
@@ -245,18 +271,13 @@ export default {
     this.loadPlaylog()
   },
   methods: {
-    loadPlaylog () {
+    loadPlaylog (page = 0) {
       this.playlogLoaded = false
       this.playlogLoadFailed = false
       this.playlogData = null
 
-      fetch(this.$store.state.endpoint + '/PlayerPlaylog', {
-        method: 'GET',
-        headers: authHeader()
-      }).then(checkTokenValidity.bind(this)).then(d => {
-        if (d.code) {
-          this.playlogLoadFailed = true
-        } else {
+      this.loadPlaylogData(page).then(d => {
+        if (d) {
           const cols = d.data.cols
           const playlogData = d.data.rows.map(r => {
             const row = {}
@@ -273,11 +294,33 @@ export default {
             return row
           })
           this.playlogData = playlogData
+          this.pageInfo = d.data.page
           setTimeout(() => {
             window.dispatchEvent(new Event('trigger-timeago'))
+            window.dispatchEvent(new Event('trigger-lazyload'))
           })
+        } else {
+          this.playlogLoadFailed = true
         }
         this.playlogLoaded = true
+      })
+    },
+    loadPlaylogData (page) {
+      this.loadingPage = page
+      if (page == 0 && this.$store.state.playlogResponse) {
+        return Promise.resolve(this.$store.state.playlogResponse)
+      }
+      return fetch(this.$store.state.endpoint + `/PlayerPlaylog?page=${page}`, {
+        method: 'GET',
+        headers: authHeader()
+      }).then(checkTokenValidity.bind(this)).then(d => {
+        if (d.code) {
+          this.playlogLoadFailed = true
+          return null
+        } else {
+          this.$store.commit('savePlaylogResponse', d)
+          return d
+        }
       })
     },
     getMusicName,

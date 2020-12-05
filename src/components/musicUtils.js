@@ -66,3 +66,16 @@ export async function initMusicInfo () {
   }
   parseMusicInfoCsv()
 }
+
+function img_lazyload (){
+  var t = [].slice.call(document.getElementsByTagName("img"));
+  t.forEach(function (t) {
+    if (t.hasAttribute("_src")) {
+      var e = t.getBoundingClientRect();
+      e.bottom < -100 || e.top > innerHeight + 1000 || e.right < -1000 || e.left > innerWidth + 100 || (t.setAttribute("src", t.getAttribute("_src")), t.removeAttribute("_src"))
+    }
+  })
+}
+window.addEventListener("scroll", img_lazyload)
+window.addEventListener("resize", img_lazyload)
+window.addEventListener("trigger-lazyload", img_lazyload)

@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     endpoint: process.env.NODE_ENV === 'production' ? 'https://n.bzxyzt.cn/api' : location.origin.replace(/:\d+/, ':9989/api'),
     loggedIn: false,
-    loginInfo: null
+    loginInfo: null,
+    playlogResponse: null
   },
   mutations: {
     updateLoginInfo (state, data) {
@@ -34,6 +35,9 @@ export default new Vuex.Store({
       if (state.loggedIn) {
         state.loginInfo.user_data.user_name = newName
       }
+    },
+    savePlaylogResponse (store, r) {
+      store.playlogResponse = r
     }
   },
   actions: {
