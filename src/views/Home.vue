@@ -5,11 +5,10 @@
     <div class="row"></div>
     <div class="row"></div>
     <div class="row">
-      <div class="col s1"></div>
-      <router-link class="col s4 waves-effect waves-light btn" to="/account/register">{{$t('register')}}</router-link>
-      <div class="col s2"></div>
-      <router-link class="col s4 waves-effect waves-light btn" to="/account/login">{{$t('login')}}</router-link>
-      <div class="col s1"></div>
+      <div class="col s0 m1"></div>
+      <router-link class="col s5 m4 waves-effect waves-light btn" to="/account/register">{{$t('register')}}</router-link>
+      <div class="col s1 m2"></div>
+      <router-link class="col s5 m4 waves-effect waves-light btn" to="/account/login">{{$t('login')}}</router-link>
     </div>
   </div>
 </template>
