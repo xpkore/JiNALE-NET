@@ -1,6 +1,7 @@
 <template>
   <div>
     <h3>{{$t('title')}}</h3>
+    <PlayerNavBar></PlayerNavBar>
     <form @submit.prevent="doChangePwd">
       <h5>{{$t('label_1')}}</h5>
       <p class="input-field">
@@ -52,8 +53,12 @@
 
 <script>
 import { hashPassword, checkTokenValidity, authHeader } from '@/components/accUtils'
+import PlayerNavBar from '@/components/PlayerNavBar'
 
 export default {
+  components: {
+    PlayerNavBar
+  },
   data: () => ({
     fetching: false,
 

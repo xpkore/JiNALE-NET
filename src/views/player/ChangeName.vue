@@ -1,6 +1,7 @@
 <template>
   <div>
     <h3>{{$t('title')}}</h3>
+    <PlayerNavBar></PlayerNavBar>
     <form @submit.prevent="doChangeName">
       <p class="input-field">
         <input type="text" id="new_player_name" name="new_player_name" autocomplete="off" autofocus v-model="new_player_name" :disabled="fetching" @input="usernameInput" maxlength="8" data-length="8"/>
@@ -64,8 +65,12 @@ html[color-scheme=dark] .symbol-item { background:#444; }
 <script>
 import M from 'materialize-css'
 import { checkTokenValidity, authHeader } from '@/components/accUtils'
+import PlayerNavBar from '@/components/PlayerNavBar'
 
 export default {
+  components: {
+    PlayerNavBar
+  },
   data: () => ({
     new_player_name: '',
     fetching: false,

@@ -1,6 +1,9 @@
 <template>
   <div>
     <h3>{{$t('title')}}</h3>
+    <p>
+      <router-link to="/">＜ Home</router-link>
+    </p>
     <div v-for="date in updateNotes[$t('key')]" :key="date[0]">
       <h5>{{ date[0] }}</h5>
       <ul class="browser-default">
