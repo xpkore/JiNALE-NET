@@ -50,7 +50,7 @@
 </i18n>
 
 <script>
-import { hashPassword, initMyInfo } from '@/components/accUtils'
+import { hashPassword, initMyInfo, fetchWithPostBody } from '@/components/accUtils'
 
 export default {
   data: () => ({
@@ -72,12 +72,10 @@ export default {
       this.fetching = true
       const hashedPwd = hashPassword(this.pwd)
       let loginInfo
-      fetch(this.$store.state.endpoint + '/login', {
-        method: 'POST',
-        headers: new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' }),
-        body: `id=${encodeURIComponent(this.userid)}&hashed_pwd=${hashedPwd}`,
-        credentials: 'include'
-      }).then(r => r.json()).then(d => {
+      fetchWithPostBody(
+        this.$store.state.endpoint + '/login',
+        `id=${encodeURIComponent(this.userid)}&hashed_pwd=${hashedPwd}`
+      ).then(r => r.json()).then(d => {
         if (d.code !== 0 || !d.token) {
           this.errorStr = this.$t('msg_1') + `: [${d.code}] ${d.msg}`
           return

@@ -16,7 +16,7 @@ export function hashPassword (pwd) {
 /**
  * 
  * @param {Response} r fetch response
- * @return {Promise<string>}
+ * @return {Promise<object>} resolved json object
  */
 export function checkTokenValidity (r) {
   if (!this.$store) {
@@ -57,4 +57,20 @@ export async function initMyInfo () {
   } else {
     this.$store.commit('updateLoginInfo')
   }
+}
+
+/**
+ * 
+ * @param {string} url url to fetch
+ * @param {string} body post body for fetch
+ * @return {Promise<Response>} initiated fetch request
+ */
+export function fetchWithPostBody (url, body) {
+  const h = authHeader()
+  h.append('Content-Type', 'application/x-www-form-urlencoded')
+  return fetch(url, {
+    method: 'POST',
+    headers: h,
+    body: body
+  })
 }

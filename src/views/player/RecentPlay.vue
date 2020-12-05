@@ -262,7 +262,7 @@
 <script>
 import { getShopName } from '@/components/shopUtils'
 import { standardizeDate, dateToLocalStr } from '@/components/dateUtils'
-import { checkTokenValidity, authHeader } from '@/components/accUtils'
+import { checkTokenValidity, fetchWithPostBody } from '@/components/accUtils'
 import { getMusicName, getMusicJacketUrl } from '@/components/musicUtils.js'
 import PlayerNavBar from '@/components/PlayerNavBar'
 
@@ -323,10 +323,10 @@ export default {
       if (page == 0 && this.$store.state.playlogResponse) {
         return Promise.resolve(this.$store.state.playlogResponse)
       }
-      return fetch(this.$store.state.endpoint + `/PlayerPlaylog?page=${page}`, {
-        method: 'GET',
-        headers: authHeader()
-      }).then(checkTokenValidity.bind(this)).then(d => {
+      return fetchWithPostBody(
+        this.$store.state.endpoint + '/PlayerPlaylog',
+        `page=${page}`
+      ).then(checkTokenValidity.bind(this)).then(d => {
         if (d.code) {
           this.playlogLoadFailed = true
           return null

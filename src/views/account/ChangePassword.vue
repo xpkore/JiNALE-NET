@@ -52,7 +52,7 @@
 </i18n>
 
 <script>
-import { hashPassword, checkTokenValidity, authHeader } from '@/components/accUtils'
+import { hashPassword, checkTokenValidity, fetchWithPostBody } from '@/components/accUtils'
 import PlayerNavBar from '@/components/PlayerNavBar'
 
 export default {
@@ -90,13 +90,10 @@ export default {
         return
       }
       const hashedPwd = hashPassword(this.pwd)
-      const h = authHeader()
-      h.append('Content-Type', 'application/x-www-form-urlencoded')
-      fetch(this.$store.state.endpoint + '/changePwd', {
-        method: 'POST',
-        headers: h,
-        body: `hashed_pwd=${hashedPwd}`
-      }).then(checkTokenValidity.bind(this)).then(d => {
+      fetchWithPostBody(
+        this.$store.state.endpoint + '/changePwd',
+        `hashed_pwd=${hashedPwd}`
+      ).then(checkTokenValidity.bind(this)).then(d => {
         if (d.code !== 0 || !d.token) {
           this.errorStr = this.$t('msg_1') + `: [${d.code}] ${d.msg}`
           return
