@@ -31,14 +31,45 @@ function parseNumValue (i) {
   return out
 }
 
+function parseCsvLine (lineIn) {
+  let quoted = false
+  let quoteBlock = []
+  let lineOut = []
+  for (let i = 0; i < lineIn.length; i++) {
+    const block = lineIn[i]
+    if (!quoted) {
+      if (block.substr(0, 1) === '"') {
+        if (block.substr(-1, 1) === '"') {
+          lineOut.push(block.slice(1, -1).replace(/""/g, '"'))
+        } else {
+          quoted = true
+          quoteBlock.push(block)
+        }
+      } else {
+        lineOut.push(block)
+      }
+    } else {
+      quoteBlock.push(block)
+      if (block.substr(-1, 1) === '"') {
+        quoted = false
+        lineOut.push(quoteBlock.join(',').slice(1, -1).replace(/""/g, '"'))
+      }
+    }
+  }
+  if (quoted) {
+    throw new Error('CSV line parser: Expected quote, EOL found: ' + lineIn.join(','))
+  }
+  return lineOut
+}
+
 function parseMusicInfoCsv () {
   "use strict"
   const lines = localStorage.musicDataCsv.replace(/\r/g, '').trim().split('\n')
   const cols = lines.shift().split(',')
   musicInfos = {}
-  const numCols = ['deleted', 'genre', 'lvl1', 'lvl2', 'lvl3', 'lvl4', 'lvl5', 'lvl6', 'scr1', 'scr2', 'scr3', 'scr4', 'scr5', 'scr6']
+  const numCols = ['deleted', 'fanmade', 'dx_transform', 'genre', 'lvl1', 'lvl2', 'lvl3', 'lvl4', 'lvl5', 'lvl6']
   lines.forEach(line => {
-    const vals = line.split(',')
+    const vals = parseCsvLine(line.split(','))
     const musicInfo = {}
     for (let i = 0; i < cols.length; i++) {
       musicInfo[cols[i]] = numCols.indexOf(cols[i]) !== -1 ? parseNumValue(vals[i]) : vals[i]
