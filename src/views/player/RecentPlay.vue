@@ -48,7 +48,7 @@
               <div class="score-rank">{{item._rank}}</div>
               <div class="music-name">{{ getMusicName(item.music_id) }}</div>
               <div class="row playlog-info">
-                <div class="music-jacket"><img :_src="getMusicJacketUrl(item.music_id)" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="></div>
+                <div class="music-jacket" :class="{'music-deleted':isMusicDeleted(item.music_id)}"><img :_src="getMusicJacketUrl(item.music_id)" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="></div>
                 <div class="col s7 playlog-info-right">
                   <div class="flex flex-row">
                     <div class="achievement">
@@ -189,9 +189,23 @@
 }
 .music-jacket {
   float:left;
+  font-size:0;
 }
 .music-jacket>img {
   width:128px
+}
+.music-jacket.music-deleted {
+  position: relative;
+}
+.music-jacket.music-deleted:after {
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  height:128px;
+  width:128px;
+  display:block;
+  background:url("data:image/svg+xml,%3Csvg%20height%3D%22128%22%20width%3D%22128%22%20viewBox%3D%220%200%20128%20128%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20style%3D%22background%3Argba(0%2C0%2C0%2C0.5)%3Bfill%3Argba(255%2C255%2C255%2C0.8)%3Bfont-family%3AMeiryo%3Bfont-size%3A%2030px%3B%22%3E%3Ctext%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%20x%3D%2264%22%20y%3D%2264%22%20transform%3D%22rotate(-45)%22%20transform-origin%3D%22center%22%3E%3Ctspan%20x%3D%2264%22%20y%3D%2264%22%20dy%3D%22-0.5em%22%3E%E5%89%8A%E9%99%A4%E3%81%97%3C%2Ftspan%3E%3Ctspan%20x%3D%2264%22%20y%3D%2264%22%20dy%3D%220.5em%22%3E%E3%81%BE%E3%81%97%E3%81%9F%3C%2Ftspan%3E%3C%2Ftext%3E%3C%2Fsvg%3E")
 }
 .col.playlog-info-right {
   margin-left: 10px;
@@ -263,7 +277,7 @@
 import { getShopName } from '@/components/shopUtils'
 import { standardizeDate, dateToLocalStr } from '@/components/dateUtils'
 import { checkTokenValidity, fetchWithPostBody } from '@/components/accUtils'
-import { getMusicName, getMusicJacketUrl } from '@/components/musicUtils.js'
+import { getMusicName, getMusicJacketUrl, isMusicDeleted } from '@/components/musicUtils.js'
 import PlayerNavBar from '@/components/PlayerNavBar'
 
 export default {
@@ -338,6 +352,7 @@ export default {
     },
     getMusicName,
     getMusicJacketUrl,
+    isMusicDeleted,
     getResultIconClass (item) {
       if (item.is_all_perfect_plus === 1) {
         return 'result-icon-app'

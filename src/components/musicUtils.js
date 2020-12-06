@@ -22,6 +22,15 @@ export function getMusicJacketUrl (id) {
 
 /**
  * 
+ * @param {number} id music id
+ * @return {boolean} music is deleted
+ */
+export function isMusicDeleted (id) {
+  return musicInfos[id] && musicInfos[id].deleted ? true : false
+}
+
+/**
+ * 
  * @param {string} i input string
  * @return {number} value as number
  */
