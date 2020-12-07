@@ -14,6 +14,7 @@
           <div class="row music-info">
             <div class="music-jacket" :class="{'music-deleted':isMusicDeleted(music_id)}"><img :src="getMusicJacketUrl(music_id)"></div>
             <div class="col s7 music-info-right">
+              <div>{{$t('Artist')}}{{getMusicArtist(music_id)}}</div>
               <div>{{$t('Constant')}}{{getMusicLevelConstant(music_id, level).toFixed(1)}}</div>
               <div>{{charter ? $t('Charter') : ''}}{{charter}}</div>
             </div>
@@ -53,6 +54,7 @@
 <i18n>
 {
   "en": {
+    "Artist": "Artist: ",
     "Constant": "Chart Constant: ",
     "Charter": "Chart Design: ",
     "score_ranking": "Score Ranking",
@@ -61,6 +63,7 @@
     "retry": "Retry"
   },
   "zh": {
+    "Artist": "曲：",
     "Constant": "谱面定数：",
     "Charter": "谱面设计：",
     "score_ranking": "单曲分数榜",
@@ -116,7 +119,7 @@
 import { getShopName } from '@/components/shopUtils'
 import { standardizeDate, dateToLocalStr } from '@/components/dateUtils'
 import { checkTokenValidity, fetchWithPostBody } from '@/components/accUtils'
-import { getMusicName, getMusicJacketUrl, isMusicDeleted, getMusicLevelConstant, getMusicLevelCharter } from '@/components/musicUtils.js'
+import { getMusicName, getMusicArtist, getMusicJacketUrl, isMusicDeleted, getMusicLevelConstant, getMusicLevelCharter } from '@/components/musicUtils.js'
 import PlayerNavBar from '@/components/PlayerNavBar'
 
 export default {
@@ -144,6 +147,7 @@ export default {
   },
   methods: {
     getMusicName,
+    getMusicArtist,
     getMusicJacketUrl,
     isMusicDeleted,
     getMusicLevelConstant,

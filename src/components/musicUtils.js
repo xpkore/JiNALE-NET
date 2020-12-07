@@ -12,6 +12,15 @@ export function getMusicName (id) {
 /**
  * 
  * @param {number} id music id
+ * @return {string} artist name
+ */
+export function getMusicArtist (id) {
+  return musicInfos[id] ? musicInfos[id].artist : ''
+}
+
+/**
+ * 
+ * @param {number} id music id
  * @return {string} jacket url
  */
 export function getMusicJacketUrl (id) {

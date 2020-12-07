@@ -205,7 +205,8 @@
   height:128px;
   width:128px;
   display:block;
-  background:url("data:image/svg+xml,%3Csvg%20height%3D%22128%22%20width%3D%22128%22%20viewBox%3D%220%200%20128%20128%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20style%3D%22background%3Argba(0%2C0%2C0%2C0.5)%3Bfill%3Argba(255%2C255%2C255%2C0.8)%3Bfont-family%3AMeiryo%3Bfont-size%3A30px%3Bline-height%3A30px%22%3E%3Ctext%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%20transform%3D%22rotate(-45%2C64%2C64)%22%3E%3Ctspan%20x%3D%2264%22%20y%3D%2264%22%20dy%3D%22-0.5em%22%20alignment-baseline%3D%22middle%22%3E%E5%89%8A%E9%99%A4%E3%81%97%3C%2Ftspan%3E%3Ctspan%20x%3D%2264%22%20y%3D%2264%22%20dy%3D%220.5em%22%20alignment-baseline%3D%22middle%22%3E%E3%81%BE%E3%81%97%E3%81%9F%3C%2Ftspan%3E%3C%2Ftext%3E%3C%2Fsvg%3E")
+  background:url("data:image/svg+xml,%3Csvg%20height%3D%22128%22%20width%3D%22128%22%20viewBox%3D%220%200%20128%20128%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20style%3D%22background%3Argba(0%2C0%2C0%2C0.5)%3Bfill%3Argba(255%2C255%2C255%2C0.8)%3Bfont-family%3AMeiryo%3Bfont-size%3A30px%3Bline-height%3A30px%22%3E%3Ctext%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%20transform%3D%22rotate(-45%2C64%2C64)%22%3E%3Ctspan%20x%3D%2264%22%20y%3D%2264%22%20dy%3D%22-0.5em%22%20alignment-baseline%3D%22middle%22%3E%E5%89%8A%E9%99%A4%E3%81%97%3C%2Ftspan%3E%3Ctspan%20x%3D%2264%22%20y%3D%2264%22%20dy%3D%220.5em%22%20alignment-baseline%3D%22middle%22%3E%E3%81%BE%E3%81%97%E3%81%9F%3C%2Ftspan%3E%3C%2Ftext%3E%3C%2Fsvg%3E");
+  pointer-events: none;
 }
 .row .col.playlog-info-right {
   margin-left: 10px;
