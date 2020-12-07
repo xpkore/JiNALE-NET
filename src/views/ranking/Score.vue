@@ -36,7 +36,7 @@
               <div class="flex flex-row valign-wrapper ">
                 <div class="score-rank-position" :class="`rank-${item.rank}`">{{ item.rank }}</div>
                 <div class="score-rank-name">{{item.name}}</div>
-                <div class="score-rank-achievement">{{ (item.achievement / 100).toFixed(2) }}%</div>
+                <div class="score-rank-achievement"><div class="result-icon" :class="getResultIconClass(item.fcap)"></div>{{ (item.achievement / 100).toFixed(2) }}%</div>
                 <div class="score-rank-date hoveritem">
                   <span class="normal timeago" :datetime="playDate(item)">{{ playDateStr(item) }}</span>
                   <span class="hover">{{ playDateStr(item) }}</span>
@@ -106,6 +106,9 @@
 }
 .score-rank-item.player-rank .score-rank-name {
   color: rgb(255,174,0)
+}
+.result-icon-none {
+  display: none
 }
 </style>
 
@@ -211,6 +214,15 @@ export default {
     },
     playDateStr (item) {
       return dateToLocalStr(item.date, true)
+    },
+    getResultIconClass (fcap) {
+      switch (fcap) {
+        case 1: {return 'result-icon-fc'}
+        case 2: {return 'result-icon-fcp'}
+        case 3: {return 'result-icon-ap'}
+        case 4: {return 'result-icon-app'}
+      }
+      return 'result-icon-none'
     },
   }
 }
