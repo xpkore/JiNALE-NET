@@ -31,6 +31,26 @@ export function isMusicDeleted (id) {
 
 /**
  * 
+ * @param {number} id music id
+ * @param {number} level music level
+ * @return {number} chart rating constant
+ */
+export function getMusicLevelConstant (id, level) {
+  return musicInfos[id] && musicInfos[id][`lvl${level}`] ? musicInfos[id][`lvl${level}`] : 0
+}
+
+/**
+ * 
+ * @param {number} id music id
+ * @param {number} level music level
+ * @return {string} charter
+ */
+export function getMusicLevelCharter (id, level) {
+  return musicInfos[id] && musicInfos[id][`charter${level}`] ? musicInfos[id][`charter${level}`] : ''
+}
+
+/**
+ * 
  * @param {string} i input string
  * @return {number} value as number
  */
