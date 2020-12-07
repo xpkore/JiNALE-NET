@@ -14,6 +14,8 @@ import TransferCard from '@/views/player/TransferCard.vue'
 import ChangeName from '@/views/player/ChangeName.vue'
 import RecentPlay from '@/views/player/RecentPlay.vue'
 
+import RankingScore from '@/views/ranking/Score.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -67,6 +69,12 @@ const routes = [
     path: '/player/recent_play',
     name: 'RecentPlay',
     component: RecentPlay
+  },
+
+  {
+    path: '/ranking/score',
+    name: 'RankingScore',
+    component: RankingScore
   }
 ]
 

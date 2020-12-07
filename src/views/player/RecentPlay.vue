@@ -2,7 +2,7 @@
   <div>
     <h3>{{ $t('title') }}</h3>
     <PlayerNavBar></PlayerNavBar>
-    <div class="recent-plays">
+    <div class="recent-plays narrow-column">
       <form class="right-align">
         <p>
         <label>
@@ -68,6 +68,7 @@
                     <div class="result-icon" :class="getMultiIconClass(item)"></div>
                   </div>
                   <div class="right-align" v-show="!showAllDetailScore">
+                    <router-link :to="`/ranking/score?music_id=${item.music_id}&level=${item.level}`" class="ranking-score-btn">{{$t('Ranking')}}</router-link>
                     <div class="detail-toggle-box" @click="toggleDetail(item.user_play_date)">{{$t(showDetailScore === item.user_play_date ? 'hide_detail' : 'show_detail')}}</div>
                   </div>
                 </div>
@@ -144,7 +145,8 @@
     "judge_style": "Judge style: ",
     "challenge":"Challenge",
     "survival":"Survival",
-    "life":"Life: "
+    "life":"Life: ",
+    "Ranking": "Ranking"
   },
   "zh": {
     "title": "游玩记录",
@@ -161,16 +163,13 @@
     "judge_style": "严判：",
     "challenge":"挑战曲",
     "survival":"段位",
-    "life":"血量："
+    "life":"血量：",
+    "Ranking": "分数榜"
   }
 }
 </i18n>
 
-<style scoped>
-.recent-plays {
-  max-width:400px;
-  margin:0 auto
-}
+<style>
 .flex {display:flex}
 .flex.flex-column {flex-direction: column}
 .flex.flex-row {flex-direction: row}
@@ -208,7 +207,7 @@
   display:block;
   background:url("data:image/svg+xml,%3Csvg%20height%3D%22128%22%20width%3D%22128%22%20viewBox%3D%220%200%20128%20128%22%20version%3D%221.1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20style%3D%22background%3Argba(0%2C0%2C0%2C0.5)%3Bfill%3Argba(255%2C255%2C255%2C0.8)%3Bfont-family%3AMeiryo%3Bfont-size%3A30px%3Bline-height%3A30px%22%3E%3Ctext%20text-anchor%3D%22middle%22%20dominant-baseline%3D%22middle%22%20transform%3D%22rotate(-45%2C64%2C64)%22%3E%3Ctspan%20x%3D%2264%22%20y%3D%2264%22%20dy%3D%22-0.5em%22%20alignment-baseline%3D%22middle%22%3E%E5%89%8A%E9%99%A4%E3%81%97%3C%2Ftspan%3E%3Ctspan%20x%3D%2264%22%20y%3D%2264%22%20dy%3D%220.5em%22%20alignment-baseline%3D%22middle%22%3E%E3%81%BE%E3%81%97%E3%81%9F%3C%2Ftspan%3E%3C%2Ftext%3E%3C%2Fsvg%3E")
 }
-.col.playlog-info-right {
+.row .col.playlog-info-right {
   margin-left: 10px;
   width: calc(100% - 138px)
 }
@@ -271,6 +270,9 @@
   padding:5px 10px;
   display:inline;
   color:black
+}
+.ranking-score-btn {
+  float:left;
 }
 </style>
 

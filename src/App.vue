@@ -153,6 +153,11 @@ div.card.lvl-exp .level-icon {background-position-y:-45px}
 div.card.lvl-mas .level-icon {background-position-y:-60px}
 div.card.lvl-rem .level-icon {background-position-y:-75px}
 div.card.lvl-utage .level-icon {background:none}
+
+.narrow-column {
+  max-width:400px;
+  margin:0 auto
+}
 </style>
 
 <script>
