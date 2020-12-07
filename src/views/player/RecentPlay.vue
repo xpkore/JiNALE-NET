@@ -38,7 +38,7 @@
                 <span>
                   <span>Track {{item.track.toString().padStart(2, 0)}}</span>
                   <span class="level-icon"></span>
-                  <span>{{getLevelDifficulty(item)}}</span>
+                  <span>Lv.{{getLevelDifficulty(item)}}</span>
                   <span v-if="item.challenge_life > 0" style="font-size:14px">{{$t(item.is_challenge_track === 'true' ? 'challenge' : 'survival')}}</span>
                 </span>
                 <span class="hoveritem right-align">

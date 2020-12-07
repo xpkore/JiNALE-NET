@@ -14,7 +14,7 @@
           <div class="row music-info">
             <div class="music-jacket" :class="{'music-deleted':isMusicDeleted(music_id)}"><img :src="getMusicJacketUrl(music_id)"></div>
             <div class="col s7 music-info-right">
-              <div>{{$t('Constant')}}{{getMusicLevelConstant(music_id, level)}}</div>
+              <div>{{$t('Constant')}}{{getMusicLevelConstant(music_id, level).toFixed(1)}}</div>
               <div>{{charter ? $t('Charter') : ''}}{{charter}}</div>
             </div>
           </div>
