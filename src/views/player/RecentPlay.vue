@@ -38,6 +38,7 @@
                 <span>
                   <span>Track {{item.track.toString().padStart(2, 0)}}</span>
                   <span class="level-icon"></span>
+                  <span>{{getLevelDifficulty(item)}}</span>
                   <span v-if="item.challenge_life > 0" style="font-size:14px">{{$t(item.is_challenge_track === 'true' ? 'challenge' : 'survival')}}</span>
                 </span>
                 <span class="hoveritem right-align">
@@ -277,7 +278,7 @@
 import { getShopName } from '@/components/shopUtils'
 import { standardizeDate, dateToLocalStr } from '@/components/dateUtils'
 import { checkTokenValidity, fetchWithPostBody } from '@/components/accUtils'
-import { getMusicName, getMusicJacketUrl, isMusicDeleted } from '@/components/musicUtils.js'
+import { getMusicName, getMusicJacketUrl, isMusicDeleted, getMusicLevelConstant } from '@/components/musicUtils.js'
 import PlayerNavBar from '@/components/PlayerNavBar'
 
 export default {
@@ -465,6 +466,19 @@ export default {
       if (lvl === 5) return 'lvl-mas'
       if (lvl === 6) return 'lvl-rem'
       return 'lvl-utage'
+    },
+    getLevelDifficulty (item) {
+      if (item.level < 1 || item.level > 6) return ''
+      const constant = getMusicLevelConstant(item.music_id, item.level)
+      if (constant === 0) return '?'
+      const lvlBase = Math.floor(constant).toString()
+      const constantMul = constant * 10
+      if (constantMul < 130) {
+        if ((constantMul % 10) < 7) return lvlBase
+        return `${lvlBase}+`
+      }
+      if ((constantMul % 10) < 9) return lvlBase
+      return `${lvlBase}+`
     },
     paginationInput (e) {
       if (e.keyCode === 13) {
