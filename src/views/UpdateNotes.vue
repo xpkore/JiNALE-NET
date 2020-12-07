@@ -31,8 +31,13 @@ export default {
   data: () => ({
     updateNotes: {"en":[
       [
+        '2020/12/07', [
+          'Added score ranking page'
+        ]
+      ],
+      [
         '2020/12/05', [
-          'Improve recent plays page with pagination and icons'
+          'Improved recent plays page with pagination and icons'
         ]
       ],
       [
@@ -71,6 +76,11 @@ export default {
         ]
       ]
     ], "zh":[
+      [
+        '2020/12/07', [
+          '添加单曲榜页面'
+        ]
+      ],
       [
         '2020/12/05', [
           '最近游玩改进，添加翻页及图标'
