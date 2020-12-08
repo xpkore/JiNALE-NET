@@ -21,6 +21,7 @@
           </div>
         </div>
       </div>
+      <PlayerScoreBox :music-id="music_id" :levels="[level]"></PlayerScoreBox>
       <hr>
       <div class="score-ranking">
         <h5>{{ $t('score_ranking') }}</h5>
@@ -110,7 +111,7 @@
 .score-rank-item.player-rank .score-rank-name {
   color: rgb(255,174,0)
 }
-.result-icon-none {
+.score-rank-item .result-icon-none {
   display: none
 }
 </style>
@@ -121,10 +122,12 @@ import { standardizeDate, dateToLocalStr } from '@/components/dateUtils'
 import { checkTokenValidity, fetchWithPostBody } from '@/components/accUtils'
 import { getMusicName, getMusicArtist, getMusicJacketUrl, isMusicDeleted, getMusicLevelConstant, getMusicLevelCharter } from '@/components/musicUtils.js'
 import PlayerNavBar from '@/components/PlayerNavBar'
+import PlayerScoreBox from '@/components/PlayerScoreBox'
 
 export default {
   components: {
-    PlayerNavBar
+    PlayerNavBar,
+    PlayerScoreBox
   },
   data: () => ({
     rankingLoaded: false,
