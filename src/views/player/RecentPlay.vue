@@ -72,6 +72,7 @@
                     <div class="detail-toggle-box" @click="toggleDetail(item.user_play_date)">{{$t(showDetailScore === item.user_play_date ? 'hide_detail' : 'show_detail')}}</div>
                   </div>
                 </div>
+                <div class="shop-name">{{getShopName(item.place_name)}}</div>
                 <div class="detail-box" :class="{show:showAllDetailScore || showDetailScore === item.user_play_date}">
                   <div class="flex flex-row flex-2 center-align" v-if="item.judge_style !== 0 || item.challenge_life > 0">
                     <span>{{item.judge_style ? $t('judge_style') + ['','マジ','ガチ','ゴリ'][item.judge_style] : ''}}</span>
@@ -278,6 +279,10 @@
 .level-text {
   padding-right:10px
 }
+.playlog-item .shop-name {
+  clear:both;
+  color:gray
+}
 </style>
 
 <script>
@@ -357,6 +362,7 @@ export default {
         }
       })
     },
+    getShopName,
     getMusicName,
     getMusicJacketUrl,
     isMusicDeleted,

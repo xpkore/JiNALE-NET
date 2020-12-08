@@ -13,5 +13,6 @@ const keychips = JSON.parse('{"A72E1145141":"滑稽家(基板)","A72E39C7585":"�
  * @return {string} shop name
  */
 export function getShopName (keychip) {
+  if (keychip.length !== 11) return ''
   return keychips[keychip] || '未知店铺'
 }
