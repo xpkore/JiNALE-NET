@@ -31,6 +31,12 @@ export default {
   data: () => ({
     updateNotes: {"en":[
       [
+        '2020/12/08', [
+          'Added score info box in ranking page',
+          'Added shop name in playlog (not all log have shop info)'
+        ]
+      ],
+      [
         '2020/12/07', [
           'Added score ranking page'
         ]
@@ -76,6 +82,12 @@ export default {
         ]
       ]
     ], "zh":[
+      [
+        '2020/12/08', [
+          '单曲榜页面添加分数记录',
+          '游玩记录内添加店铺名（较旧数据无店铺信息）'
+        ]
+      ],
       [
         '2020/12/07', [
           '添加单曲榜页面'
