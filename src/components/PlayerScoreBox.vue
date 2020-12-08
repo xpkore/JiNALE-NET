@@ -139,7 +139,7 @@ export default {
             scoreMax: r[col.score_max],
             syncRateMax: r[col.sync_rate_max],
             maxFever: r[col.max_fever],
-            fcap: r[col.is_all_perfect_plus] === 'true' ? 4 : r[col.is_all_perfect] ? 3 : r[col.full_combo],
+            fcap: r[col.is_all_perfect_plus] ? 4 : r[col.is_all_perfect] === 'true' ? 3 : r[col.full_combo],
           }
         })
         this.$store.commit('setPlayerScores', playerScores)
