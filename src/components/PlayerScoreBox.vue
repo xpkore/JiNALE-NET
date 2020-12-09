@@ -73,7 +73,11 @@
   font-size: 25px;
 }
 .player-score-box-achievement,.player-score-box-score {
-  width: calc((100% - 180px) / 2)
+  width: calc((100% - 180px) / 2);
+  text-align:right
+}
+.player-score-box-score {
+  padding-right: 10px
 }
 .player-score-box-count-box {
   padding:0 10px 10px
