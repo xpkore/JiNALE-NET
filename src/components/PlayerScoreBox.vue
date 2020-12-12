@@ -100,11 +100,12 @@ export default {
   computed: {
     levelsData () {
       return this.levels.map(level => {
-        const lvlData = this.$store.state.playerScores[this.musicId][level]
-        if (!lvlData) return {
+        const playerScore = this.$store.state.playerScores
+        if (!playerScores[this.musicId] || !playerScores[this.musicId][level]) return {
           level,
           data: null
         }
+        const lvlData = playerScores[this.musicId][level]
         return {
           level,
           data: lvlData
@@ -125,7 +126,6 @@ export default {
         const playerScoresJson = await fetch(this.$store.state.endpoint + '/PlayerScore', {
           headers: authHeader()
         }).then(checkTokenValidity.bind(this))
-        //console.log(playerScoresJson)
         if (playerScoresJson.code !== 0) {
           this.playerScoreLoadFailed = true
           this.playerScoreLoaded = true
