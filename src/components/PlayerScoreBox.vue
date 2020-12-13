@@ -100,7 +100,7 @@ export default {
   computed: {
     levelsData () {
       return this.levels.map(level => {
-        const playerScore = this.$store.state.playerScores
+        const playerScores = this.$store.state.playerScores
         if (!playerScores[this.musicId] || !playerScores[this.musicId][level]) return {
           level,
           data: null
