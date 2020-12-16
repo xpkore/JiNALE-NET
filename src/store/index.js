@@ -43,6 +43,12 @@ export default new Vuex.Store({
     setPlayerScores (state, ps) {
       state.playerScores = ps
     },
+    saveOptions (state, data) {
+      if (!state.loggedIn) return
+      for (let k in data) {
+        state.loginInfo.user_data[k] = data[k]
+      }
+    },
   },
   actions: {
   },

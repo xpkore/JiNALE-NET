@@ -13,6 +13,7 @@ import UserHome from '@/views/player/Home.vue'
 import TransferCard from '@/views/player/TransferCard.vue'
 import ChangeName from '@/views/player/ChangeName.vue'
 import RecentPlay from '@/views/player/RecentPlay.vue'
+import Option from '@/views/player/Option.vue'
 
 import RankingScore from '@/views/ranking/Score.vue'
 
@@ -69,6 +70,11 @@ const routes = [
     path: '/player/recent_play',
     name: 'RecentPlay',
     component: RecentPlay
+  },
+  {
+    path: '/player/option',
+    name: 'Option',
+    component: Option
   },
 
   {

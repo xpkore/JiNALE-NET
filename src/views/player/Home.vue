@@ -9,7 +9,10 @@
       <div class="card-stacked">
         <div class="card-content user-info-card">
           <h6 class="user-name">{{ loginInfo.user_data.user_name }}</h6>
-          <div><router-link to="/player/change_name">{{ $t('change_name_btn') }}</router-link></div>
+          <div class="flex flex-row flex-2">
+            <router-link to="/player/change_name">{{ $t('change_name_btn') }}</router-link>
+            <router-link to="/player/option">{{ $t('option_btn') }}</router-link>
+          </div>
           <p class="card-no">
             <span v-if="showCardNo">{{ loginInfo.card.id.replace(/(.{4})(.{4})(.{4})(.{4})(.{4})/, '$1-$2-$3-$4-$5') }}</span>
             <span v-else>{{ loginInfo.card.id.replace(/(.{4})(.{4})(.{4})(.{4})(.{4})/, '$1-$2-****-****-$5') }}</span>
@@ -84,6 +87,7 @@
   "en": {
     "title": "Player Home",
     "change_name_btn": "Change player name",
+    "option_btn": "Game options",
     "show_cardno_label": "Show Card NO",
     "play_count": "Play count",
     "cheese": "Cheese",
@@ -102,6 +106,7 @@
   "zh": {
     "title": "玩家首页",
     "change_name_btn": "变更玩家名",
+    "option_btn": "游戏设定",
     "show_cardno_label": "显示卡号",
     "play_count": "总游玩次数",
     "cheese": "奶酪",
