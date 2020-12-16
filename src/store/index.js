@@ -14,6 +14,9 @@ export default new Vuex.Store({
   mutations: {
     updateLoginInfo (state, data) {
       if (data && data.uid) {
+        for (let k in data.user_data) {
+          data.user_data[k] = data.user_data[k].toString()
+        }
         state.loggedIn = true
         state.loginInfo = data
       } else {
