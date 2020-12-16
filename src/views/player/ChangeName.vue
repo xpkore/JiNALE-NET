@@ -27,7 +27,7 @@
     "title": "Change player name",
     "label_1": "New player name",
     "label_2": "Player name can include up to 8 full-width / half-width alphabets, numbers or symbols listed below",
-    "btn_1":"Transfer",
+    "btn_1":"Change Name",
     "msg_1":"Change name failed",
     "msg_2":"Player name updated",
     "msg_3":"Unknown error occured",
