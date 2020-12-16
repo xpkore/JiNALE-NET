@@ -32,7 +32,7 @@ export default new Vuex.Store({
     dailyBonus (state) {
       if (state.loggedIn) {
         state.loginInfo.have_daily_bonus = false
-        state.loginInfo.user_data.event_point += 10
+        state.loginInfo.user_data.event_point = (state.loginInfo.user_data.event_point|0) + 10
       }
     },
     updatePlayerName (state, newName) {
