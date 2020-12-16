@@ -67,9 +67,9 @@
                     <div class="result-icon" :class="getResultIconClass(item)"></div>
                     <div class="result-icon" :class="getMultiIconClass(item)"></div>
                   </div>
-                  <div class="right-align" v-show="!showAllDetailScore">
+                  <div class="right-align">
                     <router-link :to="`/ranking/score?music_id=${item.music_id}&level=${item.level}`" class="ranking-score-btn">{{$t('Ranking')}}</router-link>
-                    <div class="detail-toggle-box" @click="toggleDetail(item.user_play_date)">{{$t(showDetailScore === item.user_play_date ? 'hide_detail' : 'show_detail')}}</div>
+                    <div class="detail-toggle-box" v-show="!showAllDetailScore" @click="toggleDetail(item.user_play_date)">{{$t(showDetailScore === item.user_play_date ? 'hide_detail' : 'show_detail')}}</div>
                   </div>
                 </div>
                 <div class="shop-name">{{getShopName(item.place_name)}}</div>
