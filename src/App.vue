@@ -21,6 +21,9 @@
       <p>
         <a href="https://github.com/esterTion/jinale-net/" target="_blank">GitHub</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="http://web.jinale.com/tools/jinale.apk" target="_blank">安卓app</a> Via: bbs_jy (功能更新晚于网站)
       </p>
+      <p v-if="buildHash !== '{build_hash}'">
+        {{buildHash}}, built on {{buildDate}}
+      </p>
       <p>
         <a href="http://maimai.best/" target="_blank" style="margin-right:10px"
 title="「所以你们maimai.best啥时候上线.jpg」
@@ -168,7 +171,10 @@ export default {
   data: () => ({
     initialized: false,
     notAtUpdateNotes: true,
-    colorScheme: 'auto'
+    colorScheme: 'auto',
+
+    buildHash: '{build_hash}',
+    buildDate: '{build_date}'
   }),
   mounted: function () {
     if (localStorage.colorScheme) {
@@ -201,6 +207,9 @@ export default {
     this.$router.afterEach(() => {
       this.notAtUpdateNotes = location.pathname !== '/update_notes'
     })
+
+    this.buildHash = document.querySelector('meta[name=build-hash]').getAttribute('content')
+    this.buildDate = document.querySelector('meta[name=build-date]').getAttribute('content')
   },
   methods: {
     colorSchemeChanged () {
