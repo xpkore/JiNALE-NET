@@ -14,11 +14,6 @@ export default new Vuex.Store({
   mutations: {
     updateLoginInfo (state, data) {
       if (data && data.uid) {
-        for (let k in data.user_data) {
-          if (data.user_data[k] !== null) {
-            data.user_data[k] = data.user_data[k].toString()
-          }
-        }
         state.loggedIn = true
         state.loginInfo = data
       } else {
@@ -34,7 +29,7 @@ export default new Vuex.Store({
     dailyBonus (state) {
       if (state.loggedIn) {
         state.loginInfo.have_daily_bonus = false
-        state.loginInfo.user_data.event_point = (state.loginInfo.user_data.event_point|0) + 10
+        state.loginInfo.user_data.event_point += 10
       }
     },
     updatePlayerName (state, newName) {

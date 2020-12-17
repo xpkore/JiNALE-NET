@@ -103,10 +103,10 @@ export default {
   }),
   mounted () {
     const userData = this.$store.state.loginInfo.user_data
-    this.disp_rate = userData.disp_rate === '1'
+    this.disp_rate = userData.disp_rate === 1
     this.disp_judge_style = userData.disp_judge_style
-    this.disp_rank = userData.disp_rank === '1'
-    this.disp_total_lv = userData.disp_total_lv === '1'
+    this.disp_rank = userData.disp_rank === 1
+    this.disp_total_lv = userData.disp_total_lv === 1
     document.getElementById('disp_judge_style').options[this.disp_judge_style].setAttribute('selected', '')
 
     M.FormSelect.init(document.querySelectorAll('select'))
