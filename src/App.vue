@@ -22,7 +22,7 @@
         <a href="https://github.com/esterTion/jinale-net/" target="_blank">GitHub</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="http://web.jinale.com/tools/jinale.apk" target="_blank">安卓app</a> Via: bbs_jy (功能更新晚于网站)
       </p>
       <p v-if="buildHash !== '{build_hash}'">
-        {{buildHash}}, built on {{buildDate}}
+        build {{buildHash}}, built on {{buildDate}}
       </p>
       <p>
         <a href="http://maimai.best/" target="_blank" style="margin-right:10px"
