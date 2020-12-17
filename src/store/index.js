@@ -15,7 +15,9 @@ export default new Vuex.Store({
     updateLoginInfo (state, data) {
       if (data && data.uid) {
         for (let k in data.user_data) {
-          data.user_data[k] = data.user_data[k].toString()
+          if (data.user_data[k] !== null) {
+            data.user_data[k] = data.user_data[k].toString()
+          }
         }
         state.loggedIn = true
         state.loginInfo = data
