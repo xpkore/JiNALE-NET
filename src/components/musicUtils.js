@@ -122,7 +122,7 @@ export async function initMusicInfo () {
   if (musicInfos) return
   let musicDataVer
   try {
-    musicDataVer = await fetch('https://n.bzxyzt.cn/cors_resources/musicData.json').then(r => r.json())
+    musicDataVer = await fetch('https://n.bzxyzt.cn/cors_resources/musicData.json?prevent_cache='+Data.now()).then(r => r.json())
   } catch (e) {
     if (localStorage.musicDataCsv && localStorage.musicDataVer) {
       musicDataVer = { ver: localStorage.musicDataVer }
