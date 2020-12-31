@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    endpoint: process.env.NODE_ENV === 'production' ? 'https://n.bzxyzt.cn/api' : location.origin.replace(/:\d+/, ':9989/api'),
+    endpoint: process.env.VUE_APP_BASE_API,
     loggedIn: false,
     loginInfo: null,
     playlogResponse: null,

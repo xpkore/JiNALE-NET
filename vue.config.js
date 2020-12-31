@@ -58,5 +58,16 @@ module.exports = {
       localeDir: 'locales',
       enableInSFC: true
     }
+  },
+
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'https://n.bzxyzt.cn/api',
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
+    }
   }
 }

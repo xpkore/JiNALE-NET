@@ -46,6 +46,10 @@
       <a v-if="cheeseCount < 1000" class="col s5 m3 waves-effect waves-light btn small-btn-text" :class="{disabled:(!haveDailyBonus || this.fetchingDailyBonus)}" @click="getDailyBonus">{{ haveDailyBonus ? $t('daily_bonus') : $t('daily_bonus_got')}}</a>
       <span v-else class="col s5 m3 center">{{ $t('no_daily_bonus') }}</span>
     </div>
+    <div class="row">
+      <div class="col s0 m2"></div>
+      <a target="_blank" :href="'http://mai.moegrid.com?card=' + loginInfo.card.id" class="col s11 m8 waves-effect waves-light btn">{{ $t('statistics') }}</a>
+    </div>
     <div class="music-ranking">
       <h5>{{ $t('music_ranking') }}</h5>
       <label v-if="rankingDate">{{ $t('music_ranking_updated_at') }} {{ rankingDate }}</label>
@@ -101,7 +105,8 @@
     "music_ranking_failed": "Failed loading rank data",
     "retry": "Retry",
     "change_pwd": "Change password",
-    "logout": "Log out"
+    "logout": "Log out",
+    "statistics": "Annual report"
   },
   "zh": {
     "title": "玩家首页",
@@ -120,7 +125,8 @@
     "music_ranking_failed": "获取排行榜失败",
     "retry": "重试",
     "change_pwd": "修改密码",
-    "logout": "退出登录"
+    "logout": "退出登录",
+    "statistics": "年度报告"
   }
 }
 </i18n>
