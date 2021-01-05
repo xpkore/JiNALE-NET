@@ -46,7 +46,7 @@
       <a v-if="cheeseCount < 1000" class="col s5 m3 waves-effect waves-light btn small-btn-text" :class="{disabled:(!haveDailyBonus || this.fetchingDailyBonus)}" @click="getDailyBonus">{{ haveDailyBonus ? $t('daily_bonus') : $t('daily_bonus_got')}}</a>
       <span v-else class="col s5 m3 center">{{ $t('no_daily_bonus') }}</span>
     </div>
-    <div class="row">
+    <div class="row" v-show="false">
       <div class="col s0 m2"></div>
       <a target="_blank" :href="'http://mai.moegrid.com?card=' + loginInfo.card.id" class="col s11 m8 waves-effect waves-light btn">{{ $t('statistics') }}</a>
     </div>
@@ -65,10 +65,11 @@
           <div class="valign-wrapper rank-music-item" :class="`rank-${rankRelativePosition(item)}`" :key="`div-${item.or}`">
             <div class="rank-music-order" :class="`rank-${item.or}`">{{ item.or }}</div>
             <div class="rank-music-jacket"><img :src="getMusicJacketUrl(item.id)"></div>
-            <div class="rank-music-name">{{ getMusicName(item.id) }}</div>
+            <div class="rank-music-name">{{ item.hideOnCab?'※ ':'' }}{{ getMusicName(item.id) }}</div>
             <div class="rank-music-prev">{{ item.prev }}</div>
           </div>
         </template>
+        <div class="input-field"><span class="helper-text">※ {{ $t('hide_on_cab') }}</span></div>
       </div>
     </div>
     <div class="row center">
@@ -106,7 +107,8 @@
     "retry": "Retry",
     "change_pwd": "Change password",
     "logout": "Log out",
-    "statistics": "Annual report"
+    "statistics": "Annual report",
+    "hide_on_cab": "Will not show on cab"
   },
   "zh": {
     "title": "玩家首页",
@@ -126,7 +128,8 @@
     "retry": "重试",
     "change_pwd": "修改密码",
     "logout": "退出登录",
-    "statistics": "年度报告"
+    "statistics": "年度报告",
+    "hide_on_cab": "不会在机台上展示"
   }
 }
 </i18n>
@@ -254,7 +257,7 @@ export default {
         } else {
           const prevIndex = d['2'].map(i => i.id)
           let order = 1
-          const rankingData = d['1'].map(i => ({ or: order++, id: i.id, prev: prevIndex.indexOf(i.id) + 1 }))
+          const rankingData = d['1'].map(i => ({ or: order++, id: i.id, prev: prevIndex.indexOf(i.id) + 1, hideOnCab: i.hideOnCab || [799,803,812,820,825,833,834].indexOf(i.id) !== -1 }))
           this.rankingData = rankingData
           this.rankingDate = d.updated
         }
