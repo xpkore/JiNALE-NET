@@ -2,6 +2,7 @@
   <div>
     <h3>{{ $t('title') }}</h3>
     <PlayerNavBar></PlayerNavBar>
+    <ScoreSubNavBar></ScoreSubNavBar>
     <div class="recent-plays narrow-column">
       <form class="right-align">
         <p>
@@ -47,7 +48,7 @@
                 </span>
               </div>
               <div class="score-rank">{{item._rank}}</div>
-              <div class="music-name">{{ getMusicName(item.music_id) }}</div>
+              <div class="music-name text-overflow-hide">{{ getMusicName(item.music_id) }}</div>
               <div class="row playlog-info">
                 <div class="music-jacket" :class="{'music-deleted':isMusicDeleted(item.music_id)}"><img :_src="getMusicJacketUrl(item.music_id)" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="></div>
                 <div class="col s7 playlog-info-right">
@@ -185,8 +186,6 @@
 }
 .music-name {
 	padding: 10px;
-	overflow: hidden;
-	text-overflow: ellipsis;
 }
 .music-jacket {
   float:left;
@@ -291,10 +290,12 @@ import { standardizeDate, dateToLocalStr } from '@/components/dateUtils'
 import { checkTokenValidity, fetchWithPostBody } from '@/components/accUtils'
 import { getMusicName, getMusicJacketUrl, isMusicDeleted, getMusicLevelConstant } from '@/components/musicUtils.js'
 import PlayerNavBar from '@/components/PlayerNavBar'
+import ScoreSubNavBar from '@/components/ScoreSubNavBar'
 
 export default {
   components: {
-    PlayerNavBar
+    PlayerNavBar,
+    ScoreSubNavBar
   },
   data: () => ({
     playlogLoaded: false,

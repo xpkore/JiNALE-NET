@@ -113,7 +113,6 @@ function parseMusicInfoCsv () {
       musicInfo[cols[i]] = numCols.indexOf(cols[i]) !== -1 ? parseNumValue(vals[i]) : vals[i]
     }
     const musicId = musicInfo.id
-    delete musicInfo.id
     musicInfos[musicId] = musicInfo
   })
 }
@@ -148,3 +147,40 @@ function img_lazyload (){
 window.addEventListener("scroll", img_lazyload)
 window.addEventListener("resize", img_lazyload)
 window.addEventListener("trigger-lazyload", img_lazyload)
+
+
+/**
+ * 
+ * @param {Object} filter - filter config
+ * @param {number} [filter.genre=0] - filter for genre
+ * @param {boolean} [filter.default=false] - filter default songs
+ * @param {boolean} [filter.deleted=false] - filter deleted songs
+ * @param {boolean} [filter.fanmade=false] - filter fanmade songs
+ * @param {boolean} [filter.dxTransform=false] - filter songs with dx transformed chart
+ * @param {boolean} [filter.utage=false] - filter songs with utage charts
+ * @return {Array} filtered music list
+ */
+export function getMusicList (filter) {
+  filter = Object.assign({
+    genre: 0,
+    default: false,
+    deleted: false,
+    fanmade: false,
+    dxTransform: false,
+    utage: false,
+  }, filter)
+
+  const list = Object.values(musicInfos).filter(i => {
+    if (filter.genre !== 0 && i.genre !== filter.genre) return false
+
+    if (filter.utage && i.genre === 16) return true
+    else if (!filter.utage && i.genre === 16) return false
+
+    if (i.deleted) { if (filter.deleted) return true }
+    else if (i.fanmade && filter.fanmade) return true
+    else if (i.dx_transform && filter.dxTransform) return true
+    else if (i.id <= 852 && filter.default) return true
+    return false
+  })
+  return list
+}

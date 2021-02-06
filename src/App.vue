@@ -101,6 +101,7 @@ footer {
   [color-scheme=auto] .input-field .helper-text {
     color: rgba(255,255,255,.54)
   }
+  [color-scheme=auto] .level-icon {filter:brightness(0.8)}
 }
 
 [color-scheme=dark],[color-scheme=dark] body {background:black;color:#DDD}
@@ -123,6 +124,7 @@ input:not([type]):disabled + label, [color-scheme=dark] input:not([type])[readon
 [color-scheme=dark] .input-field .helper-text {
   color: rgba(255,255,255,.54)
 }
+[color-scheme=dark] .level-icon {filter:brightness(0.8)}
 
 .result-icon {
   background-image:url('https://n.bzxyzt.cn/assets/icon_result.png');
@@ -149,17 +151,34 @@ input:not([type]):disabled + label, [color-scheme=dark] input:not([type])[readon
   width:60px;
   vertical-align: middle;
 }
-div.card.lvl-eas .level-icon {background-position-y:0}
-div.card.lvl-bas .level-icon {background-position-y:-15px}
-div.card.lvl-adv .level-icon {background-position-y:-30px}
-div.card.lvl-exp .level-icon {background-position-y:-45px}
-div.card.lvl-mas .level-icon {background-position-y:-60px}
-div.card.lvl-rem .level-icon {background-position-y:-75px}
-div.card.lvl-utage .level-icon {background:none}
+div.lvl-eas .level-icon {background-position-y:0}
+div.lvl-bas .level-icon {background-position-y:-15px}
+div.lvl-adv .level-icon {background-position-y:-30px}
+div.lvl-exp .level-icon {background-position-y:-45px}
+div.lvl-mas .level-icon {background-position-y:-60px}
+div.lvl-rem .level-icon {background-position-y:-75px}
+div.lvl-utage  {background:none}
 
 .narrow-column {
   max-width:400px;
   margin:0 auto
+}
+
+.nav-item-row {
+  border: gray solid;
+  border-width: 1px 0;
+}
+.nav-item {
+  margin-top:10px;
+  margin-bottom:10px;
+}
+.nav-item:not(:first-of-type) {
+  border-left: gray 1px solid;
+}
+.text-overflow-hide {
+	overflow: hidden;
+	text-overflow: ellipsis;
+  white-space: pre;
 }
 </style>
 

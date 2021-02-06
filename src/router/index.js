@@ -14,6 +14,7 @@ import TransferCard from '@/views/player/TransferCard.vue'
 import ChangeName from '@/views/player/ChangeName.vue'
 import RecentPlay from '@/views/player/RecentPlay.vue'
 import Option from '@/views/player/Option.vue'
+import MusicList from '@/views/player/MusicList.vue'
 
 import RankingScore from '@/views/ranking/Score.vue'
 
@@ -75,6 +76,11 @@ const routes = [
     path: '/player/option',
     name: 'Option',
     component: Option
+  },
+  {
+    path: '/player/music_list',
+    name: 'MusicList',
+    component: MusicList
   },
 
   {

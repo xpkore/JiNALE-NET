@@ -17,28 +17,17 @@
 {
   "en": {
     "home": "Home",
-    "recent": "Recents"
+    "recent": "Scores"
   },
   "zh": {
     "home": "首页",
-    "recent": "游玩记录"
+    "recent": "我的记录"
   }
 }
 </i18n>
 
 <style scoped>
 a {color:inherit}
-.nav-item-row {
-  border: gray solid;
-  border-width: 1px 0;
-}
-.nav-item {
-  margin-top:10px;
-  margin-bottom:10px;
-}
-.nav-item:not(:first-of-type) {
-  border-left: gray 1px solid;
-}
 .nav-bar-icon {
   height:64px;
   width: 64px;
