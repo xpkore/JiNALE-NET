@@ -9,7 +9,8 @@ export default new Vuex.Store({
     loggedIn: false,
     loginInfo: null,
     playlogResponse: null,
-    playerScores: null
+    playerScores: null,
+    musicListTypeSelection: 'default',
   },
   mutations: {
     updateLoginInfo (state, data) {
@@ -48,6 +49,9 @@ export default new Vuex.Store({
       for (let k in data) {
         state.loginInfo.user_data[k] = data[k]
       }
+    },
+    updateMusicListTypeSelection (state, type) {
+      state.musicListTypeSelection = type
     },
   },
   actions: {
