@@ -31,6 +31,11 @@ export default {
   data: () => ({
     updateNotes: {"en":[
       [
+        '2021/02/06', [
+          'Added music list'
+        ]
+      ],
+      [
         '2020/12/16', [
           'Added some game options'
         ]
@@ -87,6 +92,11 @@ export default {
         ]
       ]
     ], "zh":[
+      [
+        '2021/02/06', [
+          '添加歌曲列表'
+        ]
+      ],
       [
         '2020/12/16', [
           '添加部分游戏设定'
