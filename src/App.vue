@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <router-view v-if="initialized" />
+    <div v-if="initialized">
+      <keep-alive><router-view v-if="$route.meta.keepAlive" /></keep-alive>
+      <router-view v-if="!$route.meta.keepAlive" />
+    </div>
     <div v-else>
       <p>{{$t('initializing')}}</p>
     </div>

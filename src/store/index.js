@@ -8,9 +8,7 @@ export default new Vuex.Store({
     endpoint: process.env.VUE_APP_BASE_API,
     loggedIn: false,
     loginInfo: null,
-    playlogResponse: null,
-    playerScores: null,
-    musicListTypeSelection: 'default',
+    playerScores: null
   },
   mutations: {
     updateLoginInfo (state, data) {
@@ -38,9 +36,6 @@ export default new Vuex.Store({
         state.loginInfo.user_data.user_name = newName
       }
     },
-    savePlaylogResponse (state, r) {
-      state.playlogResponse = r
-    },
     setPlayerScores (state, ps) {
       state.playerScores = ps
     },
@@ -49,9 +44,6 @@ export default new Vuex.Store({
       for (let k in data) {
         state.loginInfo.user_data[k] = data[k]
       }
-    },
-    updateMusicListTypeSelection (state, type) {
-      state.musicListTypeSelection = type
     },
   },
   actions: {

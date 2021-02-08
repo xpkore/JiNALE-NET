@@ -70,7 +70,10 @@ const routes = [
   {
     path: '/player/recent_play',
     name: 'RecentPlay',
-    component: RecentPlay
+    component: RecentPlay,
+    meta: {
+      keepAlive: true
+    }
   },
   {
     path: '/player/option',
@@ -80,7 +83,10 @@ const routes = [
   {
     path: '/player/music_list',
     name: 'MusicList',
-    component: MusicList
+    component: MusicList,
+    meta: {
+      keepAlive: true
+    }
   },
 
   {

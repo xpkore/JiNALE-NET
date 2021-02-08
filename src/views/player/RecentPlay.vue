@@ -347,9 +347,6 @@ export default {
     },
     loadPlaylogData (page) {
       this.loadingPage = page
-      if (page == 0 && this.$store.state.playlogResponse) {
-        return Promise.resolve(this.$store.state.playlogResponse)
-      }
       return fetchWithPostBody(
         this.$store.state.endpoint + '/PlayerPlaylog',
         `page=${page}`
@@ -358,7 +355,6 @@ export default {
           this.playlogLoadFailed = true
           return null
         } else {
-          this.$store.commit('savePlaylogResponse', d)
           return d
         }
       })

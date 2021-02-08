@@ -5,15 +5,15 @@
     <ScoreSubNavBar></ScoreSubNavBar>
     <p class="flex flex-row flex-3 center-align">
       <label>
-        <input type="radio" name="filter-type" value="default" v-model="filterType" @change="updateTypeSelection" checked />
+        <input type="radio" name="filter-type" value="default" v-model="filterType" @change="fillList" checked />
         <span>{{ $t('filter-type-finale') }}</span>
       </label>
       <label>
-        <input type="radio" name="filter-type" value="fanmade" v-model="filterType" @change="updateTypeSelection" />
+        <input type="radio" name="filter-type" value="fanmade" v-model="filterType" @change="fillList" />
         <span>{{ $t('filter-type-fanmade') }}</span>
       </label>
       <label>
-        <input type="radio" name="filter-type" value="dxTransform" v-model="filterType" @change="updateTypeSelection" />
+        <input type="radio" name="filter-type" value="dxTransform" v-model="filterType" @change="fillList" />
         <span>{{ $t('filter-type-dx') }}</span>
       </label>
     </p>
@@ -111,22 +111,16 @@ export default {
     filterType: "default"
   }),
   mounted () {
-    this.filterType = this.$store.state.musicListTypeSelection
     this.fillList()
   },
   methods: {
     isMusicDeleted,
     getMusicJacketUrl,
-    updateTypeSelection () {
-      this.$store.commit('updateMusicListTypeSelection', this.filterType)
-      this.fillList()
-    },
     fillList () {
-      const filterType = this.$store.state.musicListTypeSelection
       this.musicList = getMusicList({
-        default: filterType === "default",
-        fanmade: filterType === "fanmade",
-        dxTransform: filterType === "dxTransform"
+        default: this.filterType === "default",
+        fanmade: this.filterType === "fanmade",
+        dxTransform: this.filterType === "dxTransform"
       })
 
       setTimeout(() => {
