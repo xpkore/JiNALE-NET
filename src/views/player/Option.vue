@@ -52,7 +52,7 @@
   "zh": {
     "title": "游戏设置",
     "label_1": "显示rating",
-    "label_2": "严判",
+    "label_2": "显示严判开关",
     "label_3": "禁用",
     "label_4": "开启，不计入ra",
     "label_5": "开启，计入ra",
