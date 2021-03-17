@@ -66,10 +66,11 @@
             <div class="rank-music-order" :class="`rank-${item.or}`">{{ item.or }}</div>
             <div class="rank-music-jacket"><img :src="getMusicJacketUrl(item.id)"></div>
             <div class="rank-music-name">{{ item.hideOnCab?'※ ':'' }}{{ getMusicName(item.id) }}</div>
-            <div class="rank-music-prev">{{ item.prev }}</div>
+            <div class="rank-music-prev">{{ item.prev }}<div class="rank-music-point">{{ item.point }}pt</div></div>
           </div>
         </template>
         <div class="input-field"><span class="helper-text">※ {{ $t('hide_on_cab') }}</span></div>
+        <div class="input-field"><span class="helper-text">{{ $t('ranking_point_explain') }}</span></div>
       </div>
     </div>
     <div class="row center">
@@ -108,7 +109,8 @@
     "change_pwd": "Change password",
     "logout": "Log out",
     "statistics": "Annual report",
-    "hide_on_cab": "Will not show on cab"
+    "hide_on_cab": "Will not show on cab",
+    "ranking_point_explain": "Ranking points are calculated base on weighted play counts from last week"
   },
   "zh": {
     "title": "玩家首页",
@@ -129,7 +131,8 @@
     "change_pwd": "修改密码",
     "logout": "退出登录",
     "statistics": "年度报告",
-    "hide_on_cab": "不会在机台上展示"
+    "hide_on_cab": "不会在机台上展示",
+    "ranking_point_explain": "排名分数由过去一周内的游玩次数加权计算而来"
   }
 }
 </i18n>
@@ -173,15 +176,19 @@
 }
 .rank-music-prev {
   line-height:20px;
-  margin-top:60px;
+  margin-top:40px;
   width:40px;
   text-align: center;
   color: gray;
 }
+.rank-music-point {
+  font-size: 11px;
+  line-height: 10px;
+}
 .rank-music-item:after {
   content: "";
   position: absolute;
-  top: 20px;
+  top: 8px;
   right: 0;
   height: 40px;
   width: 40px;
@@ -257,7 +264,7 @@ export default {
         } else {
           const prevIndex = d['2'].map(i => i.id)
           let order = 1
-          const rankingData = d['1'].map(i => ({ or: order++, id: i.id, prev: prevIndex.indexOf(i.id) + 1, hideOnCab: i.hideOnCab || [799,803,812,820,825,833,834].indexOf(i.id) !== -1 }))
+          const rankingData = d['1'].map(i => ({ or: order++, id: i.id, prev: prevIndex.indexOf(i.id) + 1, point: i.point, hideOnCab: i.hideOnCab || [799,803,812,820,825,833,834].indexOf(i.id) !== -1 }))
           this.rankingData = rankingData
           this.rankingDate = d.updated
         }
