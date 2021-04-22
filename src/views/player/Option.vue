@@ -38,7 +38,7 @@
   "en": {
     "title": "Game Options",
     "label_1": "Show rating",
-    "label_2": "Judge Style",
+    "label_2": "Strict judge timing",
     "label_3": "Disable",
     "label_4": "Enable, exclude from rating",
     "label_5": "Enable, include into rating",
