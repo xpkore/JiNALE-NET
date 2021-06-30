@@ -14,8 +14,7 @@
             <router-link to="/player/option">{{ $t('option_btn') }}</router-link>
           </div>
           <p class="card-no">
-            <span v-if="showCardNo">{{ loginInfo.card.id.replace(/(.{4})(.{4})(.{4})(.{4})(.{4})/, '$1-$2-$3-$4-$5') }}</span>
-            <span v-else>{{ loginInfo.card.id.replace(/(.{4})(.{4})(.{4})(.{4})(.{4})/, '$1-$2-****-****-$5') }}</span>
+            <span>{{ cardNoParts[1] }}<span class="card-no-dash"></span>{{ cardNoParts[2] }}<span class="card-no-dash"></span>{{ showCardNo ? cardNoParts[3] : '****' }}<span class="card-no-dash"></span>{{ showCardNo ? cardNoParts[4] : '****' }}<span class="card-no-dash"></span>{{ cardNoParts[5] }}</span>
           </p>
           <p class="show-card-no-toggle">
             <label>
@@ -197,6 +196,7 @@
 }
 .rank-music-item.rank-up:after { background-position: 0 80px; }
 .rank-music-item.rank-down:after { background-position: 0 160px; }
+.card-no-dash:before{content:"-"}
 </style>
 
 <script>
@@ -225,6 +225,9 @@ export default {
     // publicPath () { return process.env.BASE_URL },
     loginInfo () {
       return this.$store.state.loginInfo
+    },
+    cardNoParts () {
+      return this.loginInfo.card.id.match(/^(\d{4})(\d{4})(\d{4})(\d{4})(\d{4})$/)
     },
     lastShopName () {
       return getShopName(this.loginInfo.user_data.last_client_id)
