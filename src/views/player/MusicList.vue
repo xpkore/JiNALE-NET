@@ -17,6 +17,27 @@
         <span>{{ $t('filter-type-dx') }}</span>
       </label>
     </p>
+    <p class="flex flex-row flex-2 center-align">
+      <span>
+        <div class="input-field filter-select"><select id="filter-genre" v-model="filterGenre" @change="fillList">
+          <option value="4">{{$t('label_genre_4')}}</option>
+          <option value="5">{{$t('label_genre_5')}}</option>
+          <option value="6">{{$t('label_genre_6')}}</option>
+          <option value="7">{{$t('label_genre_7')}}</option>
+          <option value="8">{{$t('label_genre_8')}}</option>
+          <option value="9">{{$t('label_genre_9')}}</option>
+          <option value="0">{{$t('label_genre_0')}}</option>
+        </select>
+        <label>{{ $t('filter-type-genre') }}</label></div>
+      </span>
+      <span>
+        <div class="input-field filter-select"><select v-model="filterSort" @change="fillList">
+          <option value="1">{{$t('label_sort_1')}}</option>
+          <option value="11">{{$t('label_sort_11')}}</option>
+        </select>
+        <label>{{ $t('filter-type-sort') }}</label></div>
+      </span>
+    </p>
     <div class="narrow-column">
       <div v-for="item in musicList" :key="item.id" class="card music-item row">
         <div class="music-jacket" :class="{'music-deleted':isMusicDeleted(item.id)}"><img :_src="getMusicJacketUrl(item.id)" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWNgYGBgAAAABQABh6FO1AAAAABJRU5ErkJggg=="></div>
@@ -49,6 +70,17 @@
     "filter-type-finale": "FiNALE",
     "filter-type-fanmade": "Fanmade",
     "filter-type-dx": "From DX",
+    "label_genre_4": "Pops & Anime",
+    "label_genre_5": "Vocaloid",
+    "label_genre_6": "Touhou",
+    "label_genre_7": "SEGA",
+    "label_genre_8": "Variety",
+    "label_genre_9": "Original",
+    "label_genre_0": "All Musics",
+    "filter-type-genre": "Genre",
+    "label_sort_1": "Ascending (id)",
+    "label_sort_11": "Descending (id)",
+    "filter-type-sort" : "Sort order",
     "a": "z"
   },
   "zh": {
@@ -56,6 +88,17 @@
     "filter-type-finale": "FiNALE",
     "filter-type-fanmade": "创作谱面",
     "filter-type-dx": "DX转谱",
+    "label_genre_4": "流行&动漫",
+    "label_genre_5": "Vocaloid",
+    "label_genre_6": "东方",
+    "label_genre_7": "SEGA",
+    "label_genre_8": "其他游戏",
+    "label_genre_9": "原创",
+    "label_genre_0": "所有乐曲",
+    "filter-type-genre": "分类",
+    "label_sort_1": "升序 (id)",
+    "label_sort_11": "降序 (id)",
+    "filter-type-sort" : "排序",
     "a": "z"
   }
 }
@@ -94,12 +137,18 @@ a {
   width: 2em;
   display:inline-block;
 }
+.filter-select {
+  width: 150px;
+  text-align: center;
+  margin: 1rem auto;
+}
 </style>
 
 <script>
 import PlayerNavBar from '@/components/PlayerNavBar'
 import ScoreSubNavBar from '@/components/ScoreSubNavBar'
 import { getMusicName, getMusicJacketUrl, isMusicDeleted, getMusicLevelConstant, getMusicList } from '@/components/musicUtils.js'
+import M from 'materialize-css'
 
 export default {
   components: {
@@ -108,9 +157,12 @@ export default {
   },
   data: () => ({
     musicList: [],
-    filterType: "default"
+    filterType: "default",
+    filterGenre: "4",
+    filterSort: "11",
   }),
   mounted () {
+    M.FormSelect.init(document.querySelectorAll('select'))
     this.fillList()
   },
   methods: {
@@ -120,8 +172,12 @@ export default {
       this.musicList = getMusicList({
         default: this.filterType === "default",
         fanmade: this.filterType === "fanmade",
-        dxTransform: this.filterType === "dxTransform"
+        dxTransform: this.filterType === "dxTransform",
+        genre: parseInt(this.filterGenre)
       })
+      if (this.filterSort === '11') {
+        this.musicList = this.musicList.reverse()
+      }
 
       setTimeout(() => {
         window.dispatchEvent(new Event('trigger-timeago'))
