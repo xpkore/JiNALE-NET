@@ -63,7 +63,7 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        target: 'https://n.bzxyzt.cn/api',
+        target: 'https://web-api.jinale.com/api',
         pathRewrite: {
           '^/api': ''
         }

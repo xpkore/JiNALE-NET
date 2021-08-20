@@ -26,7 +26,7 @@ export function getMusicArtist (id) {
 export function getMusicJacketUrl (id) {
   if (id < 10) id = `00${id}`
   else if (id < 100) id = `0${id}`
-  return `https://n.bzxyzt.cn/assets/jacket/${id}.jpg`
+  return `https://web-api.jinale.com/assets/jacket/${id}.jpg`
 }
 
 /**
@@ -121,14 +121,14 @@ export async function initMusicInfo () {
   if (musicInfos) return
   let musicDataVer
   try {
-    musicDataVer = await fetch('https://n.bzxyzt.cn/cors_resources/musicData.json?prevent_cache='+Date.now()).then(r => r.json())
+    musicDataVer = await fetch('https://web-api.jinale.com/cors_resources/musicData.json?prevent_cache='+Date.now()).then(r => r.json())
   } catch (e) {
     if (localStorage.musicDataCsv && localStorage.musicDataVer) {
       musicDataVer = { ver: localStorage.musicDataVer }
     }
   }
   if (!localStorage.musicDataCsv || localStorage.musicDataVer !== musicDataVer.ver) {
-    const musicDataCsv = await fetch(`https://n.bzxyzt.cn/cors_resources/musicData.csv?${musicDataVer.ver}`).then(r => r.text())
+    const musicDataCsv = await fetch(`https://web-api.jinale.com/cors_resources/musicData.csv?${musicDataVer.ver}`).then(r => r.text())
     localStorage.musicDataCsv = musicDataCsv
     localStorage.musicDataVer = musicDataVer.ver
   }

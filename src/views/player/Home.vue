@@ -4,7 +4,7 @@
     <PlayerNavBar></PlayerNavBar>
     <div class="card horizontal">
       <div class="card-image">
-        <img :alt="selectCharaName" style="width:150px;height:320px;object-fit:contain" :src="`https://n.bzxyzt.cn/assets/chara/${selectCharaName}.png`" />
+        <img :alt="selectCharaName" style="width:150px;height:320px;object-fit:contain" :src="`https://web-api.jinale.com/assets/chara/${selectCharaName}.png`" />
       </div>
       <div class="card-stacked">
         <div class="card-content user-info-card">
@@ -191,7 +191,7 @@
   right: 0;
   height: 40px;
   width: 40px;
-  background-image: url("https://n.bzxyzt.cn/assets/ranking.png");
+  background-image: url("https://web-api.jinale.com/assets/ranking.png");
   background-size: 40px auto
 }
 .rank-music-item.rank-up:after { background-position: 0 80px; }

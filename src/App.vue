@@ -130,7 +130,7 @@ input:not([type]):disabled + label, [color-scheme=dark] input:not([type])[readon
 [color-scheme=dark] .level-icon {filter:brightness(0.8)}
 
 .result-icon {
-  background-image:url('https://n.bzxyzt.cn/assets/icon_result.png');
+  background-image:url('https://web-api.jinale.com/assets/icon_result.png');
   background-size: 80px auto;
   display:inline-block;
   height:40px;
@@ -147,7 +147,7 @@ input:not([type]):disabled + label, [color-scheme=dark] input:not([type])[readon
 .result-icon-mfp    {background-position:40px -82px}
 .result-icon-100sync{background-position:40px -122px}
 .level-icon {
-  background-image:url('https://n.bzxyzt.cn/assets/icon_level.png');
+  background-image:url('https://web-api.jinale.com/assets/icon_level.png');
   background-size: 60px auto;
   display:inline-block;
   height:15px;

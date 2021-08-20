@@ -37,9 +37,9 @@ a {color:inherit}
   background-repeat: no-repeat;
 }
 .icon-home {
-  background-image: url('https://n.bzxyzt.cn/assets/chara/milk/sd_salt.png');
+  background-image: url('https://web-api.jinale.com/assets/chara/milk/sd_salt.png');
 }
 .icon-recent {
-  background-image: url('https://n.bzxyzt.cn/assets/UI_MSS_MBase_Icon_APp@2x.png')
+  background-image: url('https://web-api.jinale.com/assets/UI_MSS_MBase_Icon_APp@2x.png')
 }
 </style>
