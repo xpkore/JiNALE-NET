@@ -28,14 +28,8 @@
         build {{buildHash}}, built on {{buildDate}}
       </p>
       <p>
-        <a href="http://maimai.best/" target="_blank" style="margin-right:10px"
-title="「所以你们maimai.best啥时候上线.jpg」
-Yuuki：「十年后吧」
-「？」">茶盘</a>
-        <a href="http://finale.plus/" target="_blank" style="margin-left:10px"
-title="🏀：「xs」
-🏀：「人均在鸽」
-🏀：「我这都懒得动」">球盘</a>
+        <a href="https://maimai.best/" target="_blank" style="margin-right:10px">茶盘</a>
+        <a href="https://finale.plus/" target="_blank" style="margin-left:10px">球盘</a>
       </p>
     </footer>
   </div>
