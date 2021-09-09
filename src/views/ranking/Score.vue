@@ -3,7 +3,7 @@
     <PlayerNavBar></PlayerNavBar>
     <div class="narrow-column">
       <div>
-        <div class="card" :class="getLevelClass(level)">
+        <div class="card"><div :class="getLevelClass(level)">
           <div class="flex flex-row flex-2">
             <span>
               <span class="level-icon"></span>
@@ -19,6 +19,20 @@
               <div>{{charter ? $t('Charter') : ''}}{{charter}}</div>
             </div>
           </div>
+        </div>
+        <hr>
+        <div class="difficulty-box center-align">
+          <div class="flex flex-row flex-3">
+            <div><div class="lvl-eas" v-show="getMusicLevelConstant(music_id, 1)"><router-link :to="`/ranking/score?music_id=${music_id}&level=1`"><span class="level-icon"></span><span class="diffi-text right-align">{{ getLevelDifficulty(music_id, 1) }}</span></router-link></div></div>
+            <div><div class="lvl-bas" v-show="getMusicLevelConstant(music_id, 2)"><router-link :to="`/ranking/score?music_id=${music_id}&level=2`"><span class="level-icon"></span><span class="diffi-text right-align">{{ getLevelDifficulty(music_id, 2) }}</span></router-link></div></div>
+            <div><div class="lvl-adv" v-show="getMusicLevelConstant(music_id, 3)"><router-link :to="`/ranking/score?music_id=${music_id}&level=3`"><span class="level-icon"></span><span class="diffi-text right-align">{{ getLevelDifficulty(music_id, 3) }}</span></router-link></div></div>
+          </div>
+          <div class="flex flex-row flex-3">
+            <div><div class="lvl-exp" v-show="getMusicLevelConstant(music_id, 4)"><router-link :to="`/ranking/score?music_id=${music_id}&level=4`"><span class="level-icon"></span><span class="diffi-text right-align">{{ getLevelDifficulty(music_id, 4) }}</span></router-link></div></div>
+            <div><div class="lvl-mas" v-show="getMusicLevelConstant(music_id, 5)"><router-link :to="`/ranking/score?music_id=${music_id}&level=5`"><span class="level-icon"></span><span class="diffi-text right-align">{{ getLevelDifficulty(music_id, 5) }}</span></router-link></div></div>
+            <div><div class="lvl-rem" v-show="getMusicLevelConstant(music_id, 6)"><router-link :to="`/ranking/score?music_id=${music_id}&level=6`"><span class="level-icon"></span><span class="diffi-text right-align">{{ getLevelDifficulty(music_id, 6) }}</span></router-link></div></div>
+          </div>
+        </div>
         </div>
       </div>
       <PlayerScoreBox :music-id="music_id" :levels="[level]"></PlayerScoreBox>
@@ -75,6 +89,11 @@
 }
 </i18n>
 
+<style scoped>
+a {
+  color:inherit
+}
+</style>
 <style>
 .row .col.music-info-right {
   margin-left: 10px;
@@ -147,6 +166,11 @@ export default {
   },
   mounted () {
     this.loadRanking()
+  },
+  watch: {
+    '$route.query.level'(newLvl, oldLvl) {
+      this.loadRanking()
+    }
   },
   methods: {
     getMusicName,

@@ -125,6 +125,13 @@ a {
   height:50px;
   background-size:50px 50px;
 }
+.filter-select {
+  width: 150px;
+  text-align: center;
+  margin: 1rem auto;
+}
+</style>
+<style>
 .difficulty-box > div > div > div {
   padding: 5px 0
 }
@@ -136,11 +143,6 @@ a {
 .diffi-text {
   width: 2em;
   display:inline-block;
-}
-.filter-select {
-  width: 150px;
-  text-align: center;
-  margin: 1rem auto;
 }
 </style>
 
